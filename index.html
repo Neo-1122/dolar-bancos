@@ -1,0 +1,997 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Dólar en Bolivia · bancos, oficial y paralelo</title>
+<style>
+/* ══ Estilo del Reporte Económico (tokens de monitor_kit/template.html) ══
+   Paleta: navy #003976 + naranja #f8971d. Series: PAL del reporte. */
+:root{
+  color-scheme:light;
+  --navy:#003976; --navy3:#1565b3; --gold:#f8971d; --ok:#1e8e4e; --warn:#d99a06; --bad:#c0392b;
+  --bg:#f2f4f9; --surface:#ffffff; --ink:#1b2537; --ink2:#68748c; --ink3:#8792a8;
+  --line:#e3e8f2; --shadow:0 1px 3px rgba(0,57,118,.10),0 4px 14px rgba(0,57,118,.06);
+  --tint-navy:#eef2f9; --hover:#f6f8fc; --ia:#7b5ea7; --tint-ia:#f2eef8;
+  --accent:#003976; --banda:#cfe0f3; --otros:#64748b;
+  --c1:#1565b3; --c2:#f8971d; --c3:#1e8e4e; --c4:#c0392b; --c5:#7b5ea7; --c6:#d97706; --c7:#0e7490; --c8:#64748b;
+  --c1l:#8fc0ea; --c3l:#8fd4ac;
+  --compra:#1e8e4e; --venta:#f8971d;
+}
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0a1526; --surface:#122544; --ink:#e8edf7; --ink2:#9db0cc; --ink3:#7f93b3;
+  --line:#22375c; --shadow:0 1px 3px rgba(0,0,0,.4);
+  --tint-navy:#1a2f52; --hover:#17305a; --ia:#b39ddb; --tint-ia:#241c33;
+  --accent:#f8971d; --banda:#2a4672; --otros:#8a97ad;
+}
+*{box-sizing:border-box}
+html{scrollbar-width:thin;scrollbar-color:var(--gold) transparent}
+::-webkit-scrollbar{width:7px;height:7px}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:4px}
+::-webkit-scrollbar-track{background:transparent}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.45 "Segoe UI",system-ui,-apple-system,sans-serif;display:flex;flex-direction:column;min-height:100vh}
+button,select{font-family:inherit;cursor:pointer}
+
+/* ── Página: título, cifras ARRIBA de las pestañas, filtros, contenido y lectura ── */
+.wrap{width:100%;max-width:1560px;margin:0 auto;padding:10px 22px 8px;display:flex;flex-direction:column;flex:1}
+h2.st{font-size:18px;color:var(--ink);margin:0 0 8px;line-height:1.25;order:0}
+nav{display:flex;gap:18px;flex-wrap:wrap}
+#hdr-nav .largo{display:none}
+nav button{border:none;background:none;color:var(--ink2);padding:0 0 8px;font-size:13px;font-weight:500;border-bottom:2.5px solid transparent;margin-bottom:-1px;white-space:nowrap}
+nav button:hover{color:var(--ink)}
+nav button.on{color:var(--navy);font-weight:600;border-bottom-color:var(--navy)}
+html[data-theme="dark"] nav button.on{color:#fff;border-bottom-color:var(--gold)}
+section{display:none}
+section.on{display:contents}
+section.on>*{order:3}
+section.on>.tiles{order:1}
+section.on>[hidden]{display:none}
+
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:8px 13px;height:70px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;min-width:0}
+.tile .l{font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--ink2);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tile .v{font-size:20px;font-weight:800;letter-spacing:-.5px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+.tile .v small{font-size:12.5px;font-weight:700;letter-spacing:0}
+.tile .s{font-size:11.5px;color:var(--ink2);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Filtros: caja con etiqueta y botón activo naranja */
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:flex-end;margin-bottom:8px}
+.seg{display:inline-flex;align-items:center;gap:2px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:3px 5px}
+.seg[data-label]::before{content:attr(data-label);font-size:10.5px;color:var(--ink2);font-weight:600;padding:0 5px;white-space:nowrap}
+.seg button{border:1px solid transparent;background:transparent;color:var(--ink2);padding:4px 10px;border-radius:12px;font-size:11px;font-weight:600}
+.seg button.on{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+label.sel{font-size:10.5px;font-weight:600;color:var(--ink2);display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:3px 5px 3px 10px}
+select{font-size:11.5px;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:3px 8px}
+
+/* Vista: rejilla de tarjetas. En computadora ocupa el alto que queda y nada desborda la pantalla. */
+.pane{display:grid;gap:8px;grid-template-columns:minmax(0,1fr)}
+.pane.g2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.pane.g64{grid-template-columns:minmax(0,64fr) minmax(0,36fr)}
+.pane.g46{grid-template-columns:minmax(0,44fr) minmax(0,56fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:10px 13px;min-width:0;display:flex;flex-direction:column}
+.card h2{font-size:13.5px;font-weight:700;margin:0 0 1px;color:var(--ink)}
+.card .cap{font-size:11.5px;color:var(--ink2);margin-bottom:6px}
+.hd{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.hd .der{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.amp{border:1px solid var(--line);background:var(--surface);color:var(--ink2);border-radius:7px;min-width:26px;height:26px;font-size:13px;line-height:1;padding:0 6px;flex-shrink:0}
+.amp:hover,.amp.on{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.amp.txt{font-size:11px;font-weight:600;padding:0 8px}
+.chart{position:relative;height:270px}
+.chart svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.tbl-fill{overflow:auto}
+.vista-off{display:none!important}
+
+table{border-collapse:collapse;width:100%;font-size:12.5px;font-variant-numeric:tabular-nums}
+th,td{padding:5px 9px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;color:var(--ink2);font-weight:700;border-bottom:2px solid var(--line);position:sticky;top:0;background:var(--surface);z-index:1}
+th:first-child,td:first-child,td.izq,th.izq{text-align:left}
+th.srt{cursor:pointer;user-select:none}
+th.srt:hover{color:var(--ink)}
+tbody tr:hover td{background:rgba(0,57,118,.04)}
+tr.med td,tbody tr.med:hover td{font-weight:800;border-top:2px solid var(--navy);border-bottom:0;background:var(--tint-navy);position:sticky;bottom:0}
+tr.sub td,tbody tr.sub:hover td{font-weight:700;background:var(--hover)}
+table.wide th:first-child,table.wide td:first-child{position:sticky;left:0;background:var(--surface);z-index:1}
+table.wide th:first-child{z-index:2}
+table.wide tr.med td:first-child{background:var(--tint-navy)}
+table.wide td,table.wide th{font-size:12px;padding:4px 8px}
+table.prieta td{padding:3px 9px}
+table.prieta th{padding:4px 9px}
+.mb{display:inline-block;width:64px;height:8px;background:var(--line);border-radius:4px;overflow:hidden;vertical-align:0;margin-right:6px}
+.mb i{display:block;height:100%;background:var(--navy3)}
+.pill{display:inline-block;font-size:10.5px;font-weight:600;border:1px solid var(--line);border-radius:10px;padding:0 6px;margin-left:5px;color:var(--ink2)}
+.gris{color:var(--ink3)}
+
+.key{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:0}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 14px;font-size:12px;color:var(--ink);margin:0 0 4px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;border:2px solid;margin-right:5px;vertical-align:-1px;box-sizing:content-box}
+.legend b{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.legend u{display:inline-block;width:9px;height:9px;transform:rotate(45deg);margin-right:6px;vertical-align:0;text-decoration:none}
+.legend s{display:inline-block;width:20px;height:7px;border-radius:4px;margin-right:5px;vertical-align:1px;text-decoration:none}
+.tip{position:absolute;pointer-events:none;background:#003976;color:#fff;border-radius:6px;padding:8px 10px;font-size:12px;box-shadow:0 4px 16px rgba(0,0,0,.3);display:none;white-space:nowrap;z-index:3;top:8px;line-height:1.5}
+.tip b{font-variant-numeric:tabular-nums}
+.tip .d{font-weight:700;margin-bottom:3px}
+.tip div[style*="--ink2"]{color:rgba(255,255,255,.78)!important}
+.hb{display:grid;grid-template-columns:auto 1fr auto;gap:0 10px;align-items:center;font-size:12px;align-content:space-evenly}
+.hb .t{height:10px;background:var(--line);border-radius:0 4px 4px 0;overflow:hidden}
+.hb .t i{display:block;height:100%;background:var(--navy3);border-radius:0 4px 4px 0}
+.hb .n{font-variant-numeric:tabular-nums;font-weight:700}
+
+/* Recuadros: análisis (morado), aviso (naranja) y notas (gris) */
+.lee{border-left:4px solid var(--ia);background:var(--tint-ia);padding:7px 14px;border-radius:0 10px 10px 0;font-size:12.5px;line-height:1.45;margin:8px 0 0;color:var(--ink)}
+.lee:empty{display:none}
+.aviso{border-left:4px solid var(--gold);background:rgba(248,151,29,.08);padding:6px 12px;border-radius:0 10px 10px 0;font-size:11.5px;line-height:1.4;margin:6px 0 0;color:var(--ink)}
+.notas-txt{font-size:13px;color:var(--ink2);line-height:1.5}
+.notas-txt p{margin:0 0 9px}
+.notas-txt b{color:var(--ink)}
+
+#modal{position:fixed;inset:0;background:rgba(8,20,40,.72);display:none;align-items:center;justify-content:center;z-index:200;padding:30px}
+#modal.on{display:flex}
+#modal .mbox{background:var(--surface);border-radius:14px;width:min(1700px,94vw);max-height:100%;padding:18px 22px;box-shadow:0 20px 60px rgba(0,0,0,.4);overflow:auto}
+#modal.txt .mbox{width:min(820px,94vw)}
+#modal h2{font-size:16px;margin:0 0 2px;color:var(--ink)}
+#modal .cap{font-size:12px;color:var(--ink2);margin-bottom:8px}
+#modal .cierra{border:0;background:var(--line);color:var(--ink);width:32px;height:32px;border-radius:8px;font-size:16px}
+#ch-modal{height:min(70vh,700px)}
+#modal.txt #ch-modal,#modal.txt #m-lg{display:none}
+
+/* ── Barras superior e inferior: franja fina con las pestañas dentro y barra de estado al pie
+   (modelo de terminal financiero: OpenBB Workspace, Koyfin). Elegido por Mauro el 02/10/2026. ── */
+#hdr{display:flex;align-items:center;gap:14px;padding:0 22px;flex-shrink:0;min-height:42px}
+#hdr .logo{font-weight:800;font-size:15px;white-space:nowrap}
+#hdr .wk{font-size:11.5px;color:var(--ink2);white-space:nowrap;margin-left:10px}
+#hdr-nav{flex:1;min-width:0;display:flex}
+#hdr .acc{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.tema{border:1px solid var(--line);background:var(--surface);color:var(--ink2);width:28px;height:28px;border-radius:8px;font-size:13px;padding:0;line-height:1;font-weight:700}
+.tema:hover,.tema.act{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+#ftr{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 22px;flex-shrink:0;min-height:26px;font-size:11px;color:var(--ink2);white-space:nowrap;overflow:hidden}
+#ftr .punto{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-right:6px}
+
+#hdr{background:var(--navy);min-height:40px}
+#hdr .logo{color:#fff;font-size:12.5px;letter-spacing:.5px;text-transform:uppercase}
+#hdr .logo b{color:var(--gold)}
+#hdr .wk{display:none}
+#hdr-nav{border-left:1px solid rgba(255,255,255,.22);padding-left:14px}
+#hdr-nav nav{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+#hdr-nav nav button{color:rgba(255,255,255,.7);padding:11px 0 9px;margin:0;border-bottom-width:2px}
+#hdr-nav nav button:hover{color:#fff}
+#hdr-nav nav button.on{color:#fff;border-bottom-color:var(--gold)}
+.tema{border:0;background:rgba(255,255,255,.12);color:#fff}
+.tema:hover,.tema.act{background:var(--gold);color:var(--navy)}
+#ftr{background:#002a57;color:rgba(255,255,255,.72);min-height:24px}
+/* ── Computadora: cada vista entra en una pantalla, sin desplazamiento vertical ── */
+@media (min-width:900px) and (min-height:540px){
+  body{height:100vh;overflow:hidden}
+  .wrap{min-height:0;overflow:hidden}
+  .pane{flex:1;min-height:0;grid-template-rows:minmax(0,1fr)}
+  .card{min-height:0;overflow:hidden}
+  .chart{flex:1;min-height:0;height:auto}
+  .tbl-fill{flex:1;min-height:0}
+  .hb{flex:1;min-height:0;overflow:hidden}
+  .lee{flex-shrink:0}
+}
+@media (max-width:899px),(max-height:539px){
+  .wrap{padding:10px 12px}
+  .pane,.pane.g2,.pane.g64,.pane.g46{grid-template-columns:minmax(0,1fr)}
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  #hdr{padding:0 12px;gap:8px;flex-wrap:wrap}
+  #hdr .wk{display:none}
+  #ftr{padding:0 12px;font-size:10.5px}
+  #ftr .der{display:none}
+  #hdr-nav:not(:empty){flex:0 0 100%;order:5;overflow-x:auto}
+  #hdr-nav{border-left:0;padding-left:0}
+  h2.st{font-size:16px}
+  .bar{justify-content:flex-start}
+  .tbl-fill{max-height:420px}
+  #modal{padding:10px}
+  #modal .mbox{padding:14px}
+  #ch-modal{height:60vh}
+}
+</style>
+</head>
+<body>
+<header id="hdr">
+  <div class="marca"><span class="logo">Dólar <b>en Bolivia</b></span><span class="wk">Actualizado 03/10/2026 14:06</span></div>
+  <div id="hdr-nav"><nav id="nav"></nav></div>
+  <div class="acc"><button class="tema" id="info" type="button" title="Notas y fuentes de esta vista" aria-label="Notas y fuentes de esta vista">i</button><button class="tema" id="pres" type="button"></button><button class="tema" id="tema" type="button"></button></div>
+</header>
+<div class="wrap">
+<h2 class="st" id="st"></h2>
+
+<!-- 1. Pizarra -->
+<section id="s-pizarra">
+  <div class="tiles" id="tiles"></div>
+  <div class="bar"><label class="sel" id="lab-fecha">Fecha <select id="sel"></select></label><div class="seg" id="seg-piz" data-label="Vista"></div></div>
+  <div class="pane g2">
+    <div class="card">
+      <div class="hd"><h2 id="t-piz"></h2><div class="der"><button class="amp" type="button" data-ch="ch-piz" title="Ampliar gráfico" aria-label="Ampliar gráfico">⛶</button></div></div>
+      <div class="cap" id="c-piz"></div>
+      <div class="legend" id="lg-piz"></div>
+      <div class="chart" id="ch-piz"></div>
+    </div>
+    <div class="card">
+      <h2 id="t-bancos">Detalle</h2>
+      <div class="cap" id="c-bancos"></div>
+      <div class="tbl-fill"><table id="tabla"></table></div>
+    </div>
+  </div>
+  <p class="lee" id="lee-piz"></p>
+  <div class="notas" hidden>
+    <p><b>Norma de referencia.</b> Resolución de Directorio N° 142/2026 del Banco Central de Bolivia, del 24/09/2026, que aprueba el nuevo Reglamento de Operaciones Cambiarias y deja sin efecto la Resolución de Directorio N° 88/2026 (26/06/2026). Elimina el límite que impedía a los bancos vender el dólar por encima del TCO + Bs 0,10: desde el 25/09/2026 cada entidad pacta libremente el precio de venta con sus clientes.</p>
+    <p><b>Compra de pizarra y compra efectiva no son lo mismo.</b> La <b>compra de pizarra</b> es el precio que el banco anuncia en su web para ventanilla: lo que le pagaría hoy a un cliente que le lleva dólares. La <b>compra efectiva (BCB)</b> es el precio al que el banco realmente compró: el Banco Central toma todas las compras de dólares que el banco hizo a sus clientes en el día y publica un solo precio por banco (promedio ponderado por monto hasta las operaciones del 24/09/2026; mediana ponderada desde las del 25/09/2026). Con esas compras de todos los bancos se calcula el TCO.</p>
+    <p>La efectiva suele ser más alta que la de pizarra porque incluye operaciones grandes pactadas por mesa de dinero, a mejor precio que el de ventanilla. El BCB la publica a las 23:30, así que la que se muestra es la del último día hábil publicado, un día detrás de la pizarra.</p>
+    <p><b>Días sin pizarra.</b> <span id="nota-sin"></span></p>
+    <p><b>Fuente.</b> Sitio web de cada banco, capturado automáticamente varias veces al día; queda la última captura de cada día. La pizarra puede cambiar durante la jornada y el precio final lo confirma cada banco al operar. Los días marcados con * provienen de fuentes de terceros.</p>
+  </div>
+</section>
+
+<!-- 2. Tipo de cambio -->
+<section id="s-tc">
+  <div class="tiles" id="tiles-tc"></div>
+  <div class="bar"><div class="seg" id="seg-tc" data-label="Periodo"></div></div>
+  <div class="pane">
+    <div class="card">
+      <div class="hd"><h2 id="t-tc">Oficial y paralelo</h2><div class="der"><button class="amp txt" type="button" id="btn-brecha" title="Sombrear la brecha entre el paralelo y el oficial">Brecha</button><button class="amp" type="button" data-ch="ch-tc" title="Ampliar gráfico" aria-label="Ampliar gráfico">⛶</button></div></div>
+      <div class="cap" id="c-tc"></div>
+      <div class="legend" id="lg-tc"></div>
+      <div class="chart" id="ch-tc"></div>
+    </div>
+  </div>
+  <p class="lee" id="lee-tc"></p>
+  <div class="notas" hidden>
+    <p><b>TCO oficial.</b> Tipo de cambio oficial del Banco Central de Bolivia. Hasta el 28/06/2026 era fijo (Bs 6,86 la compra); desde el 29/06/2026 flota y se calcula cada día con las compras de dólares de los bancos a sus clientes.</p>
+    <p><b>Método de cálculo.</b> Del 29/06/2026 al 25/09/2026 fue el <b>promedio ponderado</b> por monto de esas compras (Resolución de Directorio N° 88/2026). Desde el 26/09/2026 es la <b>mediana ponderada</b> por monto (Resolución de Directorio N° 142/2026): el precio que deja la mitad del monto operado por debajo y la mitad por encima, menos sensible a operaciones atípicas.</p>
+    <p><b>Vigencia.</b> El BCB publica a las 23:30 el valor que rige desde el día siguiente. El que se publica el viernes rige sábado, domingo y lunes; en feriados se mantiene el último publicado.</p>
+    <p><b>Referencial.</b> Valor referencial de compra que el BCB publicó entre diciembre de 2025 y junio de 2026, antes de que el oficial flotara.</p>
+    <p><b>Brecha.</b> El botón Brecha sombrea la distancia entre el paralelo y el oficial en el mismo gráfico; el porcentaje (cuánto más caro está el paralelo) aparece en la leyenda y al pasar el cursor. Se dibuja como zona y no como una tercera línea porque está en porcentaje y el gráfico en bolivianos: ponerla en otra escala exigiría un segundo eje.</p>
+    <p><b>Paralelo.</b> Precio del dólar digital (USDT) en bolivianos en Binance P2P, promedio diario de compra y venta. Fuente: dolarbluebolivia.click.</p>
+  </div>
+</section>
+
+<!-- 2b. Precio por banco -->
+<section id="s-precio">
+  <div class="tiles" id="tiles-pr"></div>
+  <div class="bar"><div class="seg" id="seg-prv" data-label="Vista"></div><label class="sel" id="lab-pr">Corte <select id="sel-pr"></select></label><div class="seg" id="seg-pr" data-label="Periodo"></div></div>
+  <div class="pane g64">
+    <div class="card">
+      <div class="hd"><h2 id="t-pr">Compra efectiva de los bancos con más volumen</h2><div class="der"><button class="amp" type="button" data-ch="ch-pr" title="Ampliar gráfico" aria-label="Ampliar gráfico">⛶</button></div></div>
+      <div class="cap" id="c-pr"></div>
+      <div class="legend" id="lg-pr"></div>
+      <div class="chart" id="ch-pr"></div>
+    </div>
+    <div class="card">
+      <h2 id="t-dev">Cuánto se aparta cada banco del TCO</h2>
+      <div class="cap" id="c-dev"></div>
+      <div class="tbl-fill"><table class="prieta" id="tabla-dev"></table></div>
+    </div>
+  </div>
+  <p class="lee" id="lee-pr"></p>
+  <div class="notas" hidden>
+    <p><b>Compra efectiva.</b> Precio al que cada banco compró dólares a sus clientes ese día, según el BCB (promedio ponderado por monto hasta el corte del 24/09/2026; mediana ponderada desde el corte del 25/09/2026). Con esas compras se calcula el TCO.</p>
+    <p><b>Dispersión.</b> Distancia entre el banco que más pagó y el que menos pagó en el día, entre los bancos que compraron. Cuando es alta, el mercado está menos integrado y comparar bancos importa más.</p>
+    <p><b>Ranking del día.</b> Cada fila es un banco, ordenado de quien más pagó a quien menos en el corte elegido; la línea vertical es el TCO que resultó de ese corte y el palito muestra cuánto se aparta cada banco. Solo aparecen los bancos que compraron ese día.</p>
+    <p><b>Rango por banco.</b> Para el periodo elegido, la barra va del precio más bajo al más alto que pagó cada banco (solo los días en que compró); el punto es su precio del último día en que compró. Banco con barra larga = precio que cambia mucho de un día a otro.</p>
+    <p><b>Quién movió el precio.</b> Se toma el precio promedio de compra de todos los bancos, ponderado por lo que compró cada uno, y se reparte su cambio contra el corte anterior entre los bancos. Un banco lo empuja hacia arriba si subió su precio o si compró más siendo de los que pagan por encima del promedio (y al revés). La suma de los aportes es exacta. Desde el corte del 25/09/2026 el TCO oficial es una mediana ponderada, no un promedio: este precio promedio lo acompaña de cerca pero no lo replica exacto.</p>
+    <p><b>Desvío frente al TCO.</b> Compra efectiva del banco menos el TCO que resultó de ese corte, en bolivianos. Positivo (azul): el banco pagó más que el precio oficial; negativo (naranja): pagó menos. Sin color: el banco no compró ese día.</p>
+  </div>
+</section>
+
+<!-- 3. Volumen por banco -->
+<section id="s-vol">
+  <div class="tiles" id="tiles-vol"></div>
+  <div class="bar">
+    <label class="sel" id="lab-corte">Corte <select id="sel-corte"></select></label>
+    <div class="seg" id="seg-vol" data-label="Periodo"></div>
+    <div class="seg" id="seg-voldato" data-label="Dato"></div>
+  </div>
+  <div class="pane g64">
+    <div class="card">
+      <div class="hd"><h2 id="t-vol">Volumen comprado por día</h2><div class="der"><button class="amp" type="button" data-ch="ch-vol" title="Ampliar gráfico" aria-label="Ampliar gráfico">⛶</button></div></div>
+      <div class="cap" id="c-vol"></div>
+      <div class="legend" id="lg-vol"></div>
+      <div class="chart" id="ch-vol"></div>
+    </div>
+    <div class="card">
+      <h2>Quién compra los dólares</h2>
+      <div class="cap" id="c-det"></div>
+      <div class="tbl-fill"><table class="prieta" id="tabla-det"></table></div>
+    </div>
+  </div>
+  <p class="lee" id="lee-rank"></p>
+  <div class="notas" hidden>
+    <p><b>Qué es.</b> Cada día el BCB publica, por banco, cuántos dólares compró a sus clientes, en cuántas operaciones y a qué precio (promedio ponderado hasta el corte del 24/09/2026; mediana ponderada desde el corte del 25/09/2026). Con esas compras se calcula el TCO: los bancos con más volumen son los que más pesan en el precio oficial.</p>
+    <p><b>Fecha de corte</b> es el día en que se hicieron las operaciones; el TCO que resulta rige desde el día siguiente (el del viernes vale sábado, domingo y lunes). Fuente: Banco Central de Bolivia.</p>
+    <p><b>Todo 2026.</b> Del 05/01/2026 al 25/06/2026 son las compras que el BCB publicó con el "valor referencial de compra" de cada banco, antes de la flotación; desde el corte del 26/06/2026, las del detalle histórico del TCO. Están todos los días con operaciones (sábados, domingos y feriados no tienen corte). El número de operaciones se publica desde el 07/04/2026.</p>
+  </div>
+</section>
+
+<!-- 4. Serie por banco -->
+<section id="s-serie">
+  <div class="bar"><div class="seg" id="seg-serie" data-label="Dato"></div></div>
+  <div class="pane">
+    <div class="card">
+      <h2 id="t-serie">Compra efectiva por banco</h2>
+      <div class="cap" id="c-serie"></div>
+      <div class="tbl-fill"><table class="wide" id="tabla-serie"></table></div>
+    </div>
+  </div>
+  <div class="notas" hidden><p>Mismo dato que publica el BCB, en formato banco × fecha de corte: todos los días de 2026 con operaciones, el más reciente primero (hasta el 25/06/2026, valor referencial de compra). La tabla se desliza hacia la derecha para ver fechas anteriores.</p></div>
+</section>
+</div>
+<footer id="ftr"><span><span class="punto"></span>Actualizado 03/10/2026 14:06 · datos públicos del BCB y de los bancos</span><span class="der">Elaborado por: Mauro Alessandro Barbato Troche</span></footer>
+<div id="modal" role="dialog" aria-modal="true" aria-labelledby="m-tit"><div class="mbox">
+  <div class="hd"><h2 id="m-tit"></h2><button class="cierra" type="button" id="m-x" title="Cerrar" aria-label="Cerrar">✕</button></div>
+  <div class="cap" id="m-cap"></div><div class="legend" id="m-lg"></div><div class="chart" id="ch-modal"></div><div class="notas-txt" id="m-txt"></div>
+</div></div>
+
+<script>
+const D={"dias":[{"f":"2026-09-27","tco":12.05,"rows":[{"b":"BancoSol","c":10.85,"v":12.15,"s":1.3,"ef":12.22}],"n":1,"vm":null,"cm":null,"sm":null,"hora":"19:29","terceros":false,"corte":"2026-09-25"},{"f":"2026-09-29","tco":12.02,"rows":[{"b":"BISA","c":11.72,"v":12.27,"s":0.55,"ef":11.98},{"b":"BCP","c":11.52,"v":12.32,"s":0.8,"ef":12.02},{"b":"Económico","c":11.42,"v":12.32,"s":0.9,"ef":12.0},{"b":"FIE","c":11.52,"v":12.02,"s":0.5,"ef":11.52},{"b":"Ganadero","c":null,"v":12.12,"s":null,"ef":12.0},{"b":"Mercantil SCZ","c":10.77,"v":12.32,"s":1.55,"ef":12.05},{"b":"BNB","c":11.02,"v":12.32,"s":1.3,"ef":12.05},{"b":"BancoSol","c":10.85,"v":12.15,"s":1.3,"ef":12.05},{"b":"Unión","c":11.05,"v":12.15,"s":1.1,"ef":12.05}],"n":9,"vm":12.27,"cm":11.23,"sm":1.0,"hora":null,"terceros":true,"corte":"2026-09-29"},{"f":"2026-09-30","tco":12.02,"rows":[{"b":"BISA","c":11.32,"v":12.32,"s":1.0,"ef":12.0},{"b":"BCP","c":11.52,"v":12.32,"s":0.8,"ef":12.02},{"b":"Económico","c":11.42,"v":12.37,"s":0.95,"ef":12.02},{"b":"FIE","c":11.52,"v":12.02,"s":0.5,"ef":12.5},{"b":"Ganadero","c":null,"v":12.32,"s":null,"ef":11.98},{"b":"Mercantil SCZ","c":10.77,"v":12.32,"s":1.55,"ef":12.02},{"b":"BNB","c":11.02,"v":12.32,"s":1.3,"ef":11.97},{"b":"BancoSol","c":10.82,"v":12.32,"s":1.5,"ef":11.92},{"b":"Unión","c":11.02,"v":12.22,"s":1.2,"ef":12.25}],"n":9,"vm":12.32,"cm":11.17,"sm":1.1,"hora":"20:32","terceros":true,"corte":"2026-09-30"},{"f":"2026-10-01","tco":12.0,"rows":[{"b":"BISA","c":11.3,"v":12.3,"s":1.0,"ef":11.85},{"b":"BCP","c":11.5,"v":12.3,"s":0.8,"ef":11.98},{"b":"Económico","c":11.4,"v":12.35,"s":0.95,"ef":12.02},{"b":"FIE","c":11.5,"v":12.0,"s":0.5,"ef":11.95},{"b":"Ganadero","c":null,"v":12.3,"s":null,"ef":11.9},{"b":"Mercantil SCZ","c":10.75,"v":12.3,"s":1.55,"ef":12.02},{"b":"BNB","c":11.0,"v":12.3,"s":1.3,"ef":11.92},{"b":"BancoSol","c":10.8,"v":12.3,"s":1.5,"ef":12.0},{"b":"Unión","c":11.0,"v":12.3,"s":1.3,"ef":11.5}],"n":9,"vm":12.3,"cm":11.15,"sm":1.15,"hora":"16:01","terceros":true,"corte":"2026-10-01"},{"f":"2026-10-02","tco":11.9,"rows":[{"b":"BISA","c":11.2,"v":12.2,"s":1.0,"ef":11.9},{"b":"BCP","c":11.4,"v":12.2,"s":0.8,"ef":11.98},{"b":"Económico","c":11.3,"v":12.25,"s":0.95,"ef":12.0},{"b":"FIE","c":11.4,"v":11.9,"s":0.5,"ef":12.12},{"b":"Fortaleza","c":11.6,"v":12.2,"s":0.6,"ef":12.04},{"b":"Ganadero","c":null,"v":12.2,"s":null,"ef":11.92},{"b":"Mercantil SCZ","c":10.65,"v":12.2,"s":1.55,"ef":12.0},{"b":"BNB","c":11.4,"v":12.2,"s":0.8,"ef":11.8},{"b":"BancoSol","c":10.71,"v":12.2,"s":1.49,"ef":12.06},{"b":"Unión","c":10.9,"v":12.2,"s":1.3,"ef":12.0}],"n":10,"vm":12.2,"cm":11.3,"sm":0.95,"hora":"22:10","terceros":false,"corte":"2026-10-02"},{"f":"2026-10-03","tco":12.0,"rows":[{"b":"BISA","c":11.3,"v":12.3,"s":1.0,"ef":11.9},{"b":"BCP","c":11.5,"v":12.3,"s":0.8,"ef":11.98},{"b":"Económico","c":11.3,"v":12.35,"s":1.05,"ef":12.0},{"b":"FIE","c":11.5,"v":12.0,"s":0.5,"ef":12.12},{"b":"Fortaleza","c":11.7,"v":12.3,"s":0.6,"ef":12.04},{"b":"Ganadero","c":null,"v":12.3,"s":null,"ef":11.92},{"b":"Mercantil SCZ","c":10.9,"v":12.3,"s":1.4,"ef":12.0},{"b":"BNB","c":11.5,"v":12.3,"s":0.8,"ef":11.8},{"b":"BancoSol","c":10.8,"v":12.3,"s":1.5,"ef":12.06},{"b":"Unión","c":11.0,"v":12.3,"s":1.3,"ef":12.0}],"n":10,"vm":12.3,"cm":11.3,"sm":1.0,"hora":"14:05","terceros":false,"corte":"2026-10-02"}],"tc":{"f":["2023-01-02","2023-01-03","2023-01-04","2023-01-05","2023-01-06","2023-01-07","2023-01-08","2023-01-09","2023-01-10","2023-01-11","2023-01-12","2023-01-13","2023-01-14","2023-01-15","2023-01-16","2023-01-17","2023-01-18","2023-01-19","2023-01-20","2023-01-21","2023-01-22","2023-01-23","2023-01-24","2023-01-25","2023-01-26","2023-01-27","2023-01-28","2023-01-29","2023-01-30","2023-01-31","2023-02-01","2023-02-02","2023-02-03","2023-02-04","2023-02-05","2023-02-06","2023-02-07","2023-02-08","2023-02-09","2023-02-10","2023-02-11","2023-02-12","2023-02-13","2023-02-14","2023-02-15","2023-02-16","2023-02-17","2023-02-18","2023-02-19","2023-02-20","2023-02-21","2023-02-22","2023-02-23","2023-02-24","2023-02-25","2023-02-26","2023-02-27","2023-02-28","2023-03-01","2023-03-02","2023-03-03","2023-03-04","2023-03-05","2023-03-06","2023-03-07","2023-03-08","2023-03-09","2023-03-10","2023-03-11","2023-03-12","2023-03-13","2023-03-14","2023-03-15","2023-03-16","2023-03-17","2023-03-18","2023-03-19","2023-03-20","2023-03-21","2023-03-22","2023-03-23","2023-03-24","2023-03-25","2023-03-26","2023-03-27","2023-03-28","2023-03-29","2023-03-30","2023-03-31","2023-04-01","2023-04-02","2023-04-03","2023-04-04","2023-04-05","2023-04-06","2023-04-07","2023-04-08","2023-04-09","2023-04-10","2023-04-11","2023-04-12","2023-04-13","2023-04-14","2023-04-15","2023-04-16","2023-04-17","2023-04-18","2023-04-19","2023-04-20","2023-04-21","2023-04-22","2023-04-23","2023-04-24","2023-04-25","2023-04-26","2023-04-27","2023-04-28","2023-04-29","2023-04-30","2023-05-01","2023-05-02","2023-05-03","2023-05-04","2023-05-05","2023-05-06","2023-05-07","2023-05-08","2023-05-09","2023-05-10","2023-05-11","2023-05-12","2023-05-13","2023-05-14","2023-05-15","2023-05-16","2023-05-17","2023-05-18","2023-05-19","2023-05-20","2023-05-21","2023-05-22","2023-05-23","2023-05-24","2023-05-25","2023-05-26","2023-05-27","2023-05-28","2023-05-29","2023-05-30","2023-05-31","2023-06-01","2023-06-02","2023-06-03","2023-06-04","2023-06-05","2023-06-06","2023-06-07","2023-06-08","2023-06-09","2023-06-10","2023-06-11","2023-06-12","2023-06-13","2023-06-14","2023-06-15","2023-06-16","2023-06-17","2023-06-18","2023-06-19","2023-06-20","2023-06-21","2023-06-22","2023-06-23","2023-06-24","2023-06-25","2023-06-26","2023-06-27","2023-06-28","2023-06-29","2023-06-30","2023-07-01","2023-07-02","2023-07-03","2023-07-04","2023-07-05","2023-07-06","2023-07-07","2023-07-08","2023-07-09","2023-07-10","2023-07-11","2023-07-12","2023-07-13","2023-07-14","2023-07-15","2023-07-16","2023-07-17","2023-07-18","2023-07-19","2023-07-20","2023-07-21","2023-07-22","2023-07-23","2023-07-24","2023-07-25","2023-07-26","2023-07-27","2023-07-28","2023-07-29","2023-07-30","2023-07-31","2023-08-01","2023-08-02","2023-08-03","2023-08-04","2023-08-05","2023-08-06","2023-08-07","2023-08-08","2023-08-09","2023-08-10","2023-08-11","2023-08-12","2023-08-13","2023-08-14","2023-08-15","2023-08-16","2023-08-17","2023-08-18","2023-08-19","2023-08-20","2023-08-21","2023-08-22","2023-08-23","2023-08-24","2023-08-25","2023-08-26","2023-08-27","2023-08-28","2023-08-29","2023-08-30","2023-08-31","2023-09-01","2023-09-02","2023-09-03","2023-09-04","2023-09-05","2023-09-06","2023-09-07","2023-09-08","2023-09-09","2023-09-10","2023-09-11","2023-09-12","2023-09-13","2023-09-14","2023-09-15","2023-09-16","2023-09-17","2023-09-18","2023-09-19","2023-09-20","2023-09-21","2023-09-22","2023-09-23","2023-09-24","2023-09-25","2023-09-26","2023-09-27","2023-09-28","2023-09-29","2023-09-30","2023-10-01","2023-10-02","2023-10-03","2023-10-04","2023-10-05","2023-10-06","2023-10-07","2023-10-08","2023-10-09","2023-10-10","2023-10-11","2023-10-12","2023-10-13","2023-10-14","2023-10-15","2023-10-16","2023-10-17","2023-10-18","2023-10-19","2023-10-20","2023-10-21","2023-10-22","2023-10-23","2023-10-24","2023-10-25","2023-10-26","2023-10-27","2023-10-28","2023-10-29","2023-10-30","2023-10-31","2023-11-01","2023-11-02","2023-11-03","2023-11-04","2023-11-05","2023-11-06","2023-11-07","2023-11-08","2023-11-09","2023-11-10","2023-11-11","2023-11-12","2023-11-13","2023-11-14","2023-11-15","2023-11-16","2023-11-17","2023-11-18","2023-11-19","2023-11-20","2023-11-21","2023-11-22","2023-11-23","2023-11-24","2023-11-25","2023-11-26","2023-11-27","2023-11-28","2023-11-29","2023-11-30","2023-12-01","2023-12-02","2023-12-03","2023-12-04","2023-12-05","2023-12-06","2023-12-07","2023-12-08","2023-12-09","2023-12-10","2023-12-11","2023-12-12","2023-12-13","2023-12-14","2023-12-15","2023-12-16","2023-12-17","2023-12-18","2023-12-19","2023-12-20","2023-12-21","2023-12-22","2023-12-23","2023-12-24","2023-12-25","2023-12-26","2023-12-27","2023-12-28","2023-12-29","2023-12-30","2023-12-31","2024-01-01","2024-01-02","2024-01-03","2024-01-04","2024-01-05","2024-01-06","2024-01-07","2024-01-08","2024-01-09","2024-01-10","2024-01-11","2024-01-12","2024-01-13","2024-01-14","2024-01-15","2024-01-16","2024-01-17","2024-01-18","2024-01-19","2024-01-20","2024-01-21","2024-01-22","2024-01-23","2024-01-24","2024-01-25","2024-01-26","2024-01-27","2024-01-28","2024-01-29","2024-01-30","2024-01-31","2024-02-01","2024-02-02","2024-02-03","2024-02-04","2024-02-05","2024-02-06","2024-02-07","2024-02-08","2024-02-09","2024-02-10","2024-02-11","2024-02-12","2024-02-13","2024-02-14","2024-02-15","2024-02-16","2024-02-17","2024-02-18","2024-02-19","2024-02-20","2024-02-21","2024-02-22","2024-02-23","2024-02-24","2024-02-25","2024-02-26","2024-02-27","2024-02-28","2024-02-29","2024-03-01","2024-03-02","2024-03-03","2024-03-04","2024-03-05","2024-03-06","2024-03-07","2024-03-08","2024-03-09","2024-03-10","2024-03-11","2024-03-12","2024-03-13","2024-03-14","2024-03-15","2024-03-16","2024-03-17","2024-03-18","2024-03-19","2024-03-20","2024-03-21","2024-03-22","2024-03-23","2024-03-24","2024-03-25","2024-03-26","2024-03-27","2024-03-28","2024-03-29","2024-03-30","2024-03-31","2024-04-01","2024-04-02","2024-04-03","2024-04-04","2024-04-05","2024-04-06","2024-04-07","2024-04-08","2024-04-09","2024-04-10","2024-04-11","2024-04-12","2024-04-13","2024-04-14","2024-04-15","2024-04-16","2024-04-17","2024-04-18","2024-04-19","2024-04-20","2024-04-21","2024-04-22","2024-04-23","2024-04-24","2024-04-25","2024-04-26","2024-04-27","2024-04-28","2024-04-29","2024-04-30","2024-05-01","2024-05-02","2024-05-03","2024-05-04","2024-05-05","2024-05-06","2024-05-07","2024-05-08","2024-05-09","2024-05-10","2024-05-11","2024-05-12","2024-05-13","2024-05-14","2024-05-15","2024-05-16","2024-05-17","2024-05-18","2024-05-19","2024-05-20","2024-05-21","2024-05-22","2024-05-23","2024-05-24","2024-05-25","2024-05-26","2024-05-27","2024-05-28","2024-05-29","2024-05-30","2024-05-31","2024-06-01","2024-06-02","2024-06-03","2024-06-04","2024-06-05","2024-06-06","2024-06-07","2024-06-08","2024-06-09","2024-06-10","2024-06-11","2024-06-12","2024-06-13","2024-06-14","2024-06-15","2024-06-16","2024-06-17","2024-06-18","2024-06-19","2024-06-20","2024-06-21","2024-06-22","2024-06-23","2024-06-24","2024-06-25","2024-06-26","2024-06-27","2024-06-28","2024-06-29","2024-06-30","2024-07-01","2024-07-02","2024-07-03","2024-07-04","2024-07-05","2024-07-06","2024-07-07","2024-07-08","2024-07-09","2024-07-10","2024-07-11","2024-07-12","2024-07-13","2024-07-14","2024-07-15","2024-07-16","2024-07-17","2024-07-18","2024-07-19","2024-07-20","2024-07-21","2024-07-22","2024-07-23","2024-07-24","2024-07-25","2024-07-26","2024-07-27","2024-07-28","2024-07-29","2024-07-30","2024-07-31","2024-08-01","2024-08-02","2024-08-03","2024-08-04","2024-08-05","2024-08-06","2024-08-07","2024-08-08","2024-08-09","2024-08-10","2024-08-11","2024-08-12","2024-08-13","2024-08-14","2024-08-15","2024-08-16","2024-08-17","2024-08-18","2024-08-19","2024-08-20","2024-08-21","2024-08-22","2024-08-23","2024-08-24","2024-08-25","2024-08-26","2024-08-27","2024-08-28","2024-08-29","2024-08-30","2024-08-31","2024-09-01","2024-09-02","2024-09-03","2024-09-04","2024-09-05","2024-09-06","2024-09-07","2024-09-08","2024-09-09","2024-09-10","2024-09-11","2024-09-12","2024-09-13","2024-09-14","2024-09-15","2024-09-16","2024-09-17","2024-09-18","2024-09-19","2024-09-20","2024-09-21","2024-09-22","2024-09-23","2024-09-24","2024-09-25","2024-09-26","2024-09-27","2024-09-28","2024-09-29","2024-09-30","2024-10-01","2024-10-02","2024-10-03","2024-10-04","2024-10-05","2024-10-06","2024-10-07","2024-10-08","2024-10-09","2024-10-10","2024-10-11","2024-10-12","2024-10-13","2024-10-14","2024-10-15","2024-10-16","2024-10-17","2024-10-18","2024-10-19","2024-10-20","2024-10-21","2024-10-22","2024-10-23","2024-10-24","2024-10-25","2024-10-26","2024-10-27","2024-10-28","2024-10-29","2024-10-30","2024-10-31","2024-11-01","2024-11-02","2024-11-03","2024-11-04","2024-11-05","2024-11-06","2024-11-07","2024-11-08","2024-11-09","2024-11-10","2024-11-11","2024-11-12","2024-11-13","2024-11-14","2024-11-15","2024-11-16","2024-11-17","2024-11-18","2024-11-19","2024-11-20","2024-11-21","2024-11-22","2024-11-23","2024-11-24","2024-11-25","2024-11-26","2024-11-27","2024-11-28","2024-11-29","2024-11-30","2024-12-01","2024-12-02","2024-12-03","2024-12-04","2024-12-05","2024-12-06","2024-12-07","2024-12-08","2024-12-09","2024-12-10","2024-12-11","2024-12-12","2024-12-13","2024-12-14","2024-12-15","2024-12-16","2024-12-17","2024-12-18","2024-12-19","2024-12-20","2024-12-21","2024-12-22","2024-12-23","2024-12-24","2024-12-25","2024-12-26","2024-12-27","2024-12-28","2024-12-29","2024-12-30","2024-12-31","2025-01-01","2025-01-02","2025-01-03","2025-01-04","2025-01-05","2025-01-06","2025-01-07","2025-01-08","2025-01-09","2025-01-10","2025-01-11","2025-01-12","2025-01-13","2025-01-14","2025-01-15","2025-01-16","2025-01-17","2025-01-18","2025-01-19","2025-01-20","2025-01-21","2025-01-22","2025-01-23","2025-01-24","2025-01-25","2025-01-26","2025-01-27","2025-01-28","2025-01-29","2025-01-30","2025-01-31","2025-02-01","2025-02-02","2025-02-03","2025-02-04","2025-02-05","2025-02-06","2025-02-07","2025-02-08","2025-02-09","2025-02-10","2025-02-11","2025-02-12","2025-02-13","2025-02-14","2025-02-15","2025-02-16","2025-02-17","2025-02-18","2025-02-19","2025-02-20","2025-02-21","2025-02-22","2025-02-23","2025-02-24","2025-02-25","2025-02-26","2025-02-27","2025-02-28","2025-03-01","2025-03-02","2025-03-03","2025-03-04","2025-03-05","2025-03-06","2025-03-07","2025-03-08","2025-03-09","2025-03-10","2025-03-11","2025-03-12","2025-03-13","2025-03-14","2025-03-15","2025-03-16","2025-03-17","2025-03-18","2025-03-19","2025-03-20","2025-03-21","2025-03-22","2025-03-23","2025-03-24","2025-03-25","2025-03-26","2025-03-27","2025-03-28","2025-03-29","2025-03-30","2025-03-31","2025-04-01","2025-04-02","2025-04-03","2025-04-04","2025-04-05","2025-04-06","2025-04-07","2025-04-08","2025-04-09","2025-04-10","2025-04-11","2025-04-12","2025-04-13","2025-04-14","2025-04-15","2025-04-16","2025-04-17","2025-04-18","2025-04-19","2025-04-20","2025-04-21","2025-04-22","2025-04-23","2025-04-24","2025-04-25","2025-04-26","2025-04-27","2025-04-28","2025-04-29","2025-04-30","2025-05-01","2025-05-02","2025-05-03","2025-05-04","2025-05-05","2025-05-06","2025-05-07","2025-05-08","2025-05-09","2025-05-10","2025-05-11","2025-05-12","2025-05-13","2025-05-14","2025-05-15","2025-05-16","2025-05-17","2025-05-18","2025-05-19","2025-05-20","2025-05-21","2025-05-22","2025-05-23","2025-05-24","2025-05-25","2025-05-26","2025-05-27","2025-05-28","2025-05-29","2025-05-30","2025-05-31","2025-06-01","2025-06-02","2025-06-03","2025-06-04","2025-06-05","2025-06-06","2025-06-07","2025-06-08","2025-06-09","2025-06-10","2025-06-11","2025-06-12","2025-06-13","2025-06-14","2025-06-15","2025-06-16","2025-06-17","2025-06-18","2025-06-19","2025-06-20","2025-06-21","2025-06-22","2025-06-23","2025-06-24","2025-06-25","2025-06-26","2025-06-27","2025-06-28","2025-06-29","2025-06-30","2025-07-01","2025-07-02","2025-07-03","2025-07-04","2025-07-05","2025-07-06","2025-07-07","2025-07-08","2025-07-09","2025-07-10","2025-07-11","2025-07-12","2025-07-13","2025-07-14","2025-07-15","2025-07-16","2025-07-17","2025-07-18","2025-07-19","2025-07-20","2025-07-21","2025-07-22","2025-07-23","2025-07-24","2025-07-25","2025-07-26","2025-07-27","2025-07-28","2025-07-29","2025-07-30","2025-07-31","2025-08-01","2025-08-02","2025-08-03","2025-08-04","2025-08-05","2025-08-06","2025-08-07","2025-08-08","2025-08-09","2025-08-10","2025-08-11","2025-08-12","2025-08-13","2025-08-14","2025-08-15","2025-08-16","2025-08-17","2025-08-18","2025-08-19","2025-08-20","2025-08-21","2025-08-22","2025-08-23","2025-08-24","2025-08-25","2025-08-26","2025-08-27","2025-08-28","2025-08-29","2025-08-30","2025-08-31","2025-09-01","2025-09-02","2025-09-03","2025-09-04","2025-09-05","2025-09-06","2025-09-07","2025-09-08","2025-09-09","2025-09-10","2025-09-11","2025-09-12","2025-09-13","2025-09-14","2025-09-15","2025-09-16","2025-09-17","2025-09-18","2025-09-19","2025-09-20","2025-09-21","2025-09-22","2025-09-23","2025-09-24","2025-09-25","2025-09-26","2025-09-27","2025-09-28","2025-09-29","2025-09-30","2025-10-01","2025-10-02","2025-10-03","2025-10-04","2025-10-05","2025-10-06","2025-10-07","2025-10-08","2025-10-09","2025-10-10","2025-10-11","2025-10-12","2025-10-13","2025-10-14","2025-10-15","2025-10-16","2025-10-17","2025-10-18","2025-10-19","2025-10-20","2025-10-21","2025-10-22","2025-10-23","2025-10-24","2025-10-25","2025-10-26","2025-10-27","2025-10-28","2025-10-29","2025-10-30","2025-10-31","2025-11-01","2025-11-02","2025-11-03","2025-11-04","2025-11-05","2025-11-06","2025-11-07","2025-11-08","2025-11-09","2025-11-10","2025-11-11","2025-11-12","2025-11-13","2025-11-14","2025-11-15","2025-11-16","2025-11-17","2025-11-18","2025-11-19","2025-11-20","2025-11-21","2025-11-22","2025-11-23","2025-11-24","2025-11-25","2025-11-26","2025-11-27","2025-11-28","2025-11-29","2025-11-30","2025-12-01","2025-12-02","2025-12-03","2025-12-04","2025-12-05","2025-12-06","2025-12-07","2025-12-08","2025-12-09","2025-12-10","2025-12-11","2025-12-12","2025-12-13","2025-12-14","2025-12-15","2025-12-16","2025-12-17","2025-12-18","2025-12-19","2025-12-20","2025-12-21","2025-12-22","2025-12-23","2025-12-24","2025-12-25","2025-12-26","2025-12-27","2025-12-28","2025-12-29","2025-12-30","2025-12-31","2026-01-01","2026-01-02","2026-01-03","2026-01-04","2026-01-05","2026-01-06","2026-01-07","2026-01-08","2026-01-09","2026-01-10","2026-01-11","2026-01-12","2026-01-13","2026-01-14","2026-01-15","2026-01-16","2026-01-17","2026-01-18","2026-01-19","2026-01-20","2026-01-21","2026-01-22","2026-01-23","2026-01-24","2026-01-25","2026-01-26","2026-01-27","2026-01-28","2026-01-29","2026-01-30","2026-01-31","2026-02-01","2026-02-02","2026-02-03","2026-02-04","2026-02-05","2026-02-06","2026-02-07","2026-02-08","2026-02-09","2026-02-10","2026-02-11","2026-02-12","2026-02-13","2026-02-14","2026-02-15","2026-02-16","2026-02-17","2026-02-18","2026-02-19","2026-02-20","2026-02-21","2026-02-22","2026-02-23","2026-02-24","2026-02-25","2026-02-26","2026-02-27","2026-02-28","2026-03-01","2026-03-02","2026-03-03","2026-03-04","2026-03-05","2026-03-06","2026-03-07","2026-03-08","2026-03-09","2026-03-10","2026-03-11","2026-03-12","2026-03-13","2026-03-14","2026-03-15","2026-03-16","2026-03-17","2026-03-18","2026-03-19","2026-03-20","2026-03-21","2026-03-22","2026-03-23","2026-03-24","2026-03-25","2026-03-26","2026-03-27","2026-03-28","2026-03-29","2026-03-30","2026-03-31","2026-04-01","2026-04-02","2026-04-03","2026-04-04","2026-04-05","2026-04-06","2026-04-07","2026-04-08","2026-04-09","2026-04-10","2026-04-11","2026-04-12","2026-04-13","2026-04-14","2026-04-15","2026-04-16","2026-04-17","2026-04-18","2026-04-19","2026-04-20","2026-04-21","2026-04-22","2026-04-23","2026-04-24","2026-04-25","2026-04-26","2026-04-27","2026-04-28","2026-04-29","2026-04-30","2026-05-01","2026-05-02","2026-05-03","2026-05-04","2026-05-05","2026-05-06","2026-05-07","2026-05-08","2026-05-09","2026-05-10","2026-05-11","2026-05-12","2026-05-13","2026-05-14","2026-05-15","2026-05-16","2026-05-17","2026-05-18","2026-05-19","2026-05-20","2026-05-21","2026-05-22","2026-05-23","2026-05-24","2026-05-25","2026-05-26","2026-05-27","2026-05-28","2026-05-29","2026-05-30","2026-05-31","2026-06-01","2026-06-02","2026-06-03","2026-06-04","2026-06-05","2026-06-06","2026-06-07","2026-06-08","2026-06-09","2026-06-10","2026-06-11","2026-06-12","2026-06-13","2026-06-14","2026-06-15","2026-06-16","2026-06-17","2026-06-18","2026-06-19","2026-06-20","2026-06-21","2026-06-22","2026-06-23","2026-06-24","2026-06-25","2026-06-26","2026-06-27","2026-06-28","2026-06-29","2026-06-30","2026-07-01","2026-07-02","2026-07-03","2026-07-04","2026-07-05","2026-07-06","2026-07-07","2026-07-08","2026-07-09","2026-07-10","2026-07-11","2026-07-12","2026-07-13","2026-07-14","2026-07-15","2026-07-16","2026-07-17","2026-07-18","2026-07-19","2026-07-20","2026-07-21","2026-07-22","2026-07-23","2026-07-24","2026-07-25","2026-07-26","2026-07-27","2026-07-28","2026-07-29","2026-07-30","2026-07-31","2026-08-01","2026-08-02","2026-08-03","2026-08-04","2026-08-05","2026-08-06","2026-08-07","2026-08-08","2026-08-09","2026-08-10","2026-08-11","2026-08-12","2026-08-13","2026-08-14","2026-08-15","2026-08-16","2026-08-17","2026-08-18","2026-08-19","2026-08-20","2026-08-21","2026-08-22","2026-08-23","2026-08-24","2026-08-25","2026-08-26","2026-08-27","2026-08-28","2026-08-29","2026-08-30","2026-08-31","2026-09-01","2026-09-02","2026-09-03","2026-09-04","2026-09-05","2026-09-06","2026-09-07","2026-09-08","2026-09-09","2026-09-10","2026-09-11","2026-09-12","2026-09-13","2026-09-14","2026-09-15","2026-09-16","2026-09-17","2026-09-18","2026-09-19","2026-09-20","2026-09-21","2026-09-22","2026-09-23","2026-09-24","2026-09-25","2026-09-26","2026-09-27","2026-09-28","2026-09-29","2026-09-30","2026-10-01","2026-10-02","2026-10-03","2026-10-04","2026-10-05"],"tco":[6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,6.86,6.86,6.86,6.86,6.86,null,null,9.73,9.76,9.76,9.78,9.8,9.83,9.83,9.83,9.89,9.96,10.1,10.24,10.4,10.4,10.4,10.5,10.7,10.75,10.75,10.85,10.85,10.85,10.9,11.0,11.13,11.21,11.37,11.37,11.37,11.54,11.8,11.89,12.15,12.13,12.13,12.13,12.08,12.02,11.86,11.86,11.86,11.86,11.86,11.77,11.71,11.66,11.62,11.58,11.58,11.58,11.55,11.52,11.52,11.52,11.5,11.5,11.5,11.54,11.57,11.71,11.83,11.92,11.92,11.92,12.12,12.26,12.32,12.45,12.58,12.58,12.58,12.6,12.64,12.42,12.04,11.53,11.53,11.53,10.99,10.15,9.83,10.01,11.0,11.0,11.0,11.9,12.06,12.26,12.22,12.05,12.05,12.05,12.02,12.02,12.0,11.9,12.0,12.0,12.0],"ref":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,7.85,9.02,8.41,8.78,8.44,null,null,8.69,8.48,8.52,8.0,7.99,null,null,8.87,8.6,8.37,8.06,8.46,null,null,8.09,8.56,8.51,null,null,null,null,8.83,8.99,7.89,null,null,null,null,8.73,7.94,8.57,8.35,8.92,null,null,8.97,9.1,8.72,9.03,9.21,null,null,8.91,9.1,8.81,9.16,null,null,null,9.32,9.09,8.86,8.99,8.59,null,null,8.64,8.5,9.11,8.99,8.81,null,null,8.69,8.89,9.36,8.67,8.58,null,null,null,null,8.73,8.47,8.7,null,null,9.08,8.87,8.66,9.08,8.92,null,null,8.4,8.19,8.69,8.85,8.48,null,null,8.78,8.49,8.68,9.18,8.94,null,null,9.05,9.01,8.9,8.91,9.39,null,null,8.82,8.66,9.04,8.81,9.01,null,null,8.57,8.77,8.84,8.42,null,null,null,8.96,9.0,9.01,9.41,9.25,null,null,9.26,9.16,9.11,9.18,9.43,null,null,9.43,9.39,9.39,9.42,9.48,null,null,9.54,9.52,9.59,9.7,null,null,null,9.8,9.87,9.99,9.99,10.1,null,null,10.14,10.18,10.04,10.11,10.04,null,null,9.91,9.98,9.98,9.92,9.94,null,null,9.92,9.9,9.9,9.93,9.92,null,null,9.87,9.86,9.72,null,null,null,null,9.9,9.86,9.79,9.82,9.86,null,null,9.81,9.74,9.81,9.8,9.72,null,null,null,9.78,9.76,9.73,9.76,9.73,9.73,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"par":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,7.357,7.348,7.34,7.35,7.365,7.445,7.382,7.385,7.387,7.4,7.392,7.402,7.41,7.4,7.39,7.395,7.368,7.353,7.33,7.34,7.358,7.365,7.353,7.32,7.312,7.348,7.328,7.34,7.315,7.285,7.3,7.305,7.327,7.373,7.363,7.35,7.348,7.327,7.302,7.313,7.318,7.32,7.332,7.335,7.335,7.335,7.337,7.342,7.393,7.362,7.308,7.325,7.353,7.378,7.403,7.393,7.385,7.373,7.367,7.373,7.382,7.378,7.382,7.38,7.373,7.367,7.377,7.375,7.377,7.385,7.367,7.363,7.367,7.363,7.345,7.322,7.285,7.287,7.263,7.267,7.277,7.287,7.27,7.285,7.305,7.26,7.282,7.275,7.283,7.282,7.272,7.248,7.21,7.188,7.277,7.273,7.262,7.258,7.24,7.215,7.193,7.257,7.22,7.202,7.238,7.24,7.243,7.243,7.252,7.33,7.252,7.258,7.245,7.235,7.247,7.253,7.283,7.282,7.253,7.267,7.25,7.222,7.237,7.242,7.195,7.21,7.217,7.193,7.21,7.23,7.257,7.26,7.257,7.252,7.267,7.288,7.29,7.317,7.325,7.43,7.338,7.35,7.357,7.36,7.388,7.458,7.4,7.408,7.4,7.44,7.443,7.46,7.453,7.47,null,null,7.457,7.49,7.55,7.552,7.537,7.54,7.522,7.545,7.54,7.545,7.547,7.593,7.598,7.588,7.598,7.595,7.7,7.664,7.698,7.669,7.656,7.666,7.61,7.626,7.685,7.695,7.711,7.692,7.674,7.666,7.7,7.696,7.736,7.728,7.757,7.777,7.759,7.76,7.758,7.765,7.762,7.756,7.775,7.815,7.799,7.828,7.876,7.879,7.813,7.765,7.828,7.831,7.875,7.878,7.834,7.77,7.815,7.802,7.816,7.809,7.883,7.898,7.888,7.907,7.953,8.01,8.114,7.99,7.941,7.924,7.883,7.784,7.922,8.071,8.283,8.255,8.327,8.594,8.511,8.519,8.379,8.295,7.821,7.944,8.164,8.157,8.155,8.063,8.075,8.06,8.05,8.056,8.094,8.131,8.248,8.289,8.208,8.201,8.185,8.185,8.18,8.236,8.224,8.215,8.206,8.208,8.266,8.265,8.274,8.283,8.263,8.247,8.246,8.289,8.282,8.252,8.241,8.236,8.245,8.244,8.248,8.256,8.266,8.275,8.271,8.272,8.3,8.319,8.338,8.379,8.446,8.483,8.467,8.513,8.519,8.542,8.501,8.477,8.468,8.47,8.457,8.47,8.534,8.529,8.528,8.528,8.525,8.477,8.493,8.496,8.45,8.488,8.507,8.554,8.52,8.544,8.551,8.601,8.64,8.757,8.832,8.744,8.726,8.739,8.814,8.866,8.846,8.829,8.753,8.753,8.744,8.752,8.759,8.758,8.738,8.752,8.737,8.721,8.715,8.703,8.646,8.695,8.665,8.655,8.701,8.705,8.81,8.801,8.794,8.836,8.875,8.919,8.941,9.028,8.98,8.923,8.934,8.998,8.992,9.002,9.0,8.998,8.998,9.008,9.064,9.091,9.241,9.178,9.191,9.198,9.096,9.246,9.42,9.481,9.744,9.898,9.798,9.842,9.837,9.879,9.964,10.243,10.121,10.106,10.034,10.037,10.048,10.183,10.164,10.126,10.163,10.167,10.182,10.342,10.615,11.038,11.253,11.262,11.198,11.095,12.557,13.441,13.234,13.102,13.055,12.976,12.848,12.558,11.8,10.879,10.874,10.885,10.888,10.879,10.882,10.904,10.976,11.145,11.014,11.01,11.007,11.01,10.957,10.836,10.768,10.741,10.756,10.772,10.823,10.862,10.841,10.784,10.728,10.71,10.72,10.715,10.619,10.456,10.238,10.156,10.214,10.2,10.414,10.609,10.722,10.592,10.516,10.533,10.544,10.574,10.562,10.54,10.51,10.499,10.517,10.525,10.556,10.599,10.621,10.572,10.561,10.549,10.47,10.485,10.527,10.5,10.458,10.444,10.445,10.48,10.532,10.56,10.573,10.532,10.517,10.531,10.543,10.553,10.575,10.592,10.571,10.578,10.603,10.623,10.623,10.617,10.628,10.617,10.602,10.592,10.613,10.619,10.61,10.58,10.563,10.557,10.531,10.518,10.518,10.498,10.49,10.467,10.467,10.477,10.492,10.524,10.57,10.609,10.619,10.615,10.653,10.782,11.001,11.282,11.834,11.933,11.681,11.754,11.418,11.15,11.068,11.106,11.081,11.052,11.04,11.036,11.059,11.098,11.109,11.098,11.07,11.061,11.055,11.06,11.062,11.065,11.064,11.064,11.055,11.053,11.109,11.212,11.219,11.176,11.103,11.097,11.084,11.08,11.079,11.085,11.086,11.083,11.078,11.077,11.078,11.081,11.079,11.077,11.079,11.071,11.081,11.146,11.226,11.21,11.155,11.15,11.186,11.207,11.226,11.274,11.292,11.276,11.327,11.38,11.345,11.316,11.283,11.297,11.281,11.286,11.285,11.277,11.272,11.258,11.233,11.172,11.159,11.194,11.164,11.163,11.179,11.181,11.17,11.165,11.168,11.167,11.179,11.202,11.203,11.181,11.179,11.178,11.196,11.209,11.239,11.262,11.259,11.247,11.245,11.267,11.297,11.342,11.361,11.321,11.306,11.284,11.264,11.264,11.271,11.272,11.254,11.243,11.268,11.378,11.709,12.172,11.98,11.7,11.752,11.813,11.826,11.905,11.984,12.015,12.005,12.006,12.028,12.098,12.236,12.38,12.384,12.368,12.369,12.384,12.416,12.535,12.722,12.817,12.839,12.847,12.915,12.989,13.249,13.383,13.488,13.366,13.356,13.404,13.399,13.415,13.473,13.486,13.459,13.465,13.487,13.498,13.568,13.901,14.121,14.187,14.301,14.589,15.072,15.216,15.281,15.238,15.17,15.159,15.17,15.193,15.268,15.379,15.442,15.433,15.428,15.509,15.793,16.493,17.813,17.878,17.524,17.556,17.596,17.442,17.433,17.432,17.26,16.515,16.498,16.417,16.262,16.307,16.47,16.447,16.348,16.345,16.333,16.321,16.319,16.342,16.336,16.32,16.299,16.276,16.27,16.29,16.325,16.336,16.297,16.282,16.289,16.284,16.274,16.258,16.085,15.977,15.964,16.014,16.002,16.0,15.995,15.906,15.719,15.535,15.254,14.596,14.496,15.14,15.16,15.043,15.026,15.069,15.057,15.051,15.014,14.852,14.703,14.695,14.746,14.651,14.62,14.598,14.471,14.298,14.326,14.255,14.086,13.707,13.349,13.082,13.065,13.093,13.374,13.899,13.824,13.87,13.841,13.782,13.781,13.758,13.649,13.55,13.366,13.254,13.195,13.245,13.313,13.39,13.537,13.484,13.506,13.591,13.74,13.485,13.428,13.384,13.359,13.307,13.271,13.23,13.231,13.216,13.117,12.818,12.406,12.264,12.085,11.947,11.308,11.587,12.528,12.384,12.077,12.125,12.224,12.338,12.331,12.57,12.714,12.635,12.65,12.695,12.732,12.726,12.655,12.578,12.511,12.532,12.616,12.591,12.559,12.538,12.563,12.561,12.563,12.568,12.563,12.538,12.534,12.506,12.414,12.383,12.334,12.359,12.572,12.59,12.72,12.903,12.931,12.928,12.91,12.881,12.829,12.815,12.768,12.948,12.915,12.782,12.796,12.721,12.611,12.537,12.563,12.545,12.405,12.131,12.009,11.59,11.382,11.392,11.451,11.42,11.331,10.861,10.626,10.623,10.497,10.347,10.096,10.072,10.261,10.591,10.44,10.378,10.465,10.387,10.24,10.388,10.382,10.367,10.362,10.398,10.41,10.354,10.262,10.203,10.136,10.106,10.107,9.82,9.685,9.678,9.572,9.498,9.504,9.518,9.439,9.363,9.207,9.136,9.162,9.175,9.152,9.179,9.326,10.148,9.91,9.646,9.625,9.609,9.508,9.45,9.476,9.529,9.532,9.572,9.586,9.597,9.618,9.653,9.646,9.613,9.633,9.648,9.65,9.643,9.636,9.62,9.654,9.663,9.64,9.597,9.598,9.578,9.549,9.519,9.561,9.566,9.592,9.556,9.536,9.523,9.528,9.536,9.509,9.309,9.177,9.0,9.064,9.123,9.112,9.112,9.122,9.187,9.265,9.248,9.216,9.197,9.176,9.133,9.122,9.151,9.156,9.129,9.115,9.076,9.071,9.089,9.077,9.068,9.08,9.071,9.052,9.025,9.022,9.022,9.019,9.031,9.037,9.049,9.091,9.166,9.192,9.302,9.417,9.484,9.502,9.356,9.252,9.258,9.285,9.343,9.386,9.326,9.269,9.27,9.283,9.288,9.339,9.385,9.319,9.288,9.288,9.294,9.314,9.342,9.327,9.312,9.313,9.317,9.305,9.311,9.313,9.313,9.279,9.267,9.268,9.283,9.297,9.305,9.302,9.306,9.332,9.377,9.391,9.422,9.488,9.49,9.48,9.49,9.541,9.645,9.725,9.732,9.746,9.775,9.936,10.205,10.056,9.867,9.881,9.834,9.869,9.948,9.977,10.0,10.025,9.969,9.932,9.975,10.026,10.0,10.017,10.06,10.03,10.024,10.044,10.049,10.06,10.035,9.994,9.984,9.988,9.999,9.991,9.948,9.965,9.96,9.952,9.932,9.921,9.921,9.941,9.964,9.954,9.955,9.949,9.948,9.949,9.938,9.921,9.908,9.9,9.906,9.904,9.898,9.875,9.863,9.882,9.986,9.939,9.954,9.934,9.902,9.883,9.885,9.931,9.903,9.877,9.924,9.971,9.99,9.968,9.993,9.989,9.996,10.036,10.212,10.409,10.571,10.593,10.435,10.492,10.543,10.634,10.721,10.71,10.765,10.76,10.834,11.092,11.354,11.517,11.728,11.732,11.564,11.651,11.64,11.861,11.887,12.004,11.705,11.69,11.803,11.768,11.618,11.248,11.162,11.136,11.187,11.347,11.51,11.529,11.512,11.538,11.442,11.462,11.564,11.568,11.606,11.595,11.636,11.604,11.619,11.639,11.702,11.835,11.984,12.034,11.92,11.941,11.999,12.007,12.235,12.372,12.398,12.412,12.399,12.447,12.53,12.362,12.12,11.736,11.502,11.7,11.822,11.383,10.612,10.734,11.36,11.989,11.929,12.002,12.221,12.332,12.275,12.036,11.925,12.006,12.064,12.002,11.988,12.042,12.009,11.97,null,null]},"bancos":{"cortes":["2026-01-05","2026-01-06","2026-01-07","2026-01-08","2026-01-09","2026-01-12","2026-01-13","2026-01-14","2026-01-15","2026-01-16","2026-01-19","2026-01-20","2026-01-21","2026-01-22","2026-01-26","2026-01-27","2026-01-28","2026-01-29","2026-01-30","2026-02-02","2026-02-03","2026-02-04","2026-02-05","2026-02-06","2026-02-09","2026-02-10","2026-02-11","2026-02-12","2026-02-13","2026-02-18","2026-02-19","2026-02-20","2026-02-23","2026-02-24","2026-02-25","2026-02-26","2026-02-27","2026-03-02","2026-03-03","2026-03-04","2026-03-05","2026-03-06","2026-03-09","2026-03-10","2026-03-11","2026-03-12","2026-03-13","2026-03-16","2026-03-17","2026-03-18","2026-03-19","2026-03-20","2026-03-23","2026-03-24","2026-03-25","2026-03-26","2026-03-27","2026-03-30","2026-03-31","2026-04-01","2026-04-02","2026-04-06","2026-04-07","2026-04-08","2026-04-09","2026-04-10","2026-04-13","2026-04-14","2026-04-15","2026-04-16","2026-04-17","2026-04-20","2026-04-21","2026-04-22","2026-04-23","2026-04-24","2026-04-27","2026-04-28","2026-04-29","2026-04-30","2026-05-04","2026-05-05","2026-05-06","2026-05-07","2026-05-08","2026-05-11","2026-05-12","2026-05-13","2026-05-14","2026-05-15","2026-05-18","2026-05-19","2026-05-20","2026-05-21","2026-05-22","2026-05-25","2026-05-26","2026-05-27","2026-05-28","2026-05-29","2026-06-01","2026-06-02","2026-06-03","2026-06-08","2026-06-09","2026-06-10","2026-06-11","2026-06-12","2026-06-15","2026-06-16","2026-06-17","2026-06-18","2026-06-19","2026-06-23","2026-06-24","2026-06-25","2026-06-26","2026-06-29","2026-06-30","2026-07-01","2026-07-02","2026-07-03","2026-07-06","2026-07-07","2026-07-08","2026-07-09","2026-07-10","2026-07-13","2026-07-14","2026-07-15","2026-07-17","2026-07-20","2026-07-21","2026-07-22","2026-07-23","2026-07-24","2026-07-27","2026-07-28","2026-07-29","2026-07-30","2026-07-31","2026-08-03","2026-08-04","2026-08-05","2026-08-10","2026-08-11","2026-08-12","2026-08-13","2026-08-14","2026-08-17","2026-08-18","2026-08-19","2026-08-20","2026-08-21","2026-08-24","2026-08-25","2026-08-26","2026-08-27","2026-08-28","2026-08-31","2026-09-01","2026-09-02","2026-09-03","2026-09-04","2026-09-07","2026-09-08","2026-09-09","2026-09-10","2026-09-11","2026-09-14","2026-09-15","2026-09-16","2026-09-17","2026-09-18","2026-09-21","2026-09-22","2026-09-23","2026-09-24","2026-09-25","2026-09-28","2026-09-29","2026-09-30","2026-10-01","2026-10-02"],"nombres":["BISA","Ganadero","Unión","Mercantil SCZ","BNB","BCP","BancoSol","Económico","Fortaleza","FIE","PyME Ecofuturo","Nación Argentina","Prodem","PyME Comunidad"],"tco":[8.73,7.94,8.57,8.35,8.92,8.97,9.1,8.72,9.03,9.21,8.91,9.1,8.81,9.16,9.32,9.09,8.86,8.99,8.59,8.64,8.5,9.11,8.99,8.81,8.69,8.89,9.36,8.67,8.58,8.73,8.47,8.7,9.08,8.87,8.66,9.08,8.92,8.4,8.19,8.69,8.85,8.48,8.78,8.49,8.68,9.18,8.94,9.05,9.01,8.9,8.91,9.39,8.82,8.66,9.04,8.81,9.01,8.57,8.77,8.84,8.42,8.96,9.0,9.01,9.41,9.25,9.26,9.16,9.11,9.18,9.43,9.43,9.39,9.39,9.42,9.48,9.54,9.52,9.59,9.7,9.8,9.87,9.99,9.99,10.1,10.14,10.18,10.04,10.11,10.04,9.91,9.98,9.98,9.92,9.94,9.92,9.9,9.9,9.93,9.92,9.87,9.86,9.72,9.9,9.86,9.79,9.82,9.86,9.81,9.74,9.81,9.8,9.72,9.78,9.76,9.73,9.73,9.76,9.76,9.78,9.8,9.83,9.89,9.96,10.1,10.24,10.4,10.5,10.7,10.75,10.85,10.9,11.0,11.13,11.21,11.37,11.54,11.8,11.89,12.15,12.13,12.08,12.02,11.86,11.77,11.71,11.66,11.62,11.58,11.55,11.52,11.52,11.52,11.5,11.54,11.57,11.71,11.83,11.92,12.12,12.26,12.32,12.45,12.58,12.6,12.64,12.42,12.04,11.53,10.99,10.15,9.83,10.01,11.0,11.9,12.06,12.26,12.22,12.05,12.02,12.02,12.0,11.9,12.0],"esref":[true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],"p":[[8.29,7.97,9.29,7.96,8.47,8.36,8.58,8.5,7.99,6.96,null,7.35,null,7.0],[8.3,7.35,6.91,7.34,7.88,8.51,8.2,8.95,8.44,6.96,9.2,7.42,null,7.08],[7.72,8.71,9.3,8.51,8.44,7.23,8.97,7.66,null,null,null,6.96,null,7.07],[8.28,7.6,8.0,8.97,7.98,7.87,9.08,8.64,6.97,null,null,7.33,null,7.0],[8.88,8.83,9.19,8.99,8.95,8.56,9.04,8.73,9.11,7.2,9.17,7.38,null,null],[8.81,8.97,9.19,8.78,8.97,8.66,8.98,8.97,8.96,null,null,7.45,null,null],[9.03,9.02,9.27,8.86,8.8,9.01,9.22,9.05,9.1,null,null,8.19,null,7.0],[9.03,8.89,6.93,7.74,8.37,8.29,9.09,9.04,6.95,6.96,null,7.42,null,null],[9.13,9.17,6.96,9.03,8.04,7.08,9.19,9.09,7.65,null,null,6.96,null,7.0],[8.77,9.04,9.66,9.03,8.15,8.78,9.21,9.1,null,7.2,9.25,6.96,null,7.13],[9.18,8.44,9.32,9.11,8.06,8.89,9.13,8.11,7.47,null,null,6.96,null,7.0],[9.03,8.87,9.75,8.82,8.8,7.32,9.14,9.05,8.78,null,9.19,7.39,null,null],[8.99,9.0,6.92,7.86,8.67,8.35,9.18,8.89,9.18,null,null,6.96,6.97,7.0],[9.13,9.15,9.6,7.71,8.09,9.01,8.76,9.07,8.01,null,9.19,6.96,null,null],[9.05,9.13,9.75,7.09,8.92,8.99,9.02,9.18,9.11,6.97,null,6.96,null,null],[9.03,8.99,9.65,7.0,9.03,8.74,9.11,8.78,7.1,7.5,9.21,6.96,null,null],[8.94,8.95,9.3,7.37,8.83,8.7,9.07,9.07,7.88,6.96,9.2,6.96,null,null],[8.88,8.99,9.8,6.92,7.32,9.06,9.06,6.97,9.03,6.96,9.17,6.91,null,7.0],[8.87,8.38,9.6,6.91,7.85,8.91,8.98,6.96,6.91,7.5,null,8.86,6.97,6.99],[8.99,7.76,9.64,6.98,8.88,8.8,8.83,8.93,7.57,6.97,9.14,7.46,null,7.07],[8.95,7.13,9.77,7.41,8.63,8.61,8.84,8.18,6.95,6.97,null,6.96,null,null],[8.07,8.99,9.5,8.51,8.87,8.61,9.0,7.66,null,null,null,6.96,null,7.0],[8.86,8.82,9.35,8.71,8.78,8.73,9.01,7.09,null,null,null,8.14,null,7.08],[8.88,8.91,9.23,8.37,8.72,8.82,9.01,7.14,9.0,7.5,9.05,6.96,null,null],[8.92,8.84,8.89,8.28,8.33,8.82,8.81,8.88,7.38,7.19,6.97,7.44,null,7.0],[8.37,8.8,9.32,8.79,7.89,8.65,8.77,8.24,7.78,null,9.17,8.9,null,7.13],[8.94,8.75,9.77,8.9,8.58,8.38,8.87,7.79,7.95,null,null,7.81,6.97,7.0],[8.87,8.97,9.44,7.36,8.36,7.75,9.02,8.53,6.96,null,null,7.44,null,null],[8.89,8.97,9.37,7.13,7.89,8.93,8.92,8.89,8.9,7.2,8.95,8.85,null,null],[8.83,8.96,9.21,8.18,8.43,7.9,8.99,7.96,6.95,7.5,null,8.72,null,null],[8.71,8.48,8.28,8.07,8.46,8.66,8.95,8.87,8.01,null,9.07,8.35,null,null],[8.97,8.75,8.9,7.4,8.5,8.14,8.87,7.6,7.16,7.5,null,8.4,null,7.0],[8.9,8.56,9.49,7.02,8.84,7.82,null,8.6,8.9,6.97,8.98,6.96,null,7.0],[8.76,8.91,9.5,8.9,8.79,8.21,8.91,8.71,8.89,null,null,7.43,null,null],[8.75,8.75,7.55,8.78,7.26,8.47,8.9,8.86,6.96,9.3,null,7.22,null,7.0],[8.72,8.83,9.55,7.39,8.84,8.6,8.49,8.86,6.95,8.46,null,6.96,null,null],[8.93,8.88,9.57,8.84,8.78,8.46,8.54,8.86,6.86,null,null,7.02,null,null],[8.7,8.92,9.6,6.99,8.43,8.56,8.83,7.48,6.86,7.0,null,8.12,null,7.2],[8.89,8.81,8.7,7.26,6.89,7.66,8.94,8.76,6.95,null,null,8.06,null,null],[8.74,8.72,9.55,7.07,8.7,8.38,8.96,7.17,6.86,6.96,null,7.47,null,7.0],[8.35,8.49,9.24,8.04,8.07,8.03,9.02,8.61,6.86,7.8,null,7.58,null,7.17],[8.61,8.83,8.7,8.53,8.84,8.87,8.95,8.85,6.87,8.93,null,6.96,null,null],[8.74,8.95,9.06,8.58,8.66,8.06,8.93,8.97,7.3,7.14,null,6.96,null,null],[8.83,8.02,9.06,8.49,8.43,8.92,8.93,8.93,6.9,6.96,null,7.87,null,7.08],[8.93,8.88,9.08,8.7,8.79,8.56,8.84,9.13,6.88,null,null,7.44,null,7.0],[9.0,8.05,9.7,8.62,8.84,9.07,9.15,9.11,6.97,6.96,null,6.96,6.97,7.08],[9.09,9.09,9.1,8.91,8.69,8.37,9.11,7.96,6.97,null,null,7.44,null,null],[9.02,8.35,9.37,8.85,8.8,8.81,9.12,8.3,6.95,7.5,null,6.96,null,7.12],[8.96,8.99,8.81,8.95,9.04,9.06,9.08,8.98,9.09,7.5,9.15,8.73,null,7.08],[8.56,9.04,7.13,8.89,7.47,8.95,9.0,8.95,6.95,6.96,null,7.41,null,7.0],[8.93,9.03,9.32,8.26,7.78,8.81,8.98,9.03,6.95,null,null,6.96,6.97,null],[8.45,8.93,9.68,7.86,8.74,8.58,8.9,9.05,8.99,6.96,8.79,7.51,null,7.1],[9.01,8.99,9.33,7.06,7.26,7.43,9.03,9.04,8.95,6.97,null,7.24,null,7.0],[8.71,9.07,9.18,6.9,8.39,8.65,8.9,8.16,8.98,null,null,8.01,null,7.0],[8.94,9.07,9.65,7.72,7.55,8.0,8.94,8.51,6.94,null,null,7.88,null,7.08],[9.02,8.92,9.7,7.72,7.0,8.85,9.05,9.02,6.95,null,null,6.96,null,null],[8.5,8.97,9.67,7.06,8.47,8.68,8.75,9.06,7.16,null,null,7.42,null,7.0],[9.01,9.03,9.29,6.97,8.1,7.93,8.88,9.0,9.11,7.15,null,7.37,null,null],[9.01,8.92,9.66,7.1,8.57,8.87,8.9,8.92,9.08,null,null,6.94,null,7.2],[8.93,9.0,9.69,6.96,6.88,8.95,8.93,8.99,7.96,null,null,7.35,null,7.0],[8.79,8.27,8.9,6.97,7.55,8.85,9.03,6.97,6.95,null,null,7.41,null,null],[9.01,8.95,9.7,7.36,8.87,8.84,8.95,8.85,7.42,6.97,null,7.83,null,7.0],[9.03,9.08,8.9,9.05,8.82,8.84,8.91,8.97,9.06,null,null,7.44,null,null],[8.85,9.06,8.1,9.1,8.86,9.05,9.02,9.09,8.7,null,null,7.44,null,7.08],[9.07,9.08,9.65,9.12,8.71,8.75,9.13,9.09,null,null,null,8.89,null,null],[9.1,9.12,9.68,9.16,9.08,9.06,9.17,9.14,null,null,9.15,7.53,null,null],[9.13,9.12,9.6,9.08,8.91,9.16,9.14,9.13,9.3,7.55,null,7.44,null,7.0],[9.16,9.11,9.69,9.02,9.04,9.2,9.17,9.16,null,null,null,8.46,null,7.08],[9.16,9.11,8.9,8.78,8.79,9.05,9.15,9.21,8.34,null,null,null,null,null],[9.14,9.25,9.7,9.09,9.04,9.06,9.25,9.24,7.0,null,null,7.44,null,null],[9.16,9.23,9.67,9.05,9.13,9.24,9.24,7.2,9.17,7.55,null,null,null,null],[9.22,9.28,9.69,9.11,7.71,8.9,9.19,9.12,null,null,null,7.44,null,null],[9.23,9.34,9.61,9.28,9.24,8.97,9.34,9.32,8.56,null,9.44,7.44,null,7.0],[9.28,9.29,9.62,9.32,7.94,9.24,null,9.37,8.25,9.28,null,8.09,null,7.0],[9.39,9.44,9.7,9.38,9.02,8.79,9.33,9.4,9.3,9.53,null,null,null,null],[9.42,9.46,9.7,8.84,9.42,9.34,9.33,9.4,7.0,9.36,null,null,null,7.08],[9.44,9.46,9.65,9.29,9.51,9.28,9.49,9.48,9.06,9.47,null,7.48,null,7.0],[9.48,9.5,9.67,8.97,9.22,9.31,9.59,9.53,null,9.41,null,9.35,null,7.08],[9.58,9.46,9.69,9.63,9.68,9.27,9.68,9.45,9.5,9.59,9.57,null,null,7.08],[9.63,9.69,9.89,null,9.48,9.45,9.66,9.65,9.61,9.72,null,null,null,null],[9.77,9.69,9.99,9.45,9.65,9.27,9.82,9.82,7.79,8.74,null,null,null,7.0],[10.0,9.83,9.05,8.91,9.69,9.98,9.8,9.87,null,null,null,null,null,null],[10.0,9.74,10.3,9.45,9.5,9.84,10.05,10.0,10.6,9.91,null,7.44,null,null],[9.93,9.82,10.09,10.07,10.05,9.39,10.25,10.07,null,10.23,10.2,null,null,null],[9.71,10.02,10.36,9.84,10.02,10.1,10.3,10.25,10.29,null,10.33,7.58,null,7.0],[9.79,10.19,10.28,10.03,10.15,9.97,10.2,10.2,null,10.0,null,9.37,null,null],[10.14,10.06,10.4,10.19,10.02,10.04,10.21,10.17,10.08,9.6,null,null,null,null],[10.06,10.12,10.32,10.17,10.06,9.69,9.72,9.97,10.13,10.13,null,null,null,null],[10.09,9.88,10.2,10.14,10.19,10.13,10.2,9.92,10.12,10.15,null,9.87,null,null],[10.02,10.09,9.94,9.87,9.99,10.01,7.55,10.01,10.03,7.55,null,null,null,null],[9.96,10.02,10.08,10.03,9.87,9.46,9.68,10.01,10.17,null,null,10.0,null,null],[9.99,10.01,10.0,9.95,9.58,10.07,9.99,10.02,10.1,null,null,null,null,7.0],[10.02,9.67,9.97,10.05,9.9,9.92,9.8,9.86,null,null,null,null,null,null],[10.0,9.88,9.98,9.94,9.75,10.01,8.14,9.91,9.8,9.3,null,null,null,7.0],[9.99,9.96,9.96,9.74,9.05,9.97,9.81,9.93,9.95,7.55,null,9.85,null,null],[9.94,9.94,9.92,9.78,9.89,9.87,9.4,9.96,9.9,10.0,10.0,null,null,null],[9.87,9.97,9.94,9.89,9.85,9.81,9.98,9.84,9.48,9.91,null,9.4,null,null],[9.84,9.87,9.29,9.91,9.98,9.9,9.91,null,9.5,null,9.94,null,null,null],[9.95,9.9,9.9,9.96,9.94,9.85,9.87,9.93,9.97,9.72,9.98,null,null,7.08],[9.87,9.93,9.74,9.79,9.96,9.88,9.94,9.13,9.95,null,9.99,null,null,null],[9.91,9.87,10.0,9.81,9.85,9.59,9.82,9.83,null,9.93,null,null,null,null],[9.89,9.88,9.89,9.72,9.85,9.74,9.93,7.21,null,9.81,null,9.81,null,7.0],[9.24,9.82,9.86,10.03,9.39,8.74,9.92,9.94,9.88,9.66,null,null,null,null],[9.92,9.88,9.86,9.9,9.89,9.44,9.86,9.94,9.07,9.95,null,9.85,null,null],[9.81,9.88,9.72,9.8,9.82,9.86,9.86,9.94,9.76,9.91,null,9.89,null,7.0],[9.8,9.82,9.9,9.65,9.8,9.78,9.85,9.89,null,null,null,null,null,7.08],[9.77,9.86,9.19,9.87,9.9,9.92,9.72,9.86,9.94,9.51,9.93,9.8,null,null],[9.86,9.86,9.64,9.8,9.85,9.9,9.89,9.85,9.88,9.87,null,null,null,null],[9.78,9.85,9.1,9.84,9.83,9.75,9.84,9.78,null,9.9,null,null,null,7.0],[9.72,9.82,9.85,9.43,9.11,9.71,9.73,9.79,9.0,9.75,null,9.77,null,7.0],[9.76,9.85,9.85,9.72,9.76,9.78,9.74,9.8,9.71,9.46,null,null,null,null],[9.75,9.81,9.9,9.79,9.77,9.65,null,9.79,null,9.81,null,null,null,7.13],[9.73,9.77,9.87,9.95,8.87,9.8,9.74,9.8,8.0,8.29,null,9.85,null,7.0],[9.73,9.79,9.85,9.8,9.79,9.68,9.77,9.78,9.84,9.83,null,9.6,null,7.0],[9.77,9.78,9.85,9.72,8.93,9.76,9.6,9.7,9.85,9.72,9.75,null,null,7.0],[9.75,9.81,9.59,9.71,9.53,9.63,9.77,9.14,9.0,9.78,null,null,null,null],[9.72,9.78,9.05,9.64,9.75,9.46,9.63,9.77,9.82,null,null,9.7,null,null],[9.73,9.7,9.73,9.8,9.59,9.67,9.73,9.79,9.73,9.73,9.73,9.63,9.63,9.73],[9.79,9.73,9.76,9.77,9.57,9.78,9.79,9.72,9.71,9.66,9.76,9.66,9.56,9.76],[9.79,9.78,9.89,9.56,9.75,9.77,9.76,9.76,9.75,9.66,9.36,9.66,9.36,9.76],[9.81,9.78,9.78,9.72,9.78,9.86,9.77,9.78,9.78,9.68,9.38,9.77,9.48,9.78],[9.84,9.81,9.8,9.84,9.8,9.88,9.85,9.89,9.81,9.7,9.4,9.7,9.7,9.8],[9.88,9.71,9.83,10.0,9.8,9.93,9.9,9.89,9.76,9.73,9.43,9.8,9.73,9.83],[9.97,9.95,9.89,10.01,9.95,9.91,9.97,9.99,9.89,9.79,9.49,9.82,9.79,9.89],[10.09,10.04,9.96,10.21,9.94,10.07,10.06,9.92,10.07,9.86,9.56,9.86,9.86,9.96],[10.23,10.13,10.1,10.28,10.14,10.26,10.38,10.24,7.5,10.0,9.7,10.0,10.0,10.1],[10.38,10.3,10.24,10.33,10.24,10.57,10.57,10.54,10.27,10.19,9.84,10.18,10.14,10.24],[10.53,10.11,10.4,10.66,10.34,10.38,10.55,10.53,10.4,10.49,10.0,10.35,10.3,10.4],[10.59,10.58,10.5,10.81,10.4,10.73,10.52,10.72,10.7,10.8,10.1,10.43,10.4,10.5],[10.71,10.69,10.7,10.69,10.75,10.84,10.9,10.67,10.77,10.6,10.3,10.69,10.6,10.7],[10.93,10.88,10.75,10.82,10.75,10.86,10.99,10.75,10.8,10.65,11.13,10.74,10.65,10.75],[10.94,10.86,10.9,10.85,10.78,10.9,11.01,10.84,10.79,10.75,10.45,10.76,10.75,10.85],[11.0,10.98,10.9,10.91,10.91,11.06,11.06,10.8,10.96,10.9,10.9,10.96,10.8,10.9],[11.09,11.19,11.0,11.11,11.09,11.12,11.24,11.19,10.98,10.9,10.6,10.92,10.9,11.0],[11.22,11.19,11.13,11.27,11.11,11.18,11.31,11.23,11.36,11.03,10.73,11.03,11.03,11.13],[11.38,11.38,11.21,11.06,11.19,11.56,11.42,11.5,11.33,11.11,10.81,11.11,11.11,11.21],[11.54,11.41,11.37,11.55,11.32,11.74,11.54,11.45,11.52,11.51,10.97,11.33,11.27,11.37],[11.77,11.73,11.54,11.91,11.55,11.78,11.74,11.83,12.07,12.06,11.39,11.51,11.44,11.54],[12.01,11.82,11.8,11.92,11.77,11.93,11.96,11.96,11.82,11.7,11.4,11.92,11.7,11.8],[12.16,12.15,12.09,12.0,11.95,12.24,12.07,11.84,12.33,12.04,11.49,11.8,11.79,11.89],[12.19,12.08,12.19,12.13,12.17,12.18,12.04,12.05,12.11,12.19,12.1,12.16,12.05,12.15],[11.96,12.07,12.14,12.06,12.05,12.1,12.14,11.97,12.31,12.03,11.73,12.12,12.03,12.13],[12.03,11.98,12.09,11.98,12.02,11.97,12.0,11.92,12.06,12.19,11.68,11.9,11.98,12.08],[11.86,11.87,11.92,11.87,11.75,11.8,11.85,11.88,11.87,12.05,11.62,11.82,11.82,12.02],[11.76,11.82,11.36,11.77,11.69,11.67,11.59,11.1,11.74,11.76,11.46,11.79,11.66,11.86],[11.73,11.69,10.73,11.54,11.41,11.6,11.76,11.65,11.6,11.71,11.37,11.27,11.57,11.77],[11.69,11.63,10.67,11.71,11.56,11.69,11.61,11.5,11.61,11.67,null,11.21,11.41,11.47],[11.64,11.59,10.16,11.66,11.57,11.63,11.6,11.42,11.54,11.61,11.26,11.55,11.36,11.51],[11.56,11.59,11.52,11.59,11.47,11.62,11.51,11.52,11.54,11.63,11.22,11.46,11.32,null],[11.56,11.55,10.5,11.58,11.48,11.59,11.6,11.48,11.58,11.49,11.18,11.08,11.28,11.5],[11.51,11.54,10.5,11.52,11.5,11.52,11.52,11.44,11.55,11.38,11.15,11.05,11.25,11.15],[11.51,11.53,11.46,11.53,11.36,11.52,11.51,11.53,11.54,11.51,11.12,11.36,11.22,11.12],[11.52,11.52,11.45,11.45,11.51,11.53,11.57,11.56,11.47,11.32,null,11.48,11.22,11.12],[11.51,11.5,10.5,11.49,11.46,11.5,11.55,11.53,11.48,11.32,null,11.38,11.22,11.12],[11.55,11.53,10.5,11.28,11.57,11.54,11.58,11.59,11.59,11.53,null,11.0,11.2,11.1],[11.53,11.57,10.5,11.71,11.55,11.62,11.59,11.61,11.5,11.66,11.14,11.05,11.24,11.14],[11.72,11.68,10.5,11.74,11.73,11.71,11.68,11.64,11.6,11.78,11.17,11.49,11.27,11.17],[11.87,11.81,10.5,11.75,11.71,11.85,11.94,11.79,11.66,11.81,11.31,11.82,11.41,11.31],[11.95,12.01,10.5,11.77,11.85,12.08,12.05,11.98,11.89,11.63,11.43,11.77,11.53,11.43],[12.14,12.15,10.5,11.96,12.04,12.07,12.13,12.11,11.9,11.96,11.52,11.73,11.62,11.52],[12.29,12.17,10.5,12.25,12.21,12.35,12.35,12.24,12.09,12.39,11.72,11.93,11.82,11.72],[12.26,12.29,12.26,12.37,12.25,12.32,12.42,12.41,12.54,12.45,12.55,11.96,11.96,11.86],[12.43,12.47,10.5,12.5,12.37,12.4,12.57,12.5,12.19,12.56,11.92,12.18,12.02,11.92],[12.53,12.62,11.56,12.59,12.45,12.56,12.6,12.59,12.65,12.62,null,12.38,12.15,12.05],[12.59,12.52,11.3,12.68,12.55,12.67,12.51,12.56,12.61,12.58,12.18,12.28,12.28,12.18],[12.63,12.7,12.74,12.44,12.5,12.63,12.69,12.55,12.5,12.61,null,12.44,12.3,12.2],[12.39,12.44,12.74,12.32,12.47,12.28,12.24,12.22,12.57,12.48,12.61,12.12,12.34,12.24],[11.88,12.28,11.49,12.16,11.38,12.02,11.93,11.78,12.2,11.99,12.02,12.12,12.12,12.02],[11.57,11.71,11.3,11.68,11.4,11.58,11.64,11.14,11.94,11.54,null,11.67,11.74,11.64],[10.91,11.42,11.3,10.86,11.1,11.0,10.84,10.8,11.43,11.03,null,10.93,11.23,null],[9.84,10.47,10.64,9.86,9.72,10.47,10.59,10.62,10.53,10.39,10.59,10.4,10.69,10.59],[9.76,10.13,9.15,9.91,9.96,9.96,10.0,9.98,10.01,9.35,9.75,9.95,9.85,9.96],[9.94,9.96,9.0,9.9,10.0,10.41,9.92,10.27,9.83,9.72,9.43,9.79,9.53,9.43],[10.41,10.7,9.01,11.84,11.12,11.07,10.07,11.63,9.91,10.04,9.61,9.48,9.71,9.61],[11.78,11.96,10.0,11.57,11.61,12.09,9.91,12.31,11.8,10.5,null,11.42,10.7,10.6],[11.95,12.08,10.9,12.09,12.12,12.34,11.98,12.35,12.39,11.0,12.0,12.08,11.6,11.5],[12.18,12.32,11.06,12.14,12.03,12.06,12.29,12.32,12.4,12.28,12.56,12.03,11.76,11.66],[12.21,12.13,12.33,12.3,12.11,12.17,12.09,11.6,12.4,12.2,null,null,11.96,11.88],[12.0,12.22,11.22,12.0,12.05,12.0,12.22,11.6,12.5,11.76,12.28,null,11.92,11.82],[12.0,12.05,11.05,12.0,12.07,12.0,12.33,12.0,12.15,11.45,11.65,12.0,11.75,12.05],[11.98,12.0,12.05,12.05,12.05,12.02,12.05,12.0,11.95,11.52,11.02,11.52,11.72,11.62],[12.0,11.98,12.25,12.02,11.97,12.02,11.92,12.02,11.72,12.5,11.02,11.9,11.72,11.62],[11.85,11.9,11.5,12.02,11.92,11.98,12.0,12.02,11.8,11.95,11.0,11.95,11.7,11.6],[11.9,11.92,12.0,12.0,11.8,11.98,12.06,12.0,12.04,12.12,12.06,11.9,11.6,11.5]],"m":[[6374863,13270679,40384184,5590077,6606364,5707697,6050572,2687283,300260,6870,null,51175,null,435],[2044021,6057968,121374,958535,1110896,3438979,1409129,1338962,229000,575426,300000,44303,null,2100],[303325,2720860,18000281,3741289,7997997,8930501,218060,5682,null,null,null,2360,null,1106],[5604577,9639133,225,4455678,725290,980586,7754342,1591956,3250,null,null,358346,null,1000],[9989385,6512005,3012043,4038525,26564797,137852,718455,398610,500448,540000,500000,9347,null,null],[2007493,6705266,8017773,4395332,5657139,740794,4777684,1256575,406097,null,null,257450,null,null],[12634591,7784379,19086548,3448885,4900644,55496,9511431,2224404,632487,null,null,419153,null,500],[6403089,3500332,30200,383288,1218225,145354,3276073,804797,3000,1705580,null,54256,null,null],[26290690,15862249,362623,4028100,925870,1223636,3886787,902542,920759,null,null,6000,null,500],[3298099,8010375,14578896,2401274,1391790,388010,5933481,3165113,null,700787,400000,2100,null,3001],[8904037,9999396,5548691,13400386,1560677,1439852,6954765,1738898,830277,null,null,4374,null,200],[12073392,5456817,10498394,1246976,7939960,1101453,1801479,1025070,315773,null,700000,14493,null,null],[2475435,4144852,73792,1397313,835904,565292,1167679,403000,327259,null,null,2494,1800,197],[14864680,17395472,9579492,500386,731032,3107728,54060,1657743,1129784,null,600000,2255,null,null],[8486764,6462075,26280135,1958978,1272856,2345884,1608922,5800689,522247,379779,null,627,null,null],[7174324,6412148,15011632,1867598,5438372,611412,3506420,4184034,656248,250000,273000,600,null,null],[8310605,3167257,8192713,2812730,4509217,4638166,815665,939078,94830,19963,500000,1270,null,null],[3030884,11229093,15000018,5542645,506202,7297902,1811542,38372,503605,129435,450000,2020,null,28000],[3749577,5952525,10115046,5457686,1212443,4585967,668148,920074,6999,200000,null,57375,4750,149],[8171981,2423917,3541096,3126322,1772968,1631910,3019518,645921,14694,385350,200000,28682,null,2217],[18762297,10612887,5397367,2003286,4129706,3941589,1163753,26613,500,99905,null,13463,null,null],[1990387,6213489,26306547,795482,16575088,826849,5422840,1391426,null,null,null,2638,null,100],[16495557,5743385,17098487,3241050,2180764,1436067,2028474,699614,null,null,null,135669,null,2000],[8254770,11130502,4405234,4134494,2061115,5539619,1698332,839594,24667,300000,18000,2163,null,null],[9556009,6508813,1450818,1208142,547592,874305,622422,519883,1674389,353667,175000,52250,null,150],[766110,3960925,5626282,6445537,696033,1615525,773059,58194,44956,null,900000,16096,null,3001],[8401754,3583714,38720452,5623273,5334084,707663,93481,1490311,160975,null,null,7301,1800,150],[3131717,7600988,7178161,5547343,256081,775976,2226052,4963913,10000,null,null,204313,null,null],[8694530,7351088,3037821,5314752,590143,2399965,311248,804020,148975,741514,101000,32271,null,null],[8292931,14263869,2711321,7646875,452247,647136,4305396,1599922,1000,200000,null,49694,null,null],[7064144,12012587,727782,8938850,3226826,347476,1998387,2313917,363955,null,400000,444903,null,null],[13287120,4506642,2454996,540297,2512996,2036111,1039629,1249122,79331,500000,null,9220,null,197],[4268396,1122624,28465771,2384728,4000458,2978828,null,330490,819975,288557,219585,5000,null,550],[5059191,11504752,1702205,5796925,5089769,712411,2257370,513498,1099975,null,null,212812,null,null],[5035615,8781115,533,5864455,1478438,813044,1120785,872210,15050,30000,null,118400,null,1000],[2369299,10638043,27800938,4433152,4365187,301793,298911,1994310,200,209102,null,2554,null,null],[18873185,5033069,13902892,11426345,3214205,669296,1090789,1217147,3228854,null,null,55010,null,null],[3935862,7915259,2992105,1084920,2905768,5237853,256969,380166,4978519,290782,null,11759,null,33472],[6999916,14162381,851180,2090313,3579146,4623947,1220432,726711,5267190,null,null,79889,null,null],[8126942,6500699,10382728,278593,3571627,336602,707270,3487,4949785,58151,null,109770,null,217],[1427956,6691719,45087709,1638214,379516,1170395,10798934,330971,6829268,14983,null,246747,null,7200],[7197664,8478104,301157,2113644,4966855,6215635,1175845,5805971,6792279,46444,null,2600,null,null],[7002560,10313642,3085034,1938732,1420191,347979,870174,3569066,778207,774059,null,6673,null,null],[4805673,5367047,17821519,2997036,1300516,752321,349480,797237,4630785,1585580,null,86540,null,2100],[6223219,6832733,5274434,1972767,2086835,3069631,2057747,3600876,3726452,null,null,23662,null,2000],[8999934,12830977,40360368,3571373,2906550,3625228,7648142,2379083,567932,9490,null,2000,1800,1200],[9309895,13172361,2365638,4901230,704824,6334216,3104515,71713,7015,null,null,68176,null,null],[7941668,2608186,14021173,4339561,3655840,1660535,4040317,79608,600,200000,null,9924,null,4200],[4058145,7554513,2300,3886782,9429734,2311615,1911686,1461108,530557,3784,750000,316546,null,2623],[707831,5205059,110723,12461468,194654,1202067,959718,267147,5000,15614,null,33295,null,100],[7669165,10091634,640533,1320182,483207,6167870,193654,2021797,1439,null,null,4120,4440,null],[608887,8076443,32734276,689374,3174059,1044135,170269,2074755,250975,28773,37789,8984,null,239444],[20055614,7280680,4659478,3024792,43504,1659100,2956811,3254434,107175,575439,null,162313,null,300],[4890818,11412574,3028726,3673458,585034,2764704,889419,74474,100000,null,null,58757,null,209],[2973002,9795371,7549694,2754764,95599,654913,578087,208548,1530,null,null,5644,null,2100],[11774843,5865939,1301970,5650446,195744,3380121,7536464,1428985,400,null,null,478,null,null],[2217268,13432072,18036462,5168572,301686,576958,96926,5071346,8140,null,null,206450,null,89],[8580633,7164273,741908,4286797,348399,1664910,618910,2144611,300000,580905,null,36056,null,null],[6494592,5538523,2279604,2527891,3295213,2036741,391312,606285,604955,null,null,5829,null,13000],[5506564,5692553,10021681,3739601,1685850,2364232,400271,521894,42635,null,null,85008,null,317],[6557081,5209141,393,4055197,1175136,10896263,1225996,24510,2877,null,null,106321,null,null],[8789009,7979330,10181345,4010691,8391305,855104,1214056,222682,18502,122100,null,117358,null,250],[9110738,10755103,2625,978042,3551031,1711056,780044,1312785,276062,null,null,107380,null,null],[1080453,5491294,5314,3867661,2878766,1410050,2683245,902068,49975,null,null,45045,null,2500],[5846149,6479227,30820688,3459711,836219,577930,2133351,1144928,null,null,null,66400,null,null],[9638212,15126275,14585804,5759759,4686114,3777625,2555331,767676,null,null,230000,170213,null,null],[9665975,9270905,17352520,5222684,1781224,6955068,191212,2293629,61900,300000,null,76655,null,150],[10524333,4736144,2015299,2567181,2484038,1704257,1448575,2749398,null,null,null,551261,null,1848],[6241476,2905662,1825,1529139,378983,959666,3326539,3105750,128140,null,null,null,null,null],[4888942,10151954,711325,1560623,1035478,8997146,5384723,3878016,47,null,null,160213,null,null],[6377672,6331774,28000252,574720,3183482,4368722,2911699,48628,165000,400000,null,null,null,null],[12305922,11888141,22077026,1589851,229478,280318,1407134,30440,null,null,null,11275,null,null],[7539019,11174087,18086323,3235530,3782655,2006697,4046849,3169254,173975,null,632780,22550,null,1000],[3856860,4515662,11283712,2169713,866976,880305,null,1993026,14623,35535,null,6472,null,1197],[9013025,12046469,1886582,8827952,1054055,362738,1978959,1787317,157500,6158272,null,null,null,null],[7528070,8047733,9199971,687633,2113042,652480,207938,2155704,79,3235327,null,null,null,1015],[9943335,8081741,30800354,3654388,2818097,1050113,1343182,2289932,11633,1743300,null,46770,null,500],[11966859,8007959,9475049,1257302,185000,1409998,4008633,2961933,null,804676,null,35970,null,2472],[4479153,3785724,4061900,1323007,1063903,359549,1645854,63866,50,1694071,141306,null,null,2000],[8602536,10400013,8653577,null,2273686,1308474,1216817,566761,774638,2956121,null,null,null,null],[9250693,3776999,17100519,2305526,2717085,1210887,598170,2985548,91207,549773,null,null,null,217],[7354563,6870870,1188,574136,1422917,3518037,2947202,2455733,null,null,null,null,null,null],[10789184,5480893,7000088,291553,917013,1213662,907915,2904552,212107,949565,null,45570,null,null],[6278470,7286839,100575,3385746,5356838,1898076,5395752,1510022,null,1874457,566000,null,null,null],[7155448,7494047,11805225,3728279,3368648,2827943,4931780,3714913,518730,null,150000,20170,null,300],[1168092,21239655,177472,5095585,2037434,1489437,2098189,2749198,null,103905,null,192183,null,null],[28067100,6243914,15052609,4859908,5466012,3059445,1079800,1640426,711014,12664,null,null,null,null],[4605380,8422167,488290,9521703,7875071,6686422,26957,69738,910259,629975,null,null,null,null],[13278114,2639087,3394156,3815973,3953444,5327209,558039,24058,214507,3429980,null,33969,null,null],[2710026,17473539,9197,1422116,2196003,1332080,5395,660041,682957,200000,null,null,null,null],[2879373,5731374,3562,1506614,1627987,2490622,104153,683479,637109,null,null,59975,null,null],[4256818,6094892,3916057,3761753,2229146,3814799,311607,4825981,1201410,null,null,null,null,1000],[4885733,1296022,43540,7315426,3577094,1572742,2005,260335,null,null,null,null,null,null],[8518942,6556016,3793382,9350301,4406816,3288916,10671,96876,1564933,15985,null,null,null,197],[13093306,9027655,39618,813480,489433,3385973,33741,302687,250000,200000,null,21370,null,null],[1844848,6575053,313526,1678605,2384535,286783,41572,3077494,322415,249920,300000,null,null,null],[1010124,5053169,3702029,4013361,3310452,3859516,3048355,670814,27466,1513768,null,199975,null,null],[1743891,9015848,459,873079,3554620,2208584,688433,null,11975,null,220550,null,null,null],[10774293,7277499,50074,3346097,1670515,1783593,345032,1631351,2480730,114975,100000,null,null,2000],[1305301,7392942,16581,803980,1561642,233752,1946363,29691,362950,null,1235000,null,null,null],[4223281,3942471,3749756,1825385,1285462,2024241,352759,73250,null,41525,null,null,null,null],[9721564,8838909,7561,1785450,2305408,2195943,1589484,52841,null,9975,null,105000,null,117],[2883485,3830019,59627,6409197,3505576,445173,1062952,1514059,143775,173590,null,null,null,null],[11031035,9943699,23588,1254039,4999580,375264,2280669,2044164,42948,2247440,null,83476,null,null],[4717206,8340738,230687,2770329,4199653,5419101,4826069,4838524,65190,100000,null,224048,null,200],[10077887,5279740,62745,3578465,2757883,3358224,3364914,2124468,null,null,null,null,null,1010],[1244642,5310727,36765,1509205,7451339,4093310,1113899,1516661,425592,3759766,600000,29850,null,null],[27006866,9310268,8097,5849840,2227811,2314770,1198500,1240901,206975,2288272,null,null,null,null],[7405421,7938902,353947,7378674,3522809,2661519,625504,267581,null,1000000,null,null,null,150],[1751614,6823709,4659,306735,642218,852964,3242333,1381708,1763,329663,null,48975,null,150],[846472,7835072,2007611,888030,4102562,766749,229184,103575,49975,145508,null,null,null,null],[3090593,16937709,2002647,5389232,2574028,730455,null,3115975,null,1331679,null,null,null,3001],[4096506,4775823,2835126,2005152,1075951,70593,143806,3407514,7560,447885,null,704975,null,150],[1989425,8158866,1094226,4000336,3945253,2314520,142373,2348411,1596500,150000,null,199975,null,97],[3970476,4444344,5002999,1892278,640018,1780127,175193,148804,250000,361732,400000,null,null,348],[7018568,7566917,147377,3111284,3297494,797154,1484982,33233,48739,788950,null,null,null,null],[3957090,3046253,650,3150669,1440469,21481,105300,5194132,400000,null,null,7425,null,null],[2707410,1721370,676658,9831975,1421596,99697,246272,418104,123435,105419,730,8870,10687,7544],[1521342,2793562,96187,1250940,492923,2024915,1908015,114942,169833,11564,602,6332,3759,244],[14976501,5914984,1623335,406827,2980659,993657,2633673,211466,96871,8284,3620,16886,5846,216],[8452401,5565364,209115,938533,2567310,1239519,431373,1620163,16,40169,2640,27711,4502,2262],[2150476,8446425,318733,3817857,2165994,1465788,802413,1754920,1133622,761,3815,11336,18491,64],[3646488,1696172,180125,2540862,153597,1393544,962170,1198507,13299,15603,47414,17609,4406,7049],[5791895,6275603,159336,1041185,5858184,818299,2513273,1336920,200,14763,107,33464,13867,2000],[3680118,6582111,47994,11639754,3606296,1264766,1099351,35333,425000,12445,422,3320,57246,1101],[3902015,4104284,59816,9884451,3667634,5187313,2131145,724752,1814,31651,10,2932,70219,570],[8250424,3484964,339509,800634,10288924,5834653,4015518,3806369,48871,4985,112,5190,3750,68],[2289085,1560817,254558,3619877,442571,256829,2250803,432290,70,398680,99,2526,19587,252],[11966869,5196938,104882,14928796,392777,4822134,316661,2962605,50545,2222232,1146,9320,11639,2129],[302163,7088777,543562,934189,2835854,3198821,2004617,457222,654089,4732,600,89048,13772,1074],[8439237,10013631,1040059,6464450,7903359,1705266,671115,39890,812621,5701,585421,133165,1485,1211],[6294200,4292291,838491,1003630,263128,1724581,695397,65265,63063,4003,6050,2739,3923,457],[8519843,4328290,619773,664485,1157721,840759,7887966,10840,101420,427580,200187,55805,6503,1676],[10191349,10339225,179799,3134714,6776277,4166319,1991354,2129943,104772,4591,1520,5106,12127,1178],[10524285,6866825,55282,3743530,3687811,556144,2006683,443327,546642,2814,470,20972,103793,6085],[12716266,9615145,35890,823927,6862876,4815867,460326,1922257,986507,3355,2980,7462,2634,142044],[3636726,4163882,53381,3158393,507386,4096950,1281389,3088493,1067063,46440,350,12619,22014,5293],[8944464,11345343,42014,4864421,2514828,1318312,2661720,1863927,2000224,3025087,242467,24807,5435,426],[8978676,3801257,113341,3788154,12769237,9214129,1091581,1308702,329802,3769,102330,126013,25950,6397],[13240160,11208391,913230,2275041,1483401,7088266,556276,155918,1244318,525380,660,17861,11361,5585],[7245017,9927452,2070157,5698732,6795663,2089165,3173792,2599071,576982,551965,220289,111039,76628,26442],[2841500,5863480,5433130,3372165,2757616,1976995,1577317,1252144,1504777,55907,26160,103665,43765,6283],[106804902,13239971,8717523,5251692,14858963,1990107,3326125,4143980,337142,1066948,14353,2533,160064,26452],[30301395,13107513,889618,6707597,4040013,1650749,1143659,1960611,105065,213463,2714,13769,288044,58829],[19752071,26287526,248411,9453503,2739404,2235625,1154984,48413,30067,347302,3316,11516,349500,47533],[72570741,11845322,665315,1133686,910171,1028145,5907069,718615,148428,909124,200,580,409921,8301],[12318126,8382354,51181,5048104,3082805,5910414,647140,531240,2471870,187612,null,1350,271193,8462],[12770296,5781734,18225,10821109,2871761,4781021,3281690,1144155,212247,77182,1500,145788,177954,13401],[12800668,11167634,59954,5524585,1159766,3040587,370467,782249,241180,1086452,1,32075,50458,null],[6497350,12645125,58751,3791902,2431330,2323702,613137,333053,335474,240087,251,2332,6305,247],[51436771,6293206,61103,4160935,2002198,1522230,3386445,403708,124681,48587,2551,2763,12065,1940],[12808357,4172244,80369,11919869,309847,2130881,898170,990300,738265,217172,180,17136,4698,10000],[7939411,7434730,87131,3748640,5039003,3532605,3189296,1492326,98086,14575,null,120321,13867,1104],[5066456,5501678,3765,1245375,1562295,1863696,1622605,557386,63889,149951,null,31836,8319,1029],[3577350,8269535,6970,1135863,1768376,914474,1736939,2477890,510136,93440,null,4717,1339,700],[25462104,5262517,3722,6991371,1600491,2315219,1405829,1193528,82828,1034956,1,9844,8352,4],[12735608,16277225,5826,8613419,4938442,4226139,927612,367349,98333,1306468,3,8372,6230,600],[7015088,10431910,17444,2399226,1221841,2145905,2581517,1267529,406059,240795,1000,627547,6719,292],[3334635,5889785,569358,3226673,1595783,2490180,2620782,2091028,18594,2877,9,49372,633,13836],[3997904,10084013,3903,1014400,1109240,1519773,754923,657031,340464,54532,7,28880,4844,108],[6857678,9634151,4663,1287492,4313357,7864821,2035587,1536005,309732,1524293,10,25920,20429,1853],[26918666,4363174,243776,3414527,1856765,1249480,5552007,4314646,748364,3466510,500075,5170,2080,1329],[9492931,8799522,2014,1912850,3232721,4020744,3003232,254412,153114,1322930,2,46435,11869,1553],[9516224,20567035,33370,10460837,4520051,4459708,818573,4056039,700072,1553359,null,61090,19061,5030],[1978150,4016081,2530,4303984,3647090,2440268,400265,387607,76006,864446,1,2432,15894,3382],[10870420,11698734,4622055,3466680,1749489,2680729,3293376,672709,563075,589463,null,56901,20980,3482],[27809977,18927582,10260720,10415192,5604780,6620626,3889444,3245050,2347031,3698661,282012,556370,88040,3001],[6567167,4732232,82202,9540753,805408,782229,1792656,896310,311118,5068782,7,55259,93599,2728],[11631387,2570477,3636,602730,1722793,418756,1269644,2208887,8048,42016,null,21248,221423,2425],[7035445,1388559,22220,269947,522813,4112381,954937,4903,13365,13888,null,4407,2114,null],[17551371,2014352,529104,2034361,502488,3192412,6124219,1151359,219597,3401136,4010,10847,1397,392],[18560041,1097346,128761,1424079,1826300,2315569,1597593,2249259,66615,775544,1368,170686,889,379],[8194627,1373313,12935,2043206,3695924,2457653,2375368,628730,25341,200101,18,17180,4648,266],[7842369,4174599,86099,6718542,2563437,3140033,1322657,3032602,36755,873981,1,5335,617,10400],[1769222,6901898,20478,4564317,2656357,3331231,9160,4053001,97756,651,null,64745,5942,111],[38345021,11069292,54538,7680315,4860835,9528116,2667444,4095228,505964,501501,1000049,39524,12259,225],[5964528,15656473,24639,1255334,2215692,881068,2532105,2685578,405543,872064,500003,29247,15443,1290],[25323995,1064471,409389,8235396,2799124,485161,9518,50,1001988,2426171,null,null,18000,15923],[2744720,7234869,176979,5178501,3043387,2592056,43856,3006,931725,14198,100035,null,20675,51653],[9807369,7202634,24249,3064740,2426766,2091241,2781371,2615458,288146,29018,405,73944,11293,22434],[5345349,6283386,4105895,8950031,1886841,4384807,3278411,2719858,799926,10806,115,18631,35465,2122],[10298881,5232482,2877615,5859949,2814038,4719971,470721,1250941,1667,1161322,18,28644,4283,221],[18593849,8225511,73942,10237146,1866806,2230401,550001,4841023,45581,327545,23,113714,4441,472],[1906150,4706396,1273635,5972846,1160647,2234078,4804445,5585481,890520,1127702,500002,40608,6171,97]],"n":[[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[86,3459,6,20,35,51,11,7,2,null,null,2,null,null],[43,3564,4,13,17,33,15,4,1,null,null,2,null,1],[136,3479,16,29,27,37,5,8,null,null,null,4,null,null],[76,3421,11,22,16,43,13,3,null,null,1,2,null,null],[74,2996,16,13,31,50,8,10,1,1,null,4,null,1],[70,4238,9,21,25,45,10,14,null,null,null,3,null,1],[49,3458,4,26,14,38,12,15,1,null,null,null,null,null],[70,3160,5,18,15,44,11,10,1,null,null,1,null,null],[72,2927,14,18,16,39,10,5,1,1,null,null,null,null],[279,2545,6,21,16,35,14,2,null,null,null,1,null,null],[404,2804,20,22,12,40,17,10,2,null,3,2,null,1],[191,3043,9,12,21,32,null,11,2,2,null,1,null,2],[388,2705,5,24,24,30,18,8,1,6,null,null,null,null],[230,2472,2,7,12,38,11,7,1,7,null,null,null,1],[174,2544,23,20,12,42,15,13,2,3,null,2,null,1],[191,782,9,41,4,41,9,17,null,4,null,1,null,1],[85,428,5,11,4,64,16,4,1,3,2,null,null,1],[128,649,10,null,8,33,17,5,2,4,null,null,null,null],[105,591,7,33,6,43,14,17,2,2,null,null,null,1],[97,1589,5,39,10,53,30,8,null,null,null,null,null,null],[73,1102,2,14,28,59,13,8,1,9,null,1,null,null],[102,634,5,12,34,60,19,7,null,6,2,null,null,null],[144,802,13,35,24,35,12,12,3,null,1,2,null,1],[102,759,9,28,9,39,8,11,null,1,null,2,null,null],[157,696,13,28,29,50,8,7,8,1,null,null,null,null],[85,685,9,39,36,35,8,2,8,2,null,null,null,null],[115,649,15,16,21,57,8,2,3,4,null,3,null,null],[78,616,11,31,17,43,3,8,3,1,null,null,null,null],[69,591,3,20,18,52,7,8,2,null,null,1,null,null],[63,662,14,31,28,38,8,8,5,null,null,null,null,1],[14,973,3,12,20,48,1,7,null,null,null,null,null,null],[88,545,8,33,22,35,5,6,4,1,null,null,null,2],[107,600,17,20,33,39,7,5,1,1,null,1,null,null],[60,518,12,16,16,31,5,8,4,1,1,null,null,null],[61,570,11,35,15,57,8,16,3,6,null,1,null,null],[42,646,6,12,14,43,11,null,1,null,2,null,null,null],[125,720,8,28,4,31,13,14,5,2,1,null,null,1],[72,825,18,17,5,16,8,10,3,null,3,null,null,null],[60,767,16,20,10,35,14,3,null,1,null,null,null,null],[137,1119,14,11,11,53,9,11,null,1,null,2,null,1],[98,681,21,30,29,39,13,5,2,5,null,null,null,null],[63,957,12,12,34,28,11,8,2,4,null,6,null,null],[157,847,19,25,34,51,14,11,2,1,null,2,null,1],[137,1028,29,32,25,61,16,13,null,null,null,null,null,1],[102,784,11,20,34,63,9,10,1,5,2,3,null,null],[87,713,12,16,14,30,8,8,2,6,null,null,null,null],[64,666,6,13,10,23,10,8,null,1,null,null,null,1],[56,696,5,14,14,46,14,11,1,2,null,1,null,1],[15,894,16,19,19,40,10,2,1,4,null,null,null,null],[90,646,20,27,12,47,null,10,null,2,null,null,null,1],[84,893,11,17,18,3,5,4,1,3,null,2,null,1],[85,268,13,11,22,43,7,8,4,1,null,1,null,1],[51,22,6,31,11,32,4,2,1,3,1,null,null,1],[112,19,21,26,15,59,21,12,1,3,null,null,null,null],[85,147,2,22,2,15,4,11,1,null,null,1,null,null],[5,826,116,238,296,15,27,51,9,21,1,23,21,8],[59,636,100,177,188,20,32,34,3,12,6,26,9,3],[70,592,74,360,1990,36,23,30,4,15,3,26,13,3],[54,551,75,193,1066,36,37,36,2,12,2,24,8,3],[51,569,83,149,1075,24,22,38,3,8,5,10,7,3],[55,562,64,212,172,12,34,28,9,17,3,30,9,4],[65,545,79,140,159,20,20,29,2,25,3,11,9,1],[85,290,68,162,202,23,36,17,2,22,3,10,13,3],[50,277,80,133,214,54,41,37,2,14,1,8,15,4],[91,246,80,209,225,34,37,30,3,11,2,16,9,1],[48,222,126,193,242,82,27,29,6,23,2,16,14,1],[44,237,137,163,177,112,36,39,3,26,6,8,15,4],[34,444,210,207,299,105,48,39,6,31,4,11,8,5],[121,258,218,166,260,91,40,34,9,24,6,17,9,3],[46,217,275,154,222,104,51,29,12,24,6,35,8,5],[89,302,158,138,236,65,45,35,8,15,6,20,10,11],[96,261,81,313,263,57,39,37,10,21,5,19,8,6],[95,369,65,195,220,65,42,35,8,15,3,17,10,8],[102,280,67,221,264,57,41,32,6,16,7,35,15,4],[53,214,59,239,255,69,38,39,16,19,4,36,23,5],[82,279,48,203,264,68,43,37,7,24,8,26,16,3],[71,368,76,233,280,91,52,51,13,27,5,19,16,6],[74,396,88,273,325,88,49,48,13,23,3,31,15,11],[60,370,234,313,410,104,53,146,14,33,5,38,25,14],[66,116,313,377,467,142,35,60,7,40,11,31,36,6],[126,769,500,443,541,374,56,54,8,25,9,11,72,18],[159,197,163,285,554,409,49,64,16,24,5,20,85,12],[120,278,96,219,533,486,73,63,11,18,4,22,97,15],[193,178,62,219,291,360,44,68,8,19,1,3,98,8],[126,276,30,151,273,369,32,73,18,14,null,2,69,8],[128,184,28,183,226,265,36,87,15,16,2,5,43,6],[123,170,25,169,251,317,32,54,16,28,1,11,24,null],[64,167,28,162,255,371,43,52,7,31,3,29,24,2],[93,168,37,167,198,314,34,41,8,17,3,9,12,2],[124,139,19,168,234,332,42,30,8,28,2,12,15,3],[93,142,27,177,249,345,27,46,9,20,null,16,18,5],[139,170,18,198,239,334,36,43,5,27,null,15,22,2],[81,164,33,232,264,347,36,47,11,19,null,26,10,1],[95,214,36,239,277,383,49,55,9,26,1,18,11,2],[132,191,31,193,292,377,43,32,5,22,1,25,13,2],[124,328,16,170,258,353,73,39,9,27,1,32,19,3],[117,150,22,270,268,383,47,50,4,20,1,40,9,7],[100,177,22,220,403,463,45,47,12,22,1,64,14,3],[106,252,13,61,406,348,55,51,9,17,2,29,21,5],[75,154,40,213,406,426,39,68,8,20,2,22,13,3],[105,149,22,223,322,542,53,45,7,23,3,34,22,6],[114,281,42,359,467,522,49,58,10,30,null,19,15,2],[56,153,34,215,466,561,49,48,10,38,1,20,23,7],[91,225,40,212,395,614,45,52,17,27,null,13,29,5],[128,178,47,228,362,568,59,43,15,27,2,12,31,4],[308,256,37,367,296,547,53,95,13,26,2,14,56,13],[269,241,30,3945,272,549,43,39,7,17,null,14,58,4],[138,131,44,141,182,89,44,25,4,11,null,8,18,null],[240,237,51,153,240,526,41,30,13,20,2,10,9,3],[259,420,49,146,170,441,36,27,8,19,2,8,9,8],[200,299,31,123,165,487,46,30,6,9,1,21,11,6],[343,256,35,4893,207,558,32,21,6,13,2,7,4,2],[102,177,45,149,221,791,47,35,4,11,null,36,12,3],[231,192,53,302,318,627,34,55,4,17,2,13,13,3],[161,202,59,161,278,537,44,48,11,19,2,24,17,4],[203,150,45,155,221,338,16,1,9,18,null,null,9,5],[204,188,57,239,342,909,40,10,10,14,2,null,27,5],[163,278,25,294,386,786,107,58,10,18,1,34,12,6],[261,358,31,299,463,807,45,51,9,25,2,36,9,8],[377,268,47,276,492,993,46,48,7,23,1,21,16,5],[408,401,45,238,233,1078,36,39,12,22,2,17,10,2],[459,260,54,265,384,1076,53,36,9,20,3,20,15,1]],"pre":{"cortes":["2025-12-29","2025-12-30","2025-12-31"],"m":[[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null]]}},"generado":"03/10/2026 14:06","flotante":"2026-06-29","venta_libre":"2026-09-25","mediana":"2026-09-26","corte_mediana":"2026-09-25","min_bancos":5};
+const MES=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+// ancho aproximado de un texto en px; recorte con "…" para que ninguna etiqueta invada a la vecina
+const anchoTxt=(t,fs,neg)=>String(t).length*fs*(neg?0.62:0.57);
+const recorta=(t,fs,max,neg)=>{t=String(t);if(anchoTxt(t,fs,neg)<=max)return t;let k=t.length;while(k>1&&anchoTxt(t.slice(0,k)+'…',fs,neg)>max)k--;return k>1?t.slice(0,k)+'…':'';};
+const $=id=>document.getElementById(id);
+const nf=(x,n)=>x==null||isNaN(x)?'—':x.toLocaleString('es-BO',{minimumFractionDigits:n,maximumFractionDigits:n});
+const f2=x=>nf(x,2), f1=x=>nf(x,1), f0=x=>nf(x,0);
+// Mismo formato de fecha que el Reporte Económico: "27-May" y "27-May-2026"
+const fd=s=>{const p=s.split('-');return `${p[2]}-${MES[+p[1]-1]}`;};
+const fdl=s=>{const p=s.split('-');return `${p[2]}-${MES[+p[1]-1]}-${p[0]}`;};
+const dmy=s=>s.split('-').reverse().join('/');
+const tile=(l,v,s)=>`<div class="tile"><div class="l">${l}</div><div class="v">${v}</div><div class="s">${s||''}</div></div>`;
+const bs=v=>`<small>Bs</small> ${f2(v)}`;
+const seg=(id,ops,act,fn)=>{const el=$(id);el.innerHTML=ops.map(o=>`<button data-v="${o[0]}" class="${o[0]===act?'on':''}">${o[1]}</button>`).join('');
+  el.querySelectorAll('button').forEach(b=>b.onclick=()=>{el.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));fn(b.dataset.v);});};
+
+/* ───────── Gráficos SVG (un solo eje, sin dependencias) ─────────
+   Cada gráfico ocupa el alto de su contenedor (.chart): en computadora lo fija la pantalla, en celular la hoja de estilos. */
+const REG={};   // última configuración de cada gráfico, para poder ampliarlo
+const dim=host=>({W:Math.max(280,host.clientWidth),H:Math.max(170,host.clientHeight)});
+function ejeY(lo,hi,n){const paso0=(hi-lo)/n||1,mag=Math.pow(10,Math.floor(Math.log10(paso0)));
+  const paso=[1,2,2.5,5,10].map(k=>k*mag).find(p=>p>=paso0)||10*mag;
+  const a=Math.floor(lo/paso)*paso,b=Math.ceil(hi/paso)*paso,t=[];for(let v=a;v<=b+paso/1e6;v+=paso)t.push(+v.toFixed(6));return {lo:a,hi:b,t,paso};}
+/* Eje de fechas jerárquico. Regla: ningún dato se saltea.
+     series semanales -> semana (S40) + mes + año, como el eje 'semana' del reporte
+     hasta ~4 meses   -> día + mes + año
+     más largo        -> mes + año (nombre corto o inicial); si ni así entra, solo años
+   Cada mes (o año) lleva un corchete que va de su primer a su último dato, con la etiqueta centrada. */
+function nivelEje(x,ancho,sem){if(sem)return 'dia';const dias=(new Date(x[x.length-1])-new Date(x[0]))/864e5;if(dias<=130)return 'dia';
+  return ancho/new Set(x.map(f=>f.slice(0,7))).size>=9?'mes':'anio';}
+function altoEje(x,ancho,sem){return {dia:64,mes:46,anio:30}[nivelEje(x,ancho,sem)];}
+function ejeFechas(x,X,y0,paso,xMin,xMax,barras,sem){
+  const nivel=nivelEje(x,xMax-xMin,sem),borde=barras?paso/2:3;
+  const txt=(cx,y,t,w,fs)=>`<text x="${cx.toFixed(1)}" y="${y}" text-anchor="middle" font-size="${fs||11.5}"${w?' font-weight="600"':''} fill="var(--ink2)">${t}</text>`;
+  const grupos=(clave,etq)=>{const g=[];x.forEach((f,i)=>{const k=clave(f);if(!g.length||g[g.length-1].k!==k)g.push({k,a:i,b:i,t:etq(f)});else g[g.length-1].b=i;});
+    g.forEach((q,j)=>{q.x0=j?(X(q.a)+X(q.a-1))/2:X(q.a)-borde;q.x1=j<g.length-1?(X(q.b)+X(q.b+1))/2:X(q.b)+borde;q.cx=(q.x0+q.x1)/2;});return g;};
+  const corchetes=(g,y)=>g.map(q=>{const a=q.x0+2.5,b=Math.max(q.x1-2.5,a+1);return `<path d="M${a.toFixed(1)} ${y-5}V${y}H${b.toFixed(1)}V${y-5}" fill="none" stroke="var(--ink3)"/>`;}).join('');
+  const fila=(g,y,fs)=>{let tope=-1e9,s='';g.forEach(q=>{const an=String(q.t).length*fs*0.62;if(q.cx-an/2>=tope+4){s+=txt(q.cx,y,q.t,true,fs);tope=q.cx+an/2;}});return s;};
+  let s=`<line x1="${xMin}" x2="${xMax}" y1="${y0}" y2="${y0}" stroke="var(--ink3)"/>`;
+  const anios=grupos(f=>f.slice(0,4),f=>f.slice(0,4));
+  if(nivel==='anio') return s+corchetes(anios,y0+10)+fila(anios,y0+24,11.5);
+  const meses=grupos(f=>f.slice(0,7),f=>MES[+f.slice(5,7)-1]);
+  if(nivel==='mes'){
+    const corto=(xMax-xMin)/meses.length<26;
+    meses.slice(1).forEach(q=>{s+=`<line x1="${q.x0.toFixed(1)}" x2="${q.x0.toFixed(1)}" y1="${y0}" y2="${y0+4}" stroke="var(--ink3)"/>`;});
+    let tope=-1e9;meses.forEach(q=>{const t=corto?q.t[0]:q.t,fs=corto?10.5:11.5,an=t.length*fs*0.62;if(q.cx-an/2>=tope+2){s+=txt(q.cx,y0+16,t,false,fs);tope=q.cx+an/2;}});
+    return s+corchetes(anios,y0+27)+fila(anios,y0+41,11.5);
+  }
+  // una marca por dato y su rótulo (día del mes, o semana S40); si no entran todos, uno de cada k dentro de cada mes
+  if(!barras&&paso>=4) x.forEach((_,i)=>{s+=`<line x1="${X(i).toFixed(1)}" x2="${X(i).toFixed(1)}" y1="${y0}" y2="${y0+3}" stroke="var(--ink3)"/>`;});
+  const ancho=sem?21:13.5,k=paso>=ancho?1:([2,3,4,5,7,10,13,26].find(k=>paso*k>=ancho+3)||26),fs=paso*k>=ancho+6?11:10,min=fs*(sem?2:1.3);
+  const rot=i=>sem?'S'+sem[i].split('/')[0]:+x[i].slice(8);
+  // semanas: una de cada k en toda la serie (la semana 1 puede caer sola en diciembre); días: dentro de cada mes
+  if(sem){for(let i=0;i<x.length;i+=k)s+=txt(X(i),y0+15,rot(i),false,fs);}
+  else meses.forEach((q,j)=>{const sig=meses[j+1];
+    for(let i=q.a;i<=q.b;i+=k){if(sig&&X(sig.a)-X(i)<min)break;s+=txt(X(i),y0+15,rot(i),false,fs);}});
+  return s+corchetes(meses,y0+26)+fila(meses,y0+40,11.5)+corchetes(anios,y0+49)+fila(anios,y0+62,11.5);
+}
+/* Trazo suavizado: mismos puntos de control que Chart.js con tension .25 (el del reporte) */
+function curvaSuave(P,t=0.25){if(!P.length)return '';if(P.length<3)return P.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const c=P.map((p,i)=>{const a=P[i-1]||p,b=P[i+1]||p,d1=Math.hypot(p[0]-a[0],p[1]-a[1]),d2=Math.hypot(b[0]-p[0],b[1]-p[1]),s=d1+d2||1,fa=t*d1/s,fb=t*d2/s;
+    return [p[0]-fa*(b[0]-a[0]),p[1]-fa*(b[1]-a[1]),p[0]+fb*(b[0]-a[0]),p[1]+fb*(b[1]-a[1])];});
+  let d=`M${P[0][0].toFixed(1)} ${P[0][1].toFixed(1)}`;
+  for(let i=1;i<P.length;i++)d+=` C${c[i-1][2].toFixed(1)} ${c[i-1][3].toFixed(1)} ${c[i][0].toFixed(1)} ${c[i][1].toFixed(1)} ${P[i][0].toFixed(1)} ${P[i][1].toFixed(1)}`;
+  return d;}
+/* cfg:{x:[iso],sem:[semanas],series:[{name,color,data,dash,dots}],fmt,sufijo,marcas:[{f,txt}],cero,cortar,etiqueta,tit(i),tipExtra(i),onPick(i)}
+   dots = puntos en cada dato; cortar = no unir la línea donde falta un dato (como spanGaps:false del reporte) */
+function linea(id,cfg){
+  const host=$(id);host.innerHTML='<div class="tip"></div>';
+  const n=cfg.x.length;if(n<2){host.insertAdjacentHTML('beforeend','<div class="cap">Se necesitan al menos dos fechas para graficar.</div>');return;}
+  if(id!=='ch-modal') REG[id]={fn:linea,cfg};
+  const {W,H}=dim(host),chico=W<520,fmt=cfg.fmt||f2,suf=cfg.sufijo||'';
+  const m={l:46,r:cfg.etiqueta===false?14:(chico?58:96),t:16,b:0};m.b=altoEje(cfg.x,W-m.l-m.r,cfg.sem)+4;
+  const all=cfg.series.flatMap(s=>s.data).filter(v=>v!=null);if(!all.length){host.insertAdjacentHTML('beforeend','<div class="cap">Sin datos en este periodo.</div>');return;}
+  let lo=Math.min(...all),hi=Math.max(...all);if(cfg.cero){lo=Math.min(0,lo);} const pad=(hi-lo)*0.06||0.1;
+  const ax=ejeY(cfg.cero&&lo===0?0:lo-pad,hi+pad,H<230?4:5);lo=ax.lo;hi=ax.hi;
+  const dec=ax.paso<0.1?2:(ax.paso<1?(cfg.fmt?1:2):(cfg.fmt?0:2));
+  const X=i=>m.l+i/(n-1)*(W-m.l-m.r),Y=v=>m.t+(hi-v)/(hi-lo)*(H-m.t-m.b);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.aria||''}">`;
+  ax.t.forEach(v=>{s+=`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${m.l-8}" y="${Y(v)+4}" text-anchor="end" font-size="11.5" fill="var(--ink2)">${nf(v,dec)}${suf}</text>`;});
+  s+=ejeFechas(cfg.x,X,H-m.b,(W-m.l-m.r)/(n-1),m.l,W-m.r,false,cfg.sem);
+  (cfg.marcas||[]).forEach((mk,j)=>{const i=cfg.x.findIndex(f=>f>=mk.f);if(i>0){const izq=X(i)-m.l>150;
+    s+=`<line x1="${X(i)}" x2="${X(i)}" y1="${m.t}" y2="${H-m.b}" stroke="var(--ink3)" stroke-dasharray="3 4"/><text x="${X(i)+(izq?-6:6)}" y="${m.t+10+j*14}" text-anchor="${izq?'end':'start'}" font-size="11" fill="var(--ink2)">${mk.txt}</text>`;}});
+  if(cfg.relleno){const A=cfg.series[cfg.relleno.a].data,Z=cfg.series[cfg.relleno.b].data;let run=[];
+    const flush=()=>{if(run.length>1)s+=`<path d="M${run.map(i=>X(i).toFixed(1)+' '+Y(A[i]).toFixed(1)).join('L')}L${run.slice().reverse().map(i=>X(i).toFixed(1)+' '+Y(Z[i]).toFixed(1)).join('L')}Z" fill="${cfg.relleno.color}" opacity=".22"/>`;run=[];};
+    for(let i=0;i<n;i++){if(A[i]!=null&&Z[i]!=null)run.push(i);else flush();}flush();}
+  const fin=[],r=n>70?2.2:(n>40?3:4);
+  cfg.series.forEach(q=>{let last=-1;const tramos=[[]];
+    q.data.forEach((v,i)=>{if(v==null){if(cfg.cortar&&tramos[tramos.length-1].length)tramos.push([]);return;}tramos[tramos.length-1].push([X(i),Y(v)]);last=i;});
+    tramos.forEach(P=>{if(P.length)s+=`<path d="${curvaSuave(P)}" fill="none" stroke="${q.color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"${q.dash?' stroke-dasharray="6 4"':''}/>`;});
+    if(q.dots)q.data.forEach((v,i)=>{if(v!=null)s+=`<circle cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="${r}" fill="${q.color}" stroke="var(--surface)" stroke-width="${r>=3?1.5:0.8}"/>`;});
+    if(last>=0)fin.push({q,i:last,v:q.data[last],y:Y(q.data[last])});});
+  if(cfg.etiqueta!==false){fin.sort((a,b)=>a.y-b.y);for(let k=1;k<fin.length;k++)if(fin[k].y-fin[k-1].y<17)fin[k].y=fin[k-1].y+17;
+    const piso=H-m.b-4;for(let k=fin.length-1;k>=0;k--){const tope=k===fin.length-1?piso:fin[k+1].y-17;if(fin[k].y>tope)fin[k].y=tope;}
+    fin.forEach(e=>{s+=`<circle cx="${X(e.i)}" cy="${Y(e.v)}" r="4" fill="${e.q.color}" stroke="var(--surface)" stroke-width="2"/><text x="${X(e.i)+9}" y="${e.y+4}" font-size="12" font-weight="600" fill="var(--ink)">${chico||!e.q.corto?'':e.q.corto+' '}${fmt(e.v)}${suf}</text>`;});}
+  s+=`<line class="cx" y1="${m.t}" y2="${H-m.b}" stroke="var(--ink3)" style="display:none"/><rect x="${m.l}" y="${m.t}" width="${W-m.l-m.r}" height="${H-m.t-m.b}" fill="transparent"/></svg>`;
+  host.insertAdjacentHTML('afterbegin',s);
+  const svg=host.querySelector('svg'),tip=host.querySelector('.tip'),cx=svg.querySelector('.cx');
+  const idx=ev=>{const rc=svg.getBoundingClientRect(),px=((ev.touches?ev.touches[0].clientX:ev.clientX)-rc.left)/rc.width*W;return Math.max(0,Math.min(n-1,Math.round((px-m.l)/(W-m.l-m.r)*(n-1))));};
+  const mover=ev=>{const i=idx(ev);cx.setAttribute('x1',X(i));cx.setAttribute('x2',X(i));cx.style.display='';
+    tip.innerHTML=`<div class="d">${cfg.tit?cfg.tit(i):fdl(cfg.x[i])}</div>`+cfg.series.filter(q=>!cfg.sem||q.data[i]!=null).map(q=>`<div><span class="key" style="background:${q.color}"></span>${q.name} <b>${q.data[i]==null?'—':fmt(q.data[i])+suf}</b></div>`).join('')+(cfg.tipExtra?cfg.tipExtra(i):'');
+    tip.style.display='block';const cw=host.clientWidth,tx=X(i)/W*cw;tip.style.left=Math.max(0,tx>cw/2?tx-tip.offsetWidth-12:tx+12)+'px';};
+  const salir=()=>{tip.style.display='none';cx.style.display='none';};
+  svg.addEventListener('mousemove',mover);svg.addEventListener('touchstart',mover,{passive:true});svg.addEventListener('touchmove',mover,{passive:true});svg.addEventListener('mouseleave',salir);
+  if(cfg.onPick)svg.addEventListener('click',ev=>cfg.onPick(idx(ev)));
+}
+/* cfg:{x:[iso],sem,series:[{name,color,data}],fmt,totales,tit(i),tipExtra(i),onPick(i)} — barras apiladas, base en cero.
+   totales = etiqueta con el total sobre cada barra; va girada si la barra es angosta (como en el reporte). */
+function apiladas(id,cfg){
+  const host=$(id);host.innerHTML='<div class="tip"></div>';const n=cfg.x.length;if(!n)return;
+  if(id!=='ch-modal') REG[id]={fn:apiladas,cfg};
+  const {W,H}=dim(host),fmt=cfg.fmt||f1,m={l:46,r:10,t:14,b:altoEje(cfg.x,W-56,cfg.sem)+4};
+  const tot=cfg.x.map((_,i)=>cfg.series.reduce((a,q)=>a+(q.data[i]||0),0));
+  const paso=(W-m.l-m.r)/n,bw=Math.max(1.5,Math.min(30,paso-2));
+  const largo=Math.max(...tot.map(v=>fmt(v).length)),girada=paso<largo*6.2+4,fsT=girada?Math.min(9.5,(paso-1.5)/1.3):10.5;
+  // girado, cada total ocupa ~1,3 × su tamaño de letra a lo ancho: con menos de 7 px de letra se pisarían y se omiten (quedan en el tooltip)
+  const conTot=cfg.totales&&fsT>=7;
+  m.t=conTot?(girada?Math.round(largo*fsT*0.6+10):22):14;
+  const ax=ejeY(0,(Math.max(...tot)||1)*1.02,H<230?4:5),hi=ax.hi;
+  const X=i=>m.l+paso*i+paso/2,Y=v=>m.t+(hi-v)/hi*(H-m.t-m.b);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.aria||''}">`;
+  ax.t.forEach(v=>{s+=`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${m.l-8}" y="${Y(v)+4}" text-anchor="end" font-size="11.5" fill="var(--ink2)">${f0(v)}</text>`;});
+  s+=ejeFechas(cfg.x,X,H-m.b,paso,m.l,W-m.r,true,cfg.sem);
+  cfg.x.forEach((_,i)=>{let base=0;cfg.series.forEach(q=>{const v=q.data[i]||0;if(v<=0)return;const y1=Y(base+v),h=Y(base)-y1;
+    s+=`<rect x="${(X(i)-bw/2).toFixed(1)}" y="${y1.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(0,h-(bw>4?1:0)).toFixed(1)}" fill="${q.color}"/>`;base+=v;});
+    if(conTot&&tot[i]>0){const y=Y(tot[i])-4;
+      s+=girada?`<text transform="translate(${(X(i)+fsT*0.36).toFixed(1)} ${y.toFixed(1)}) rotate(-90)" font-size="${fsT.toFixed(1)}" font-weight="600" fill="var(--ink)">${fmt(tot[i])}</text>`
+               :`<text x="${X(i).toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" font-size="${fsT}" font-weight="600" fill="var(--ink)">${fmt(tot[i])}</text>`;}});
+  s+=`<rect class="hl" y="${m.t}" width="${paso}" height="${H-m.t-m.b}" fill="var(--ink)" opacity=".07" style="display:none"/><rect x="${m.l}" y="${m.t}" width="${W-m.l-m.r}" height="${H-m.t-m.b}" fill="transparent"/></svg>`;
+  host.insertAdjacentHTML('afterbegin',s);
+  const svg=host.querySelector('svg'),tip=host.querySelector('.tip'),hl=svg.querySelector('.hl');
+  const idx=ev=>{const rc=svg.getBoundingClientRect(),px=((ev.touches?ev.touches[0].clientX:ev.clientX)-rc.left)/rc.width*W;return Math.max(0,Math.min(n-1,Math.floor((px-m.l)/paso)));};
+  const mover=ev=>{const i=idx(ev);hl.setAttribute('x',m.l+paso*i);hl.style.display='';
+    tip.innerHTML=`<div class="d">${cfg.tit?cfg.tit(i):fdl(cfg.x[i])}</div>`+cfg.series.slice().reverse().filter(q=>q.data[i]).map(q=>`<div><span class="key" style="background:${q.color}"></span>${q.name} <b>${fmt(q.data[i])}</b></div>`).join('')+`<div style="margin-top:2px">Total <b>${fmt(tot[i])}</b>${cfg.tipExtra?cfg.tipExtra(i):''}</div>`;
+    tip.style.display='block';const cw=host.clientWidth,tx=X(i)/W*cw;tip.style.left=Math.max(0,tx>cw/2?tx-tip.offsetWidth-12:tx+12)+'px';};
+  const salir=()=>{tip.style.display='none';hl.style.display='none';};
+  svg.addEventListener('mousemove',mover);svg.addEventListener('touchstart',mover,{passive:true});svg.addEventListener('touchmove',mover,{passive:true});svg.addEventListener('mouseleave',salir);
+  if(cfg.onPick)svg.addEventListener('click',ev=>cfg.onPick(idx(ev)));
+}
+
+/* cfg:{x:[iso],series:[{name,color,data}],fmt,suf,total:{name,data},tit(i),tipExtra(i),onPick(i)}
+   Barras apiladas que admiten negativos: lo positivo se apila hacia arriba y lo negativo hacia abajo del cero.
+   total = un punto por barra con la suma (el cambio total del día). */
+function divergentes(id,cfg){
+  const host=$(id);host.innerHTML='<div class="tip"></div>';const n=cfg.x.length;if(!n)return;
+  if(id!=='ch-modal') REG[id]={fn:divergentes,cfg};
+  const {W,H}=dim(host),fmt=cfg.fmt||f2,suf=cfg.suf||'',m={l:50,r:10,t:14,b:altoEje(cfg.x,W-60)+4};
+  let hi=0,lo=0;cfg.x.forEach((_,i)=>{let p=0,q=0;cfg.series.forEach(s=>{const v=s.data[i]||0;if(v>0)p+=v;else q+=v;});hi=Math.max(hi,p,cfg.total?.data[i]||0);lo=Math.min(lo,q,cfg.total?.data[i]||0);});
+  const pad=(hi-lo)*0.06||0.01,ax=ejeY(lo-pad,hi+pad,H<230?4:5),A=ax.lo,Z=ax.hi;
+  const paso=(W-m.l-m.r)/n,bw=Math.max(1.5,Math.min(26,paso-2)),X=i=>m.l+paso*i+paso/2,Y=v=>m.t+(Z-v)/(Z-A)*(H-m.t-m.b);
+  const dec=ax.paso<0.1?2:(ax.paso<1?1:0);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.aria||''}">`;
+  ax.t.forEach(v=>{s+=`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${m.l-8}" y="${Y(v)+4}" text-anchor="end" font-size="11.5" fill="var(--ink2)">${nf(v,dec)}${suf}</text>`;});
+  s+=`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(0)}" y2="${Y(0)}" stroke="var(--ink3)"/>`;
+  s+=ejeFechas(cfg.x,X,H-m.b,paso,m.l,W-m.r,true);
+  cfg.x.forEach((_,i)=>{let up=0,dn=0;cfg.series.forEach(q=>{const v=q.data[i]||0;if(!v)return;const b0=v>0?up:dn,b1=b0+v;
+      const y0=Y(Math.max(b0,b1)),h=Math.abs(Y(b0)-Y(b1));
+      s+=`<rect x="${(X(i)-bw/2).toFixed(1)}" y="${y0.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(0,h-(bw>4&&h>2?1:0)).toFixed(1)}" fill="${q.color}"/>`;
+      if(v>0)up=b1;else dn=b1;});
+    if(cfg.total&&cfg.total.data[i]!=null){const r=Math.max(2.5,Math.min(4,bw*0.35));s+=`<circle cx="${X(i).toFixed(1)}" cy="${Y(cfg.total.data[i]).toFixed(1)}" r="${r}" fill="var(--ink)" stroke="var(--surface)" stroke-width="1.5"/>`;}});
+  s+=`<rect class="hl" y="${m.t}" width="${paso}" height="${H-m.t-m.b}" fill="var(--ink)" opacity=".07" style="display:none"/><rect x="${m.l}" y="${m.t}" width="${W-m.l-m.r}" height="${H-m.t-m.b}" fill="transparent"/></svg>`;
+  host.insertAdjacentHTML('afterbegin',s);
+  const svg=host.querySelector('svg'),tip=host.querySelector('.tip'),hl=svg.querySelector('.hl');
+  const idx=ev=>{const rc=svg.getBoundingClientRect(),px=((ev.touches?ev.touches[0].clientX:ev.clientX)-rc.left)/rc.width*W;return Math.max(0,Math.min(n-1,Math.floor((px-m.l)/paso)));};
+  const sg=v=>(v>0?'+':'')+fmt(v)+suf;
+  const mover=ev=>{const i=idx(ev);hl.setAttribute('x',m.l+paso*i);hl.style.display='';
+    tip.innerHTML=`<div class="d">${cfg.tit?cfg.tit(i):fdl(cfg.x[i])}</div>`+cfg.series.map(q=>`<div><span class="key" style="background:${q.color}"></span>${q.name} <b>${q.data[i]==null?'—':sg(q.data[i])}</b></div>`).join('')+
+      (cfg.total?`<div style="margin-top:2px">${cfg.total.name} <b>${cfg.total.data[i]==null?'—':sg(cfg.total.data[i])}</b></div>`:'')+(cfg.tipExtra?cfg.tipExtra(i):'');
+    tip.style.display='block';const cw=host.clientWidth,tx=X(i)/W*cw;tip.style.left=Math.max(0,tx>cw/2?tx-tip.offsetWidth-12:tx+12)+'px';};
+  const salir=()=>{tip.style.display='none';hl.style.display='none';};
+  svg.addEventListener('mousemove',mover);svg.addEventListener('touchstart',mover,{passive:true});svg.addEventListener('touchmove',mover,{passive:true});svg.addEventListener('mouseleave',salir);
+  if(cfg.onPick)svg.addEventListener('click',ev=>cfg.onPick(idx(ev)));
+}
+
+/* Una fila por banco sobre un eje de precio. cfg:{rows:[{name,v,lo,hi}],ref:{v,txt},palo,fmt,tip(i)}
+   palo = línea desde el precio de referencia hasta el del banco (azul si paga más, naranja si paga menos); lo/hi = barra de rango */
+function filas(id,cfg){
+  const host=$(id);host.innerHTML='<div class="tip"></div>';const R=cfg.rows,n=R.length;if(!n)return;
+  if(id!=='ch-modal') REG[id]={fn:filas,cfg};
+  const {W,H}=dim(host),chico=W<520,m={l:chico?96:122,r:chico?52:70,t:24,b:34};
+  const vals=R.flatMap(r=>[r.v,r.lo,r.hi]).concat(cfg.ref?[cfg.ref.v]:[]).filter(v=>v!=null);
+  const ax=ejeY(Math.min(...vals)-0.03,Math.max(...vals)+0.03,chico?4:6),lo=ax.lo,hi=ax.hi;
+  const X=v=>m.l+(v-lo)/(hi-lo)*(W-m.l-m.r),paso=(H-m.t-m.b)/n,Y=i=>m.t+paso*i+paso/2,r=Math.max(3.5,Math.min(6.5,paso*0.3));
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.aria||''}">`;
+  ax.t.forEach(v=>{s+=`<line x1="${X(v)}" x2="${X(v)}" y1="${m.t}" y2="${H-m.b}" stroke="var(--line)"/><text x="${X(v)}" y="${H-m.b+15}" text-anchor="middle" font-size="11.5" fill="var(--ink2)">${nf(v,ax.paso<0.1?2:1)}</text>`;});
+  s+=`<text x="${(m.l+W-m.r)/2}" y="${H-4}" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--ink2)">Bs por USD</text>`;
+  if(cfg.ref) s+=`<line x1="${X(cfg.ref.v)}" x2="${X(cfg.ref.v)}" y1="${m.t-4}" y2="${H-m.b}" stroke="var(--ink)" stroke-dasharray="4 4"/><text x="${X(cfg.ref.v)}" y="${m.t-9}" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)">${cfg.ref.txt}</text>`;
+  R.forEach((q,i)=>{const y=Y(i),arriba=cfg.ref&&q.v>=cfg.ref.v,col=cfg.palo?(arriba?'var(--c1)':'var(--c2)'):'var(--c1)';
+    s+=`<text x="${m.l-10}" y="${y+4}" text-anchor="end" font-size="12" fill="var(--ink)">${q.name}</text>`;
+    if(q.lo!=null&&q.hi!=null) s+=`<rect x="${X(q.lo)}" y="${y-r*0.6}" width="${Math.max(2,X(q.hi)-X(q.lo))}" height="${r*1.2}" rx="${r*0.6}" fill="var(--banda)"/>`;
+    if(cfg.palo&&cfg.ref) s+=`<line x1="${X(cfg.ref.v)}" x2="${X(q.v)}" y1="${y}" y2="${y}" stroke="${col}" stroke-width="3" stroke-linecap="round"/>`;
+    if(q.v!=null) s+=`<circle cx="${X(q.v)}" cy="${y}" r="${r}" fill="${col}" stroke="var(--surface)" stroke-width="1.5"/>`;
+    if(q.v!=null) s+=`<text x="${W-m.r+8}" y="${y+4}" font-size="11.5" font-weight="600" fill="var(--ink)">${f2(q.v)}${cfg.palo&&cfg.ref&&!chico?` <tspan fill="var(--ink2)" font-weight="400">${q.v-cfg.ref.v>=0?'+':''}${f2(q.v-cfg.ref.v)}</tspan>`:''}</text>`;});
+  s+=`<rect class="hl" x="0" width="${W}" height="${paso}" fill="var(--ink)" opacity=".05" style="display:none"/><rect x="0" y="${m.t}" width="${W}" height="${H-m.t-m.b}" fill="transparent"/></svg>`;
+  host.insertAdjacentHTML('afterbegin',s);
+  const svg=host.querySelector('svg'),tip=host.querySelector('.tip'),hl=svg.querySelector('.hl');
+  const mover=ev=>{const rc=svg.getBoundingClientRect(),py=((ev.touches?ev.touches[0].clientY:ev.clientY)-rc.top)/rc.height*H,i=Math.max(0,Math.min(n-1,Math.floor((py-m.t)/paso)));
+    hl.setAttribute('y',m.t+paso*i);hl.style.display='';tip.innerHTML=cfg.tip?cfg.tip(i):R[i].name;tip.style.display='block';
+    tip.style.top=Math.max(4,Math.min(host.clientHeight-tip.offsetHeight-4,Y(i)/H*host.clientHeight-tip.offsetHeight/2))+'px';tip.style.left=(host.clientWidth-tip.offsetWidth-8)+'px';};
+  svg.addEventListener('mousemove',mover);svg.addEventListener('touchstart',mover,{passive:true});svg.addEventListener('mouseleave',()=>{tip.style.display='none';hl.style.display='none';});
+}
+/* Cascada: del valor inicial al final, pasando por lo que sumó o restó cada parte. cfg:{ini:{name,v},pasos:[{name,v}],fin:{name,v},fmt,tip(i)} */
+function cascada(id,cfg){
+  const host=$(id);host.innerHTML='<div class="tip"></div>';if(id!=='ch-modal') REG[id]={fn:cascada,cfg};
+  const {W,H}=dim(host),P=cfg.pasos,n=P.length+2,m={l:52,r:12,t:26,b:40};
+  const acum=[cfg.ini.v];P.forEach(q=>acum.push(acum[acum.length-1]+q.v));
+  const vals=acum.concat([cfg.fin.v]),span=Math.max(...vals)-Math.min(...vals)||0.01,piso=Math.min(...vals)-span*0.6,tope=Math.max(...vals)+span*0.25;
+  const ax=ejeY(piso,tope,H<230?4:5),A=ax.lo,Z=ax.hi,paso=(W-m.l-m.r)/n,bw=Math.min(64,paso*0.62),X=i=>m.l+paso*i+paso/2,Y=v=>m.t+(Z-v)/(Z-A)*(H-m.t-m.b);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.aria||''}">`;
+  ax.t.forEach(v=>{s+=`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${m.l-8}" y="${Y(v)+4}" text-anchor="end" font-size="11.5" fill="var(--ink2)">${nf(v,ax.paso<0.01?3:2)}</text>`;});
+  const barra=(i,a,b,col,txt,nom)=>{const y0=Y(Math.max(a,b)),h=Math.max(1.5,Math.abs(Y(a)-Y(b)));
+    s+=`<rect x="${(X(i)-bw/2).toFixed(1)}" y="${y0.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="3" fill="${col}"/>`+
+       `<text x="${X(i).toFixed(1)}" y="${(y0-6).toFixed(1)}" text-anchor="middle" font-size="${Math.max(8.5,Math.min(11.5,(paso-4)/(String(txt).length*0.62))).toFixed(1)}" font-weight="700" fill="var(--ink)">${txt}</text>`+
+       nomEje(i,nom);};
+  const nomEje=(i,nom)=>{const max=paso-6;let fs=paso<70?10.5:11.5;while(fs>9&&anchoTxt(nom,fs)>max)fs-=0.5;
+    if(anchoTxt(nom,fs)<=max){s+=`<text x="${X(i).toFixed(1)}" y="${H-m.b+15}" text-anchor="middle" font-size="${fs}" fill="var(--ink2)">${nom}</text>`;return;}
+    const p=nom.split(' '),a=p.slice(0,Math.ceil(p.length/2)).join(' '),b=p.slice(Math.ceil(p.length/2)).join(' ');
+    [a,b].forEach((l,k)=>{const tx=recorta(l,fs,max);if(tx)s+=`<text x="${X(i).toFixed(1)}" y="${H-m.b+14+k*12}" text-anchor="middle" font-size="${fs}" fill="var(--ink2)">${tx}</text>`;});};
+  barra(0,A,cfg.ini.v,'var(--c8)','Bs '+f2(cfg.ini.v),cfg.ini.name);
+  P.forEach((q,k)=>{const a=acum[k],b=acum[k+1];s+=`<line x1="${(X(k)+bw/2).toFixed(1)}" x2="${(X(k+1)-bw/2).toFixed(1)}" y1="${Y(a).toFixed(1)}" y2="${Y(a).toFixed(1)}" stroke="var(--ink3)" stroke-dasharray="2 3"/>`;
+    barra(k+1,a,b,q.v>=0?'var(--c1)':'var(--c2)',(q.v>=0?'+':'')+nf(q.v,3),q.name);});
+  s+=`<line x1="${(X(n-2)+bw/2).toFixed(1)}" x2="${(X(n-1)-bw/2).toFixed(1)}" y1="${Y(acum[acum.length-1]).toFixed(1)}" y2="${Y(acum[acum.length-1]).toFixed(1)}" stroke="var(--ink3)" stroke-dasharray="2 3"/>`;
+  barra(n-1,A,cfg.fin.v,'var(--navy)','Bs '+f2(cfg.fin.v),cfg.fin.name);
+  s+=`<rect class="hl" y="${m.t}" width="${paso}" height="${H-m.t-m.b}" fill="var(--ink)" opacity=".06" style="display:none"/><rect x="${m.l}" y="${m.t}" width="${W-m.l-m.r}" height="${H-m.t-m.b}" fill="transparent"/></svg>`;
+  host.insertAdjacentHTML('afterbegin',s);
+  const svg=host.querySelector('svg'),tip=host.querySelector('.tip'),hl=svg.querySelector('.hl');
+  const mover=ev=>{const rc=svg.getBoundingClientRect(),px=((ev.touches?ev.touches[0].clientX:ev.clientX)-rc.left)/rc.width*W,i=Math.max(0,Math.min(n-1,Math.floor((px-m.l)/paso)));
+    hl.setAttribute('x',m.l+paso*i);hl.style.display='';tip.innerHTML=cfg.tip?cfg.tip(i):'';tip.style.display=tip.innerHTML?'block':'none';
+    const cw=host.clientWidth,tx=X(i)/W*cw;tip.style.left=Math.max(0,tx>cw/2?tx-tip.offsetWidth-12:tx+12)+'px';};
+  svg.addEventListener('mousemove',mover);svg.addEventListener('touchstart',mover,{passive:true});svg.addEventListener('mouseleave',()=>{tip.style.display='none';hl.style.display='none';});
+}
+
+/* ───────── 1. Pizarra ───────── */
+const dias=D.dias,validos=dias.filter(d=>d.vm!=null);
+let sel=(validos.length?validos[validos.length-1]:dias[dias.length-1]).f, orden={k:'s',asc:true}, pzVista='banco';
+$('sel').innerHTML=dias.slice().reverse().map(d=>`<option value="${d.f}">${fdl(d.f)}${d.terceros?' *':''}</option>`).join('');
+$('sel').value=sel;$('sel').onchange=e=>{sel=e.target.value;pizarra();};
+/* Compra y venta por banco en un día: banda compra→venta, puntos de pizarra, rombo de compra efectiva y línea del TCO
+   cfg:{rows:[{b,c,v,ef}],tco} */
+function bancos(id,cfg){
+  const host=$(id);host.innerHTML='<div class="tip"></div>';const R=cfg.rows,n=R.length;if(!n)return;
+  if(id!=='ch-modal') REG[id]={fn:bancos,cfg};
+  const {W,H}=dim(host),chico=W<520,m={l:chico?96:118,r:20,t:24,b:40};
+  const vals=R.flatMap(r=>[r.c,r.v,r.ef]).concat([cfg.tco]).filter(v=>v!=null);
+  const ax=ejeY(Math.min(...vals)-0.06,Math.max(...vals)+0.06,chico?4:7),lo=ax.lo,hi=ax.hi;
+  const X=v=>m.l+(v-lo)/(hi-lo)*(W-m.l-m.r),paso=(H-m.t-m.b)/n,Y=i=>m.t+paso*i+paso/2,r=Math.max(4,Math.min(7,paso*0.28));
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Compra y venta del dólar por banco">`;
+  ax.t.forEach(v=>{s+=`<line x1="${X(v)}" x2="${X(v)}" y1="${m.t}" y2="${H-m.b}" stroke="var(--line)"/><text x="${X(v)}" y="${H-m.b+15}" text-anchor="middle" font-size="11.5" fill="var(--ink2)">${nf(v,ax.paso<0.1?2:1)}</text>`;});
+  s+=`<line x1="${m.l}" x2="${W-m.r}" y1="${H-m.b}" y2="${H-m.b}" stroke="var(--ink3)"/><text x="${(m.l+W-m.r)/2}" y="${H-6}" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--ink2)">Bs por USD</text>`;
+  if(cfg.tco!=null) s+=`<line x1="${X(cfg.tco)}" x2="${X(cfg.tco)}" y1="${m.t-4}" y2="${H-m.b}" stroke="var(--ink)" stroke-dasharray="4 4"/><text x="${X(cfg.tco)}" y="${m.t-9}" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)">TCO ${f2(cfg.tco)}</text>`;
+  R.forEach((q,i)=>{const y=Y(i);
+    s+=`<text x="${m.l-12}" y="${y+4}" text-anchor="end" font-size="12" fill="var(--ink)">${q.b}</text>`;
+    if(q.c!=null&&q.v!=null) s+=`<rect x="${X(q.c)}" y="${y-r*0.62}" width="${Math.max(0,X(q.v)-X(q.c))}" height="${r*1.24}" rx="${r*0.62}" fill="var(--banda)"/>`;
+    if(q.ef!=null) s+=`<path d="M${X(q.ef)} ${y-r} l${r} ${r} l${-r} ${r} l${-r} ${-r}z" fill="var(--c1)" stroke="var(--surface)" stroke-width="1.5"/>`;
+    if(q.c!=null) s+=`<circle cx="${X(q.c)}" cy="${y}" r="${r}" fill="var(--compra)" stroke="var(--surface)" stroke-width="1.5"/>`;
+    if(q.v!=null) s+=`<circle cx="${X(q.v)}" cy="${y}" r="${r}" fill="var(--venta)" stroke="var(--surface)" stroke-width="1.5"/>`;});
+  s+=`<rect class="hl" x="${m.l}" width="${W-m.l-m.r}" height="${paso}" fill="var(--ink)" opacity=".06" style="display:none"/><rect x="0" y="${m.t}" width="${W}" height="${H-m.t-m.b}" fill="transparent"/></svg>`;
+  host.insertAdjacentHTML('afterbegin',s);
+  const svg=host.querySelector('svg'),tip=host.querySelector('.tip'),hl=svg.querySelector('.hl');
+  const mover=ev=>{const rc=svg.getBoundingClientRect(),py=((ev.touches?ev.touches[0].clientY:ev.clientY)-rc.top)/rc.height*H,i=Math.max(0,Math.min(n-1,Math.floor((py-m.t)/paso))),q=R[i];
+    hl.setAttribute('y',m.t+paso*i);hl.style.display='';
+    tip.innerHTML=`<div class="d">${q.b}</div><div><span class="key" style="background:var(--compra)"></span>Compra (pizarra) <b>${f2(q.c)}</b></div><div><span class="key" style="background:var(--venta)"></span>Venta (pizarra) <b>${f2(q.v)}</b></div><div><span class="key" style="background:var(--c1)"></span>Compra efectiva (BCB) <b>${f2(q.ef)}</b></div><div style="margin-top:2px">Brecha compra–venta <b>${f2(q.s)}</b></div>`;
+    tip.style.display='block';tip.style.top=Math.max(4,Math.min(host.clientHeight-tip.offsetHeight-4,Y(i)/H*host.clientHeight-tip.offsetHeight/2))+'px';tip.style.left=(host.clientWidth-tip.offsetWidth-8)+'px';};
+  const salir=()=>{tip.style.display='none';hl.style.display='none';};
+  svg.addEventListener('mousemove',mover);svg.addEventListener('touchstart',mover,{passive:true});svg.addEventListener('mouseleave',salir);
+}
+function pizarra(){
+  const d=dias.find(x=>x.f===sel),prima=d.vm!=null&&d.tco?((d.vm/d.tco-1)*100):null,porDia=pzVista==='banco';
+  $('tiles').innerHTML=tile('Venta en bancos (mediana)',bs(d.vm),prima!=null?`${f2(prima)}% sobre el TCO de Bs ${f2(d.tco)}`:'pizarra')+
+    tile('Compra en bancos (mediana)',bs(d.cm),`pizarra · ${d.n} banco${d.n===1?'':'s'} · ${dmy(d.f)}`)+
+    tile('Brecha compra–venta (mediana)',bs(d.sm),d.cm&&d.sm!=null?`${f2(d.sm/d.cm*100)}% sobre la compra · antes el tope era Bs 0,10`:'venta menos compra')+
+    tile('TCO oficial',bs(d.tco),'Banco Central de Bolivia');
+  $('lab-fecha').style.display=porDia?'':'none';
+  const rows=d.rows.slice().sort((a,b)=>{const x=a[orden.k],y=b[orden.k];if(x==null)return 1;if(y==null)return -1;return (typeof x==='string'?x.localeCompare(y):x-y)*(orden.asc?1:-1);});
+  const hayEf=d.rows.some(r=>r.ef!=null);
+  if(porDia){
+    $('t-piz').textContent=`Compra y venta del dólar por banco — ${fd(d.f)}`;
+    $('c-piz').textContent=`Bs por USD · pizarra web de cada banco`+(d.hora?` · última captura ${String(d.hora).slice(0,5)}`:'')+' · puede cambiar durante el día';
+    $('lg-piz').innerHTML=`<span><b style="background:var(--compra)"></b>Compra (pizarra)</span><span><b style="background:var(--venta)"></b>Venta (pizarra)</span><span><u style="background:var(--c1)"></u>Compra efectiva (BCB)</span><span><s style="background:var(--banda)"></s>Brecha compra–venta</span>`;
+    bancos('ch-piz',{rows,tco:d.tco});
+    $('t-bancos').textContent=`Detalle · ${fd(d.f)}`;
+    $('c-bancos').innerHTML=`<b>Compra / Venta</b>: pizarra web (ventanilla). `+(hayEf&&d.corte?`<b>Efectiva BCB</b>: precio al que el banco realmente compró (operaciones del ${fd(d.corte)}).`:'');
+    const th=(k,t)=>`<th class="srt" data-k="${k}">${t}${orden.k===k?(orden.asc?' ▲':' ▼'):''}</th>`;
+    $('tabla').innerHTML=`<thead><tr>${th('b','Banco')}${th('c','Compra')}${th('v','Venta')}${th('s','Brecha Bs')}<th>Brecha %</th>${hayEf?th('ef','Efectiva BCB'):''}</tr></thead><tbody>`+
+      rows.map(r=>`<tr><td>${r.b}</td><td>${f2(r.c)}</td><td>${f2(r.v)}</td><td><b>${f2(r.s)}</b></td><td>${r.c&&r.s!=null?f2(r.s/r.c*100)+'%':'—'}</td>${hayEf?`<td>${f2(r.ef)}</td>`:''}</tr>`).join('')+
+      (d.vm!=null?`<tr class="med"><td>Mediana</td><td>${f2(d.cm)}</td><td>${f2(d.vm)}</td><td>${f2(d.sm)}</td><td>${d.cm?f2(d.sm/d.cm*100)+'%':''}</td>${hayEf?`<td>TCO ${f2(d.tco)}</td>`:''}</tr>`:'')+'</tbody>';
+    $('tabla').querySelectorAll('th.srt').forEach(h=>h.onclick=()=>{const k=h.dataset.k;orden=orden.k===k?{k,asc:!orden.asc}:{k,asc:true};pizarra();});
+  }else{
+    pizarraEvol();
+    $('t-bancos').textContent='Detalle por día';
+    $('c-bancos').textContent='Mediana de pizarra por día · * dato de terceros';
+    $('tabla').innerHTML='<thead><tr><th>Fecha</th><th>Bancos</th><th>TCO</th><th>Compra</th><th>Venta</th><th>Brecha</th></tr></thead><tbody>'+
+      dias.slice().reverse().map(x=>`<tr><td>${fdl(x.f)}${x.terceros?' *':''}</td><td>${x.n}</td><td>${f2(x.tco)}</td><td>${f2(x.cm)}</td><td>${f2(x.vm)}</td><td><b>${f2(x.sm)}</b></td></tr>`).join('')+'</tbody>';
+  }
+  // lectura
+  const conS=d.rows.filter(r=>r.s!=null).sort((a,b)=>a.s-b.s),conEf=d.rows.filter(r=>r.ef!=null&&r.c!=null),nMay=conEf.filter(r=>r.ef>r.c).length,sinC=d.rows.filter(r=>r.c==null).map(r=>r.b);
+  $('lee-piz').innerHTML=d.vm==null
+    ?`Para el <b>${fdl(d.f)}</b> solo hay pizarra de <b>${d.n} banco${d.n===1?'':'s'}</b>: con tan pocos no se calcula una mediana del sistema.`
+    :`Al <b>${fd(d.f)}</b>, la pizarra mediana de los bancos es compra <b>Bs ${f2(d.cm)}</b> y venta <b>Bs ${f2(d.vm)}</b>: una brecha de <b>Bs ${f2(d.sm)}</b>`+(prima!=null?`, con la venta <b>${f2(prima)}%</b> sobre el TCO de Bs ${f2(d.tco)}`:'')+` (sin tope desde la RD 142/2026 del BCB; antes TCO + Bs 0,10). `+
+      (conS.length>1?`La brecha va de <b>Bs ${f2(conS[0].s)}</b> (${conS[0].b}) a <b>Bs ${f2(conS[conS.length-1].s)}</b> (${conS[conS.length-1].b}). `:'')+
+      (conEf.length?`<b>Compra efectiva (BCB)</b>: precio al que cada banco realmente compró dólares (operaciones del ${fd(d.corte)}; con ellas se calcula el TCO). Supera a la compra de pizarra, que es de ventanilla, en <b>${nMay} de ${conEf.length}</b> bancos porque incluye operaciones de mesa de dinero. `:'')+
+      (sinC.length?`${sinC.join(', ')} solo publica precio de venta. `:'')+(d.terceros?'Día tomado de una fuente de terceros, no de una captura propia.':'');
+}
+function pizarraEvol(){
+  // Eje de calendario continuo desde el primer día con mediana: un día sin captura queda a la vista, no se saltea.
+  const por=Object.fromEntries(dias.map(d=>[d.f,d])),ini=(validos[0]||dias[0]).f,fin=dias[dias.length-1].f,x=[];
+  for(let d=new Date(ini+'T00:00:00Z');;d=new Date(+d+864e5)){const f=d.toISOString().slice(0,10);x.push(f);if(f>=fin)break;}
+  const T=D.tc,tcoDe=f=>{let v=null;for(let i=0;i<T.f.length&&T.f[i]<=f;i++)if(T.tco[i]!=null)v=T.tco[i];return v;};
+  const pts=x.map(f=>por[f]||{f,vm:null,cm:null,sm:null,tco:tcoDe(f),n:0});
+  $('t-piz').textContent='Compra y venta en bancos frente al TCO — evolución diaria';
+  $('c-piz').textContent=`Bs por USD · mediana de pizarra de los bancos · desde el ${fd(x[0])}`;
+  $('lg-piz').innerHTML=`<span><i style="border-color:var(--venta)"></i>Venta en bancos (mediana)</span><span><i style="border-color:var(--compra)"></i>Compra en bancos (mediana)</span><span><i style="border-color:var(--ink3)"></i>TCO oficial</span>`;
+  linea('ch-piz',{x,aria:'Evolución diaria de la venta y la compra en bancos frente al TCO',
+    series:[{name:'Venta',corto:'Venta',color:'var(--venta)',data:pts.map(d=>d.vm),dots:true},
+            {name:'Compra',corto:'Compra',color:'var(--compra)',data:pts.map(d=>d.cm),dots:true},
+            {name:'TCO',corto:'TCO',color:'var(--ink3)',data:pts.map(d=>d.tco),dash:true}],
+    tipExtra:i=>`<div style="color:var(--ink2);margin-top:2px">${pts[i].vm!=null?`Brecha <b>${f2(pts[i].sm)}</b>`:(pts[i].n?`Solo ${pts[i].n} banco${pts[i].n===1?'':'s'}: sin mediana`:'Sin captura de pizarra')}</div>`,
+    onPick:i=>{if(!por[x[i]])return;sel=x[i];$('sel').value=sel;pzVista='banco';$('seg-piz').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v==='banco'));pizarra();}});
+}
+{ // días sin mediana desde que rige la venta libre: se dicen en las notas, no se rellenan
+  const por=Object.fromEntries(dias.map(d=>[d.f,d])),fin=dias[dias.length-1].f,sin=[];
+  for(let d=new Date(D.venta_libre+'T00:00:00Z');;d=new Date(+d+864e5)){const f=d.toISOString().slice(0,10);if(f>fin)break;const q=por[f];if(!q||q.vm==null)sin.push(fd(f)+(q&&q.n?` (solo ${q.n} banco${q.n===1?'':'s'})`:''));}
+  $('nota-sin').textContent=sin.length?`Desde el ${fdl(D.venta_libre)} no hay mediana para: ${sin.join(', ')}. No existe registro público de la pizarra de esos días; no se estiman.`:'No hay días sin mediana desde que rige la venta libre.';
+}
+seg('seg-piz',[['banco','Por banco (un día)'],['evol','Evolución diaria']],pzVista,v=>{pzVista=v;pizarra();});
+
+/* ───────── 2. Tipo de cambio ───────── */
+const TC=D.tc, PER={flotante:['Régimen flotante',D.flotante],transicion:['Del fijo al flotante','2025-10-01'],crisis:['Desde 2023','2023-01-01']};
+let perTc='flotante';
+const ultimo=(arr)=>{for(let i=arr.length-1;i>=0;i--)if(arr[i]!=null)return i;return -1;};
+function tcTiles(){
+  const it=ultimo(TC.tco),ip=ultimo(TC.par),tco=TC.tco[it],par=TC.par[ip];
+  let j=it;const lim=new Date(new Date(TC.f[it])-7*864e5).toISOString().slice(0,10);while(j>0&&(TC.f[j]>lim||TC.tco[j]==null))j--;
+  const sem=TC.tco[j],dSem=sem?(tco/sem-1)*100:null,brecha=par&&tco?(par/tco-1)*100:null;
+  $('tiles-tc').innerHTML=tile('TCO oficial',bs(tco),`vigente el ${fd(TC.f[it])}`)+
+    tile('Cambio en una semana',(dSem==null?'—':(dSem>=0?'+':'')+f1(dSem)+'%'),`contra Bs ${f2(sem)} del ${fd(TC.f[j])}`)+
+    tile('Dólar paralelo',bs(par),`USDT · ${fd(TC.f[ip])}`)+
+    tile('Brecha del paralelo',(brecha==null?'—':(brecha>=0?'+':'')+f1(brecha)+'%'),'sobre el TCO oficial');
+}
+function tc(){
+  const desde=PER[perTc][1],i0=Math.max(0,TC.f.findIndex(f=>f>=desde)),x=TC.f.slice(i0);
+  // el TCO rige hasta que se publica otro (el del viernes vale sábado, domingo y lunes): se arrastra el último valor
+  const arr=a=>{const o=a.slice(i0);for(let i=1;i<o.length;i++)if(o[i]==null&&o[i-1]!=null)o[i]=o[i-1];return o;};
+  const tco=arr(TC.tco),par=TC.par.slice(i0),ref=TC.ref.slice(i0),hayRef=ref.some(v=>v!=null);
+  const series=[{name:'TCO oficial',corto:'Oficial',color:'var(--c1)',data:tco},{name:'Paralelo (USDT)',corto:'Paralelo',color:'var(--c2)',data:par}];
+  if(hayRef) series.push({name:'Referencial BCB',corto:'',color:'var(--c3)',data:ref});
+  $('btn-brecha').classList.toggle('on',conBrecha);
+  const br=x.map((_,i)=>tco[i]!=null&&par[i]!=null?+((par[i]/tco[i]-1)*100).toFixed(2):null),ub=ultimo(br);
+  $('t-tc').textContent=`Oficial y paralelo · ${PER[perTc][0].toLowerCase()}`;
+  $('c-tc').textContent=`Bs por USD · del ${fdl(x[0])} al ${fdl(x[x.length-1])}`+(conBrecha?' · la zona sombreada es la brecha: cuánto más caro está el paralelo que el oficial':'');
+  $('lg-tc').innerHTML=series.map(q=>`<span><i style="border-color:${q.color}"></i>${q.name}</span>`).join('')+
+    (conBrecha?`<span><s style="background:var(--c2);opacity:.35"></s>Brecha${ub>=0?` (hoy ${br[ub]>=0?'+':''}${f1(br[ub])}%)`:''}</span>`:'');
+  const mFlot={f:D.flotante,txt:'el oficial empieza a flotar'},mMed={f:D.mediana,txt:'pasa de promedio a mediana'};
+  const marcas=perTc==='flotante'?[mMed]:(perTc==='transicion'?[mFlot,mMed]:[mFlot]);
+  linea('ch-tc',{x,series,aria:'Tipo de cambio oficial y paralelo',marcas,relleno:conBrecha?{a:0,b:1,color:'var(--c2)'}:null,
+    tipExtra:i=>br[i]!=null?`<div style="margin-top:2px">Brecha <b>${br[i]>=0?'+':''}${f1(br[i])}%</b></div>`:''});
+  const a=tco.findIndex(v=>v!=null),b=ultimo(tco),vb=br.filter(v=>v!=null),mx=Math.max(...vb),imx=br.indexOf(mx);
+  $('lee-tc').innerHTML=`En este periodo el oficial pasó de <b>Bs ${f2(tco[a])}</b> a <b>Bs ${f2(tco[b])}</b> (${tco[b]>=tco[a]?'+':''}${f1((tco[b]/tco[a]-1)*100)}%). `+
+    (vb.length?`La brecha del paralelo llegó a <b>${f1(mx)}%</b> el ${fdl(x[imx])} y hoy es de <b>${f1(vb[vb.length-1])}%</b>.`:'');
+}
+seg('seg-tc',Object.entries(PER).map(([k,v])=>[k,v[0]]),perTc,v=>{perTc=v;tc();});
+let conBrecha=false;
+$('btn-brecha').onclick=()=>{conBrecha=!conBrecha;tc();};
+
+/* ───────── 3. Volumen por banco ───────── */
+const B=D.bancos, COL=['var(--c1)','var(--c2)','var(--c3)','var(--c4)','var(--c5)','var(--c6)'];
+// un color fijo por banco, en el orden de volumen: paleta del reporte + sus tonos claros (texto oscuro sobre los claros)
+const COLB=[['#1565b3','#fff'],['#f8971d','#1b2537'],['#1e8e4e','#fff'],['#c0392b','#fff'],['#7b5ea7','#fff'],['#d97706','#1b2537'],['#0e7490','#fff'],['#64748b','#fff'],
+            ['#8fc0ea','#1b2537'],['#fbc98a','#1b2537'],['#8fd4ac','#1b2537'],['#e8a39b','#1b2537'],['#c4b5dd','#1b2537'],['#8ccbd7','#1b2537']];
+const colB=j=>COLB[j%COLB.length];
+const semIso=d=>{const t=new Date(d+'T00:00:00Z'),dw=(t.getUTCDay()+6)%7;t.setUTCDate(t.getUTCDate()-dw+3);const y=t.getUTCFullYear(),f=new Date(Date.UTC(y,0,4));
+  return `${1+Math.round(((t-f)/864e5-3+((f.getUTCDay()+6)%7))/7)}/${y}`;};
+const MESL=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const ACUM=B?B.m.reduce((s,f)=>s+f.reduce((a,v)=>a+(v||0),0),0):0;   // monto comprado por los bancos en todo el año
+// precio oficial del corte: TCO desde la flotación; antes, valor referencial de compra
+const ofi=i=>B.tco[i]==null?'':(B.esref[i]?'Referencial ':'TCO ')+f2(B.tco[i]);
+let perVol='dia', corte=B?B.cortes[B.cortes.length-1]:null;
+function volRango(){
+  const n=B.cortes.length,i=B.cortes.indexOf(corte);
+  if(perVol==='dia') return [i,i];
+  const dias=({semana:7,mes:30,todo:99999})[perVol],lim=new Date(new Date(B.cortes[n-1])-dias*864e5).toISOString().slice(0,10);
+  return [Math.max(0,B.cortes.findIndex(c=>c>lim)),n-1];
+}
+function vol(){
+  const [a,b]=volRango();
+  $('lab-corte').style.display=perVol==='dia'?'':'none';
+  const filas=B.nombres.map((nom,j)=>{let m=0,n=0,pm=0;for(let i=a;i<=b;i++){const mm=B.m[i][j]||0;m+=mm;n+=B.n[i][j]||0;pm+=(B.p[i][j]||0)*mm;}return {nom,m,n,p:m?pm/m:null};}).filter(r=>r.m>0).sort((x,y)=>y.m-x.m);
+  const tot=filas.reduce((s,r)=>s+r.m,0),ops=filas.reduce((s,r)=>s+r.n,0);filas.forEach(r=>r.w=r.m/tot*100);
+  const top3=filas.slice(0,3).reduce((s,r)=>s+r.w,0);let ac=0,k80=0;for(const r of filas){ac+=r.w;k80++;if(ac>=80)break;}
+  const per=a===b?fdl(B.cortes[a]):`${fd(B.cortes[a])} a ${fdl(B.cortes[b])}`;
+  $('tiles-vol').innerHTML=tile('Volumen comprado',`<small>USD</small> ${f1(tot/1e6)} <small>MM</small>`,a===b?`corte del ${fd(B.cortes[a])}`:`${b-a+1} cortes`)+
+    tile('Operaciones',ops?f0(ops):'—',`${filas.length} bancos`+(B.cortes[a]<'2026-04-07'?' · se publican desde el 07-Abr':''))+tile('Banco con más volumen',filas[0].nom,`${f1(filas[0].w)}% del total`)+
+    tile('Acumulado 2026',`<small>USD</small> ${f0(ACUM/1e6)} <small>MM</small>`,`del ${fd(B.cortes[0])} al ${fd(B.cortes[B.cortes.length-1])} · ${B.cortes.length} días`);
+  $('lee-rank').innerHTML=`<b>${k80} banco${k80===1?'':'s'}</b> ${k80===1?'forma':'forman'} el 80% del volumen (${per}). `+(a===b&&B.tco[a]!=null?(B.esref[a]?`Ese día el valor referencial de compra fue de <b>Bs ${f2(B.tco[a])}</b> (antes de la flotación).`:`De estas compras salió el TCO de <b>Bs ${f2(B.tco[a])}</b>, vigente desde el día siguiente.`):`<b>${filas[0].nom}</b> concentra el ${f1(filas[0].w)}% y los tres primeros bancos el ${f1(top3)}%: el precio oficial lo forma quien mueve monto.`);
+  $('c-det').textContent=a===b?`${per} · compra = ${B.esref[a]?'valor referencial':(B.cortes[a]>=D.corte_mediana?'mediana ponderada':'promedio ponderado')} de sus compras`:`${per} · el precio de compra se ve con el periodo Un día`;
+  const mx=filas[0].w;
+  const conP=a===b;
+  $('tabla-det').innerHTML=`<thead><tr><th>Banco</th><th class="izq">Peso</th><th>USD MM</th><th>Operac.</th>${conP?'<th>Compra</th>':''}</tr></thead><tbody>`+
+    filas.map(r=>`<tr><td>${r.nom}</td><td class="izq"><span class="mb"><i style="width:${(r.w/mx*100).toFixed(1)}%"></i></span><b>${f1(r.w)}%</b></td><td>${nf(r.m/1e6,2)}</td><td>${ops?f0(r.n):'—'}</td>${conP?`<td>${f2(r.p)}</td>`:''}</tr>`).join('')+
+    `<tr class="med"><td>Total</td><td class="izq">100%</td><td>${nf(tot/1e6,2)}</td><td>${ops?f0(ops):'—'}</td>${conP?`<td>${ofi(a)}</td>`:''}</tr></tbody>`;
+}
+let datoVol='m';
+function volChart(){
+  const ops=datoVol==='n',M=ops?B.n:B.m,k=ops?1:1e6,n=B.cortes.length;
+  // las operaciones se publican desde el 07/04/2026: antes no hay dato, no se grafican como cero
+  const i0=ops?Math.max(0,B.cortes.findIndex(c=>c>='2026-04-07')):0;
+  const uni=ops?'operaciones':'millones de USD',nota=ops?' (las operaciones se publican desde el 07-Abr)':'';
+  $('lg-vol').innerHTML=B.nombres.map((nom,j)=>`<span><b style="background:${colB(j)[0]}"></b>${nom}</span>`).join('');
+  if(perVol==='todo'){
+    // composición del año: treemap, un rectángulo por banco con área proporcional a lo comprado
+    const items=B.nombres.map((nom,j)=>{let v=0,mm=0,o=0;for(let i=i0;i<n;i++){v+=M[i][j]||0;mm+=B.m[i][j]||0;o+=B.n[i][j]||0;}return {name:nom,v:v/k,col:colB(j),mm,o};}).filter(r=>r.v>0);
+    $('t-vol').textContent=ops?'Operaciones por banco en 2026':'Composición del volumen comprado en 2026';
+    $('c-vol').textContent=`Área proporcional a ${ops?'las operaciones':'los dólares comprados'} de cada banco · del ${fd(B.cortes[i0])} al ${fdl(B.cortes[n-1])}${nota}`;
+    $('lg-vol').innerHTML='';
+    treemap('ch-vol',{items,fmt:ops?(v=>f0(v)+' op.'):(v=>'USD '+f1(v)+' MM'),uni,aria:'Composición por banco del volumen de 2026'});
+    return;
+  }
+  // barras apiladas por día, semana o mes, con todos los bancos
+  let grupos=[];
+  // índices negativos = cortes del 29 al 31/12/2025, que son la semana ISO 1 de 2026 (solo vista Semana, monto)
+  const pre=perVol==='semana'&&!ops&&B.pre?B.pre:null,np=pre?pre.cortes.length:0;
+  const cDe=ii=>ii<0?pre.cortes[ii+np]:B.cortes[ii],mDe=ii=>ii<0?pre.m[ii+np]:B.m[ii],nDe=ii=>ii<0?[]:B.n[ii],vDe=ii=>ii<0?pre.m[ii+np]:M[ii];
+  if(perVol==='dia'){for(let i=i0;i<n;i++)grupos.push({x:B.cortes[i],ix:[i],tit:fdl(B.cortes[i])});}
+  else{const clave=perVol==='semana'?semIso:(c=>c.slice(0,7));
+    for(let i=i0-np;i<n;i++){const c=cDe(i),kk=clave(c),g=grupos[grupos.length-1];if(g&&g.k===kk){g.ix.push(i);g.x=c;}else grupos.push({k:kk,x:c,ix:[i]});}
+    grupos.forEach(g=>{const a=cDe(g.ix[0]),b=g.x;g.tit=perVol==='semana'?`Semana ${g.k} · del ${fd(a)}${a.slice(0,4)!==b.slice(0,4)?'-'+a.slice(0,4):''} al ${fd(b)} (${g.ix.length} cortes)`:`${MESL[+b.slice(5,7)-1]} ${b.slice(0,4)} · ${g.ix.length} cortes`;});}
+  const x=grupos.map(g=>g.x),sem=perVol==='semana'?grupos.map(g=>g.k):null;
+  const nomP={dia:'día',semana:'semana',mes:'mes'}[perVol];
+  $('t-vol').textContent=ops?`Operaciones de compra por ${nomP}`:`Volumen comprado por ${nomP}`;
+  $('c-vol').textContent=`${ops?'Número de operaciones':'Millones de USD comprados'} por los bancos, suma por ${nomP} · `+
+    (perVol==='dia'?`${x.length} cortes, del ${fd(x[0])} al ${fdl(x[x.length-1])}`:`${grupos.length} ${perVol==='semana'?'semanas':'meses'} de 2026`)+nota+
+    (pre?' · la semana 1 de 2026 empieza el lunes 29-Dic-2025 y sus cortes son del 29 al 31 de diciembre':'');
+  const series=B.nombres.map((nom,j)=>({name:nom,color:colB(j)[0],data:grupos.map(g=>g.ix.reduce((s,i)=>s+(vDe(i)[j]||0),0)/k)}));
+  apiladas('ch-vol',{x,sem,series,totales:true,fmt:f0,aria:`Volumen comprado por banco y por ${nomP}`,tit:i=>grupos[i].tit,
+    tipExtra:i=>{const g=grupos[i],m=g.ix.reduce((s,ii)=>s+mDe(ii).reduce((a,v)=>a+(v||0),0),0),o=g.ix.reduce((s,ii)=>s+nDe(ii).reduce((a,v)=>a+(v||0),0),0),u=g.ix[g.ix.length-1];
+      return (o?`<div style="color:var(--ink2)">Operación promedio <b>USD ${f0(m/o)}</b></div>`:'')+(perVol==='dia'&&B.tco[u]!=null?`<div style="color:var(--ink2)">${B.esref[u]?'Valor referencial':'TCO resultante'} <b>${f2(B.tco[u])}</b></div>`:'');},
+    onPick:perVol==='dia'?(i=>{corte=x[i];$('sel-corte').value=corte;vol();}):null});
+}
+/* Treemap (cuadrados lo más parejos posible): cfg:{items:[{name,v,col:[fondo,texto],mm,o}],fmt,uni} */
+function treemap(id,cfg){
+  const host=$(id);host.innerHTML='<div class="tip"></div>';if(id!=='ch-modal') REG[id]={fn:treemap,cfg};
+  const {W,H}=dim(host),it=cfg.items.slice().sort((a,b)=>b.v-a.v),tot=it.reduce((s,r)=>s+r.v,0);if(!tot)return;
+  const area=it.map(r=>r.v/tot*W*H),R=[];let x=0,y=0,w=W,h=H,row=[],ri=[],i=0;
+  const peor=(row,len)=>{const s=row.reduce((a,b)=>a+b,0),mx=Math.max(...row),mn=Math.min(...row);return Math.max(len*len*mx/(s*s),s*s/(len*len*mn));};
+  const fila=()=>{const s=row.reduce((a,b)=>a+b,0);if(w>=h){const cw=s/h;let yy=y;row.forEach((a,q)=>{R.push({i:ri[q],x,y:yy,w:cw,h:a/cw});yy+=a/cw;});x+=cw;w-=cw;}
+    else{const rh=s/w;let xx=x;row.forEach((a,q)=>{R.push({i:ri[q],x:xx,y,w:a/rh,h:rh});xx+=a/rh;});y+=rh;h-=rh;}row=[];ri=[];};
+  while(i<area.length){const len=Math.min(w,h);if(!row.length||peor(row.concat(area[i]),len)<=peor(row,len)){row.push(area[i]);ri.push(i);i++;}else fila();}
+  if(row.length)fila();
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.aria||''}">`;
+  R.forEach(r=>{const q=it[r.i],pc=q.v/tot*100,g=1;
+    s+=`<rect data-i="${r.i}" x="${(r.x+g).toFixed(1)}" y="${(r.y+g).toFixed(1)}" width="${Math.max(0,r.w-2*g).toFixed(1)}" height="${Math.max(0,r.h-2*g).toFixed(1)}" rx="3" fill="${q.col[0]}"/>`;
+    let fs=Math.max(10,Math.min(15,Math.sqrt(r.w*r.h)/9));const libre=r.w-14;
+    while(fs>9&&anchoTxt(q.name,fs,true)>libre)fs-=0.5;
+    const nom=recorta(q.name,fs,libre,true);
+    if(nom&&r.h>fs+8)s+=`<text x="${(r.x+7).toFixed(1)}" y="${(r.y+fs+5).toFixed(1)}" font-size="${fs.toFixed(1)}" font-weight="700" fill="${q.col[1]}" pointer-events="none">${nom}</text>`;
+    const f2s=fs*0.85,larga=`${f1(pc)}% · ${cfg.fmt(q.v)}`,corta=`${f1(pc)}%`,cif=anchoTxt(larga,f2s)<=libre?larga:(anchoTxt(corta,f2s)<=libre?corta:'');
+    if(nom&&cif&&r.h>fs*2+14)s+=`<text x="${(r.x+7).toFixed(1)}" y="${(r.y+fs*2+9).toFixed(1)}" font-size="${f2s.toFixed(1)}" fill="${q.col[1]}" pointer-events="none">${cif}</text>`;});
+  s+='</svg>';host.insertAdjacentHTML('afterbegin',s);
+  const svg=host.querySelector('svg'),tip=host.querySelector('.tip');
+  svg.querySelectorAll('rect').forEach(el=>{const q=it[+el.dataset.i];
+    const ver=ev=>{tip.innerHTML=`<div class="d">${q.name}</div><div>${f1(q.v/tot*100)}% del total</div><div>Comprado <b>USD ${f1(q.mm/1e6)} MM</b></div>`+(q.o?`<div>Operaciones <b>${f0(q.o)}</b> · promedio USD ${f0(q.mm/q.o)}</div>`:'');
+      tip.style.display='block';const rc=host.getBoundingClientRect(),cx=(ev.touches?ev.touches[0].clientX:ev.clientX)-rc.left,cy=(ev.touches?ev.touches[0].clientY:ev.clientY)-rc.top;
+      tip.style.left=Math.max(0,Math.min(rc.width-tip.offsetWidth,cx>rc.width/2?cx-tip.offsetWidth-12:cx+12))+'px';tip.style.top=Math.max(0,Math.min(rc.height-tip.offsetHeight,cy-20))+'px';};
+    el.addEventListener('mousemove',ver);el.addEventListener('touchstart',ver,{passive:true});});
+  svg.addEventListener('mouseleave',()=>{tip.style.display='none';});
+}
+if(B){
+  $('sel-corte').innerHTML=B.cortes.slice().reverse().map(c=>`<option value="${c}">${fdl(c)}</option>`).join('');
+  $('sel-corte').onchange=e=>{corte=e.target.value;vol();};
+  seg('seg-vol',[['dia','Un día'],['semana','Semana'],['mes','Mes'],['todo','Año 2026']],perVol,v=>{perVol=v;vol();volChart();});
+  seg('seg-voldato',[['m','Monto'],['n','Operaciones']],datoVol,v=>{datoVol=v;volChart();});
+}
+
+/* ───────── 2b. Precio por banco ───────── */
+let perPr='45';const INICIO_FLOT='2026-06-26';   // primer corte del régimen flotante
+let vistaPr='ranking',cortePr=null;
+/* Indicador bancario = precio promedio de compra ponderado por monto. Su cambio entre dos cortes seguidos se separa en
+   efecto precio = Σ peso promedio × cambio de precio (bancos que compraron ambos días) y efecto peso = el resto
+   (cambio de participación entre bancos, incluidas las entradas y salidas). Los dos suman exacto el cambio total. */
+function efectos(i){
+  const tot=k=>B.m[k].reduce((s,v,j)=>s+((v||0)>0&&B.p[k][j]!=null?v:0),0),T1=tot(i-1),T2=tot(i);if(!T1||!T2)return null;
+  const w=(k,j,T)=>((B.m[k][j]||0)>0&&B.p[k][j]!=null)?B.m[k][j]/T:0;
+  let I1=0,I2=0,ep=0;const det=[];
+  B.nombres.forEach((nom,j)=>{const w1=w(i-1,j,T1),w2=w(i,j,T2);I1+=w1*(B.p[i-1][j]||0);I2+=w2*(B.p[i][j]||0);
+    const dp=w1&&w2?B.p[i][j]-B.p[i-1][j]:null,aporte=dp==null?0:(w1+w2)/2*dp;ep+=aporte;
+    const pm=w1&&w2?(B.p[i][j]+B.p[i-1][j])/2:(w2?B.p[i][j]:(w1?B.p[i-1][j]:null));
+    det.push({nom,w1,w2,dp,ap:aporte,pm});});
+  // efecto peso por banco = cambio de participación × (su precio − el indicador promedio): ganar peso suma si el banco
+  // paga más que el promedio y resta si paga menos. Los aportes suman exacto el efecto peso total.
+  const Im=(I1+I2)/2;det.forEach(r=>{r.aw=r.pm==null?0:(r.w2-r.w1)*(r.pm-Im);});
+  return {I1,I2,d:I2-I1,ep,ew:I2-I1-ep,det};
+}
+/* compras del día de un corte: solo bancos que compraron, de mayor a menor precio */
+const comprasDe=i=>B.nombres.map((nom,j)=>({nom,j,p:B.p[i][j],m:B.m[i][j]||0,o:B.n[i][j]})).filter(r=>r.p!=null&&r.m>0).sort((a,b)=>b.p-a.p);
+function tilesDia(u){
+  const n=B.cortes.length,hoy=comprasDe(u),mx=hoy[0],mn=hoy[hoy.length-1],disp=mx&&mn?mx.p-mn.p:null;
+  const d5=[];for(let i=Math.max(0,u-19);i<=u;i++){const v=comprasDe(i).map(r=>r.p);if(v.length>1)d5.push(Math.max(...v)-Math.min(...v));}
+  const prom=d5.length?d5.reduce((a,b)=>a+b,0)/d5.length:null;
+  $('tiles-pr').innerHTML=tile(B.esref[u]?'Valor referencial':'TCO del corte',bs(B.tco[u]),`corte del ${fd(B.cortes[u])}`)+
+    tile('Banco que más pagó',mx?mx.nom:'—',mx?`Bs ${f2(mx.p)}`:'')+tile('Banco que menos pagó',mn?mn.nom:'—',mn?`Bs ${f2(mn.p)}`:'')+
+    tile('Dispersión entre bancos',disp==null?'—':bs(disp),prom==null?'':`promedio de 20 cortes: Bs ${f2(prom)}`);
+  return {hoy,mx,mn,disp,prom,n20:d5.length};
+}
+function precio(){
+  const n=B.cortes.length;if(cortePr==null)cortePr=n-1;
+  const porDia=vistaPr==='ranking'||vistaPr==='cascada';
+  $('lab-pr').style.display=porDia?'':'none';$('seg-pr').style.display=porDia?'none':'';
+  $('tabla-dev').style.fontSize='';$('lg-pr').innerHTML='';
+  ({ranking:prRanking,rango:prRango,cascada:prCascada,evol:prEvol})[vistaPr]();
+}
+function prRanking(){
+  const u=cortePr,k=tilesDia(u),R=k.hoy,ref=B.tco[u];
+  $('t-pr').textContent=`Cuánto pagó cada banco · corte del ${fdl(B.cortes[u])}`;
+  $('c-pr').textContent='Compra efectiva de cada banco que compró ese día, de mayor a menor · la línea vertical es el precio oficial que resultó del corte';
+  $('lg-pr').innerHTML='<span><b style="background:var(--c1)"></b>Pagó más que el oficial</span><span><b style="background:var(--c2)"></b>Pagó menos que el oficial</span>';
+  filas('ch-pr',{rows:R.map(r=>({name:r.nom,v:r.p})),ref:ref!=null?{v:ref,txt:(B.esref[u]?'Referencial ':'TCO ')+f2(ref)}:null,palo:true,aria:'Compra efectiva por banco en el día',
+    tip:i=>{const r=R[i];return `<div class="d">${r.nom}</div><div>Compró a <b>Bs ${f2(r.p)}</b>${ref!=null?` (${r.p-ref>=0?'+':''}${f2(r.p-ref)} vs. oficial)`:''}</div><div>Monto <b>USD ${f2(r.m/1e6)} MM</b>${r.o?` · ${f0(r.o)} operaciones`:''}</div>`;}});
+  const T=R.reduce((s,r)=>s+r.m,0);
+  $('t-dev').textContent='Detalle del día';$('c-dev').textContent=`Corte del ${fdl(B.cortes[u])} · ordenado por precio`;
+  $('tabla-dev').innerHTML='<thead><tr><th>Banco</th><th>Compra</th><th>vs. oficial</th><th>USD MM</th><th>Peso</th></tr></thead><tbody>'+
+    R.map(r=>`<tr><td>${r.nom}</td><td><b>${f2(r.p)}</b></td><td>${ref==null?'—':(r.p-ref>=0?'+':'')+f2(r.p-ref)}</td><td>${f2(r.m/1e6)}</td><td>${f1(r.m/T*100)}%</td></tr>`).join('')+
+    `<tr class="med"><td>Oficial</td><td>${ref==null?'—':f2(ref)}</td><td></td><td>${f2(T/1e6)}</td><td>100%</td></tr></tbody>`;
+  const enc=ref==null?0:R.filter(r=>r.p>ref).length,wEnc=ref==null?0:R.filter(r=>r.p>ref).reduce((s,r)=>s+r.m,0)/T*100;
+  $('lee-pr').innerHTML=R.length?`El ${fdl(B.cortes[u])} pagó más <b>${k.mx.nom}</b> (Bs ${f2(k.mx.p)}) y menos <b>${k.mn.nom}</b> (Bs ${f2(k.mn.p)}): Bs ${f2(k.disp)} de diferencia`+
+    (k.prom!=null?`, ${k.disp>k.prom?'más':'menos'} que el promedio de los últimos ${k.n20} cortes (Bs ${f2(k.prom)})`:'')+`. <b>${enc} de ${R.length}</b> bancos pagaron por encima del oficial, y juntos compraron el ${f0(wEnc)}% de los dólares del día.`:'';
+}
+function prRango(){
+  const n=B.cortes.length,i0=perPr==='45'?Math.max(0,n-45):Math.max(0,B.cortes.findIndex(c=>c>=INICIO_FLOT)),u=n-1;tilesDia(u);
+  const R=B.nombres.map((nom,j)=>{const ps=[];let mm=0,pm=0,ult=null;for(let i=i0;i<n;i++){if((B.m[i][j]||0)>0&&B.p[i][j]!=null){ps.push(B.p[i][j]);mm+=B.m[i][j];pm+=B.p[i][j]*B.m[i][j];ult=B.p[i][j];}}
+    return ps.length?{name:nom,lo:Math.min(...ps),hi:Math.max(...ps),v:ult,avg:pm/mm,dias:ps.length}:null;}).filter(Boolean).sort((a,b)=>b.avg-a.avg);
+  const ofi=B.tco.slice(i0).filter(v=>v!=null),ofiAvg=ofi.reduce((a,b)=>a+b,0)/ofi.length;
+  $('t-pr').textContent='Entre qué precios compró cada banco';
+  $('c-pr').textContent=`Bs por USD · ${n-i0} cortes, del ${fd(B.cortes[i0])} al ${fdl(B.cortes[u])} · ordenado por precio promedio · la línea vertical es el promedio del oficial en el periodo`;
+  $('lg-pr').innerHTML='<span><s style="background:var(--banda)"></s>Del precio más bajo al más alto</span><span><b style="background:var(--c1)"></b>Último precio</span>';
+  filas('ch-pr',{rows:R,ref:{v:ofiAvg,txt:'Oficial prom. '+f2(ofiAvg)},aria:'Rango de precios de compra por banco en el periodo',
+    tip:i=>{const r=R[i];return `<div class="d">${r.name}</div><div>Mín <b>${f2(r.lo)}</b> · Máx <b>${f2(r.hi)}</b></div><div>Promedio ponderado <b>${f2(r.avg)}</b> · último <b>${f2(r.v)}</b></div><div>Compró ${r.dias} de ${n-i0} cortes</div>`;}});
+  $('t-dev').textContent='Resumen del periodo';$('c-dev').textContent='Bs por USD · promedio ponderado por lo que compró cada día';
+  $('tabla-dev').innerHTML='<thead><tr><th>Banco</th><th>Mín</th><th>Máx</th><th>Prom.</th><th>Último</th><th>Días</th></tr></thead><tbody>'+
+    R.map(r=>`<tr><td>${r.name}</td><td>${f2(r.lo)}</td><td>${f2(r.hi)}</td><td><b>${f2(r.avg)}</b></td><td>${f2(r.v)}</td><td>${r.dias}</td></tr>`).join('')+'</tbody>';
+  const est=R.slice().sort((a,b)=>(a.hi-a.lo)-(b.hi-b.lo));
+  $('lee-pr').innerHTML=R.length?`En el periodo pagó en promedio más <b>${R[0].name}</b> (Bs ${f2(R[0].avg)}) y menos <b>${R[R.length-1].name}</b> (Bs ${f2(R[R.length-1].avg)}). `+
+    `El precio más estable fue el de <b>${est[0].name}</b> (se movió Bs ${f2(est[0].hi-est[0].lo)}) y el más variable el de <b>${est[est.length-1].name}</b> (Bs ${f2(est[est.length-1].hi-est[est.length-1].lo)}).`:'';
+}
+function prCascada(){
+  const u=cortePr;if(u<1){$('lee-pr').innerHTML='';return;}
+  const e=efectos(u),ref=B.tco[u];if(!e){$('lee-pr').innerHTML='Sin compras suficientes para comparar con el corte anterior.';return;}
+  const det=e.det.filter(r=>r.w1||r.w2).map(r=>({...r,tot:r.ap+r.aw})).sort((a,b)=>Math.abs(b.tot)-Math.abs(a.tot));
+  const top=det.slice(0,5),resto=det.slice(5).reduce((s,r)=>s+r.tot,0);
+  const pasos=top.map(r=>({name:r.nom,v:r.tot,r})).concat(det.length>5?[{name:'Resto',v:resto}]:[]);
+  $('tiles-pr').innerHTML=tile('Precio promedio de los bancos',bs(e.I2),`corte del ${fd(B.cortes[u])}`)+tile('Corte anterior',bs(e.I1),fd(B.cortes[u-1]))+
+    tile('Cambio',`${e.d>=0?'+':''}${nf(e.d,3)} <small>Bs</small>`,ref!=null?`TCO del corte: Bs ${f2(ref)}`:'')+tile('Lo que más lo movió',top[0]?top[0].nom:'—',top[0]?`${top[0].tot>=0?'+':''}${nf(top[0].tot,3)} Bs`:'');
+  $('t-pr').textContent=`Qué bancos movieron el precio · corte del ${fdl(B.cortes[u])}`;
+  $('c-pr').textContent='Precio promedio de compra de los bancos, ponderado por lo que compró cada uno: del corte anterior al elegido, con lo que sumó o restó cada banco';
+  $('lg-pr').innerHTML='<span><b style="background:var(--c1)"></b>Lo subió</span><span><b style="background:var(--c2)"></b>Lo bajó</span>';
+  const porque=r=>{if(!r)return '';if(r.dp==null)return r.w1?'no compró este día':'no había comprado el día anterior';
+    const a=Math.abs(r.ap)>=Math.abs(r.aw);return a?(r.dp>=0?`subió su precio Bs ${f2(r.dp)}`:`bajó su precio Bs ${f2(-r.dp)}`):(r.w2>r.w1?'compró más que el día anterior':'compró menos que el día anterior');};
+  cascada('ch-pr',{ini:{name:fd(B.cortes[u-1]),v:e.I1},pasos,fin:{name:fd(B.cortes[u]),v:e.I2},aria:'Cambio del precio promedio de los bancos por banco',
+    tip:i=>{if(i===0)return `<div class="d">Corte del ${fdl(B.cortes[u-1])}</div><div>Precio promedio <b>Bs ${f2(e.I1)}</b></div>`;if(i===pasos.length+1)return `<div class="d">Corte del ${fdl(B.cortes[u])}</div><div>Precio promedio <b>Bs ${f2(e.I2)}</b></div>`;
+      const q=pasos[i-1];return `<div class="d">${q.name}</div><div>Aporte <b>${q.v>=0?'+':''}${nf(q.v,3)} Bs</b></div>`+(q.r?`<div>${porque(q.r)}</div><div>Peso ${f1(q.r.w1*100)}% → ${f1(q.r.w2*100)}%</div>`:'<div>Suma del resto de los bancos</div>');}});
+  $('t-dev').textContent='Aporte de cada banco';$('c-dev').textContent='Bs por USD · cuánto subió o bajó el precio promedio por cada banco, y por qué';
+  $('tabla-dev').style.fontSize='11.5px';
+  $('tabla-dev').innerHTML='<thead><tr><th>Banco</th><th>Aporte</th><th class="izq">Por qué</th></tr></thead><tbody>'+
+    det.map(r=>`<tr><td>${r.nom}</td><td><b>${r.tot>=0?'+':''}${nf(r.tot,3)}</b></td><td class="izq">${porque(r)}</td></tr>`).join('')+
+    `<tr class="med"><td>Total</td><td>${e.d>=0?'+':''}${nf(e.d,3)}</td><td class="izq">de Bs ${f2(e.I1)} a Bs ${f2(e.I2)}</td></tr></tbody>`;
+  const t0=top[0];
+  $('lee-pr').innerHTML=`Del ${fdl(B.cortes[u-1])} al ${fdl(B.cortes[u])} el precio promedio de compra de los bancos ${e.d>=0?'subió':'bajó'} <b>Bs ${nf(Math.abs(e.d),3)}</b>. `+
+    (t0?`Lo que más lo movió fue <b>${t0.nom}</b> (${t0.tot>=0?'+':''}${nf(t0.tot,3)}): ${porque(t0)}. `:'')+`El TCO oficial de ese corte fue Bs ${f2(ref)}.`;
+}
+function prEvol(){
+  const n=B.cortes.length,i0=perPr==='45'?Math.max(0,n-45):Math.max(0,B.cortes.findIndex(c=>c>=INICIO_FLOT)),x=B.cortes.slice(i0),u=n-1;tilesDia(u);
+  $('t-pr').textContent='Compra efectiva de los bancos con más volumen';$('t-dev').textContent='Cuánto se aparta cada banco del TCO';
+  const top=B.nombres.slice(0,6);
+  const series=top.map((nom,j)=>({name:nom,corto:nom,color:colB(j)[0],data:x.map((_,i)=>(B.m[i0+i][j]||0)>0?B.p[i0+i][j]:null),dots:true}));
+  series.push({name:'TCO / referencial',corto:'Oficial',color:'var(--ink3)',data:B.tco.slice(i0),dash:true});
+  $('c-pr').textContent=`Bs por USD · ${x.length} cortes, del ${fd(x[0])} al ${fdl(x[x.length-1])} · solo los días en que el banco compró`;
+  $('lg-pr').innerHTML=series.map(q=>`<span><i style="border-color:${q.color}"></i>${q.name}</span>`).join('');
+  linea('ch-pr',{x,series,cortar:true,etiqueta:false,aria:'Compra efectiva por banco y precio oficial',marcas:x[0]<D.corte_mediana?[{f:D.corte_mediana,txt:'mediana'}]:[]});
+  const cols=[];for(let i=u;i>=Math.max(0,n-6);i--)cols.push(i);
+  const lim=Math.max(0.05,...cols.flatMap(i=>B.nombres.map((_,j)=>(B.m[i][j]||0)>0&&B.p[i][j]!=null&&B.tco[i]!=null?Math.abs(B.p[i][j]-B.tco[i]):0)));
+  const celda=(i,j)=>{if(!((B.m[i][j]||0)>0)||B.p[i][j]==null||B.tco[i]==null)return '<td class="gris">·</td>';const v=B.p[i][j]-B.tco[i],a=Math.min(1,Math.abs(v)/lim);
+    return `<td style="background:color-mix(in srgb,${v>=0?'var(--c1)':'var(--c2)'} ${Math.round(a*55)}%,transparent)">${v>0?'+':''}${f2(v)}</td>`;};
+  $('c-dev').textContent=`Compra efectiva menos precio oficial del corte, en Bs · últimos ${cols.length} cortes, el más reciente primero`;
+  $('tabla-dev').innerHTML='<thead><tr><th>Banco</th>'+cols.map(i=>`<th>${fd(B.cortes[i])}</th>`).join('')+'</tr></thead><tbody>'+
+    B.nombres.map((nom,j)=>`<tr><td>${nom}</td>`+cols.map(i=>celda(i,j)).join('')+'</tr>').join('')+'</tbody>';
+  const ult=top.map((nom,j)=>({nom,s:series[j].data.filter(v=>v!=null)})).filter(q=>q.s.length>1).map(q=>({nom:q.nom,d:q.s[q.s.length-1]-q.s[0]})).sort((a,b)=>b.d-a.d);
+  $('lee-pr').innerHTML=ult.length?`En el periodo, entre los 6 bancos con más volumen, el que más subió su precio fue <b>${ult[0].nom}</b> (${ult[0].d>=0?'+':''}${f2(ult[0].d)} Bs) y el que menos, <b>${ult[ult.length-1].nom}</b> (${ult[ult.length-1].d>=0?'+':''}${f2(ult[ult.length-1].d)} Bs).`:'';
+}
+if(B){seg('seg-pr',[['45','Últimos 45 cortes'],['flot','Desde la flotación']],perPr,v=>{perPr=v;precio();});
+  seg('seg-prv',[['ranking','Ranking del día'],['rango','Rango por banco'],['cascada','Quién movió el precio'],['evol','Evolución']],vistaPr,v=>{vistaPr=v;precio();});
+  $('sel-pr').innerHTML=B.cortes.slice(1).reverse().map(c=>`<option value="${c}">${fdl(c)}</option>`).join('');
+  $('sel-pr').onchange=e=>{cortePr=B.cortes.indexOf(e.target.value);precio();};}
+
+/* ───────── 4. Serie por banco ───────── */
+let modoSerie='p';
+function serie(){
+  const tit={p:'Compra efectiva por banco (Bs por USD)',m:'Monto comprado por banco (miles de USD)',n:'Número de operaciones por banco'}[modoSerie];
+  $('t-serie').textContent=tit;
+  const n=B.cortes.length,idx=[];for(let i=n-1;i>=0;i--)idx.push(i);
+  $('c-serie').textContent=`${n} cortes · del ${fdl(B.cortes[idx[idx.length-1]])} al ${fdl(B.cortes[idx[0]])} · el más reciente primero`;
+  const val=(i,j)=>{const v=B[modoSerie][i][j];return v==null?'—':(modoSerie==='p'?f2(v):modoSerie==='m'?f0(v/1e3):f0(v));};
+  const pie=i=>modoSerie==='p'?(B.tco[i]==null?'—':f2(B.tco[i])):(modoSerie==='m'?f0(B.m[i].reduce((s,v)=>s+(v||0),0)/1e3):f0(B.n[i].reduce((s,v)=>s+(v||0),0)));
+  $('tabla-serie').innerHTML='<thead><tr><th>Banco</th>'+idx.map(i=>`<th>${fd(B.cortes[i])}</th>`).join('')+'</tr></thead><tbody>'+
+    B.nombres.map((nom,j)=>`<tr><td>${nom}</td>`+idx.map(i=>`<td>${val(i,j)}</td>`).join('')+'</tr>').join('')+
+    `<tr class="med"><td>${modoSerie==='p'?'TCO / referencial':'Total'}</td>`+idx.map(i=>`<td>${pie(i)}</td>`).join('')+'</tr></tbody>';
+}
+if(B) seg('seg-serie',[['p','Compra (Bs/USD)'],['m','Monto (USD)'],['n','Operaciones']],modoSerie,v=>{modoSerie=v;serie();});
+
+/* ───────── Tema claro / oscuro ───────── */
+function tema(t){document.documentElement.dataset.theme=t;$('tema').textContent='◐';$('tema').classList.toggle('act',t==='dark');
+  $('tema').title=t==='dark'?'Cambiar a tono claro':'Cambiar a tono oscuro';$('tema').setAttribute('aria-label',$('tema').title);try{localStorage.setItem('tema',t);}catch(e){}}
+let _t0='light';try{_t0=localStorage.getItem('tema')==='dark'?'dark':'light';}catch(e){}
+tema(_t0);$('tema').onclick=()=>tema(document.documentElement.dataset.theme==='dark'?'light':'dark');
+
+/* ───────── Navegación ───────── */
+// orden: del panorama al detalle. La página de entrada sigue siendo la pizarra.
+const TABS=[['tc','Evolución',()=>{tcTiles();tc();},'Evolución del tipo de cambio oficial y paralelo','Evolución'],
+            ['pizarra','Compra y venta por banco',pizarra,'Compra y venta del dólar en los bancos','Compra y venta']];
+if(B) TABS.push(['precio','Precio por banco',precio,'Cuánto paga cada banco por el dólar','Precio por banco'],
+                ['vol','Volumen por banco',()=>{vol();volChart();},'Quién forma el tipo de cambio oficial: volumen por banco','Volumen'],
+                ['serie','Serie por banco',serie,'Serie por banco y fecha de corte','Serie']);
+let activa=TABS.some(t=>'#'+t[0]===location.hash)?location.hash.slice(1):'pizarra';
+function ir(k){activa=k;TABS.forEach(t=>{$('s-'+t[0]).classList.toggle('on',t[0]===k);});
+  $('nav').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));
+  const T=TABS.find(t=>t[0]===k);$('st').textContent=T[3]||T[1];
+  T[2]();T[2]();history.replaceState(null,'',location.search+'#'+k);}
+$('nav').innerHTML=TABS.map(t=>`<button data-k="${t[0]}" title="${t[1]}"><span class="largo">${t[1]}</span><span class="corto">${t[4]||t[1]}</span></button>`).join('');
+$('nav').querySelectorAll('button').forEach(b=>b.onclick=()=>ir(b.dataset.k));
+const redibujar=()=>{TABS.find(t=>t[0]===activa)[2]();if(_modal)ampliar(_modal);};
+
+/* ───────── Ampliar gráfico ───────── */
+let _modal=null;
+function ampliar(id){const r=REG[id];if(!r)return;const card=$(id).closest('.card'),lg=card.querySelector('.legend'),cap=card.querySelector('.cap');
+  $('modal').classList.remove('txt');$('m-txt').innerHTML='';
+  $('m-tit').textContent=card.querySelector('h2').textContent;$('m-cap').textContent=cap?cap.textContent:'';
+  $('m-lg').innerHTML=lg?lg.innerHTML:'';$('m-lg').style.display=lg?'':'none';
+  $('modal').classList.add('on');_modal=id;
+  r.fn('ch-modal',Object.assign({},r.cfg,{onPick:null}));}
+function cerrarModal(){$('modal').classList.remove('on','txt');_modal=null;$('ch-modal').innerHTML='';$('m-txt').innerHTML='';}
+document.addEventListener('click',ev=>{const b=ev.target.closest('.amp[data-ch]');if(b)ampliar(b.dataset.ch);});
+$('m-x').onclick=cerrarModal;$('modal').addEventListener('click',ev=>{if(ev.target.id==='modal')cerrarModal();});
+document.addEventListener('keydown',ev=>{if(ev.key==='Escape')cerrarModal();});
+/* Notas y fuentes de la vista activa: van en una ventana para que la vista entre en una pantalla */
+$('info').onclick=()=>{const n=document.querySelector('section.on .notas');if(!n)return;_modal=null;
+  $('m-tit').textContent='Notas y fuentes · '+TABS.find(t=>t[0]===activa)[1];$('m-cap').textContent='';$('m-txt').innerHTML=n.innerHTML;
+  $('modal').classList.add('on','txt');};
+
+/* ───────── Modo presentación (pantalla completa) ───────── */
+const _fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
+function presEstado(){const on=!!_fsEl();document.body.classList.toggle('pres',on);$('pres').textContent='⤢';$('pres').classList.toggle('act',on);
+  $('pres').title=on?'Salir del modo presentación':'Modo presentación (pantalla completa)';$('pres').setAttribute('aria-label',$('pres').title);setTimeout(redibujar,160);}
+if(!(document.fullscreenEnabled||document.webkitFullscreenEnabled)) $('pres').style.display='none';
+$('pres').onclick=()=>{const el=document.documentElement;
+  if(_fsEl()) (document.exitFullscreen||document.webkitExitFullscreen).call(document);
+  else (el.requestFullscreen||el.webkitRequestFullscreen).call(el);};
+document.addEventListener('fullscreenchange',presEstado);document.addEventListener('webkitfullscreenchange',presEstado);
+$('pres').textContent='⤢';$('pres').title='Modo presentación (pantalla completa)';$('pres').setAttribute('aria-label',$('pres').title);
+
+ir(activa);
+// Los gráficos toman el alto de su contenedor: si ese alto cambia (cifras o lectura que se cargan, ventana, diseño de barras) se redibujan
+let _rz;const _tam=new Map();
+if(window.ResizeObserver){const ro=new ResizeObserver(es=>{let cambio=false;es.forEach(e=>{const k=Math.round(e.contentRect.width)+'x'+Math.round(e.contentRect.height);if(e.contentRect.height>0&&_tam.get(e.target)!==k){if(_tam.has(e.target))cambio=true;_tam.set(e.target,k);}});
+  if(cambio){clearTimeout(_rz);_rz=setTimeout(redibujar,60);}});
+  document.querySelectorAll('.chart').forEach(c=>{if(c.id!=='ch-modal')ro.observe(c);});}
+else window.addEventListener('resize',()=>{clearTimeout(_rz);_rz=setTimeout(redibujar,150);});
+</script>
+</body>
+</html>
